@@ -1,0 +1,95 @@
+.abilities {
+  padding-top: 150px;
+  position: relative;
+}
+
+.abilities__title {
+  width: 45%;
+  margin: 0 auto;
+}
+
+.abilities__title-text {
+  margin-bottom: 60px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.abilities__title-desc {
+  margin-bottom: 130px;
+  opacity: 0.5;
+}
+
+.abilities__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 90px;
+}
+
+.abilities__item {
+  margin-bottom: 50px;
+}
+
+.skills__list {
+  display: flex;
+}
+
+.skills__item {
+  position: relative;
+  margin-right: 50px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.skills-pic {
+  position: absolute;
+  left: -100px;
+  top: 300px;
+}
+
+.skills__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.skills-icon {
+  width: 160px;
+  height: 160px;
+  transform: rotate(180deg);
+}
+
+.circle {
+  fill: transparent;
+  stroke-width: 10px;
+  stroke: #eaeaea;
+}
+
+.circle_above {
+  stroke-width: 20px;
+  stroke: #5500f2;
+  stroke-dasharray: 251;
+  stroke-dashoffset: 251;
+  animation: fill 100s linear infinite;
+  animation-play-state: paused;
+  animation-delay: -50s;
+}
+
+.skills__item-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes fill {
+  from {
+    stroke-dashoffset: 251;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}

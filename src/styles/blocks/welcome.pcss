@@ -1,0 +1,41 @@
+.welcome {
+  padding-top: 200px;
+}
+
+.welcome__title {
+  width: 25%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 250px;
+}
+
+.welcome__title-text {
+  width: 70%;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.67;
+  opacity: .4;
+}
+
+.welcome__title-name {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.welcome__scroll {
+  font-size: 18px;
+  font-weight: 600;
+
+  &:after {
+    content: "";
+    @include inlineblock(middle);
+    width: 20px;
+    height: 30px;
+    margin-left: 22px;
+    background: svg-load('Scroll.svg', fill=$text-color, width=100%, height=100%);
+    @include bgcover;
+  }
+}

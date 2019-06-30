@@ -1,0 +1,21 @@
+section.hero
+  .container.container_hero
+    .hero__info
+      .hero__avatar
+        +image('content/user.jpg', 'hero__avatar-pic')
+      .hero__data
+        table
+          - var data = [['Проживаю:','Курск'], ['Возраст:', '30 лет'], ['Родился:','26 апреля 1989']]
+            each row in data
+              tr
+                td.cell.cell__left= `${row[0]}`
+                td.cell.cell__right= `${row[1]}`
+                //- td #{row[0]}
+                //- td #{row[1]}
+    .hero__about
+      h3
+        .hero__welcome Привет, меня зовут
+        .hero__name.title Сергей Бойванов
+        .hero__desc
+          p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
+          p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!

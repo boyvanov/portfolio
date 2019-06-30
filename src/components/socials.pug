@@ -1,0 +1,8 @@
+mixin socials(mod)
+  div(class=`socials socials__${mod}`)
+    ul(class=`socials__list socials__list_${mod}`)
+      - var socials = [{name: 'Instagram', href: '#'}, {name: 'Vkontakte', href: '#'}, {name: 'Github', href: '#'}]
+        each social in socials
+          li.socials__item
+            a.socials__link(href='social.href')
+              +icon(`${social.name}`, `socials__icon socials__icon_${social.name}`)
