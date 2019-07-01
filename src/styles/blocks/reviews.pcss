@@ -22,11 +22,12 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid;
+  border: 1px solid $text-color;
   margin-right: 30px;
   background: svg-load('Short Arrow.svg', fill=$text-color, width=6px, height=10px);
   background-position: 50%;
   background-repeat: no-repeat;
+  outline: none;
 
   &:last-child {
     margin-right: 0;
@@ -34,6 +35,11 @@
 
   &_prev {
     transform: rotate(180deg);
+  }
+
+  &:hover {
+    border-color: $hover-color;
+    background-image: svg-load('Short Arrow.svg', fill=$hover-color, width=6px, height=10px);
   }
 }
 
