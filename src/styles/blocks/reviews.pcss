@@ -24,22 +24,16 @@
   border-radius: 50%;
   border: 1px solid;
   margin-right: 30px;
+  background: svg-load('Short Arrow.svg', fill=$text-color, width=6px, height=10px);
+  background-position: 50%;
+  background-repeat: no-repeat;
 
   &:last-child {
     margin-right: 0;
   }
 
   &_prev {
-    background: svg-load('Short Arrow.svg', fill=$text-color, width=6px, height=10px);
-    background-position: 50%;
-    background-repeat: no-repeat;
     transform: rotate(180deg);
-  }
-
-  &_next {
-    background: svg-load('Short Arrow.svg', fill=$text-color, width=6px, height=10px);
-    background-position: 50%;
-    background-repeat: no-repeat;
   }
 }
 
