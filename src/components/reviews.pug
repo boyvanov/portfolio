@@ -7,7 +7,21 @@ section.reviews
         button(type='button').reviews__btn.reviews__btn_next
     .reviews__slider
       ul.reviews__list
-        - var feedbackItems = [{text: 'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!', picture: 'content/reviews1.png', name: 'Ковальчук Дмитрий', position: 'Основатель Loftschool'}, {text: 'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах', picture: 'content/reviews2.png', name: 'Владимир Сабанцев', position: 'Преподаватель'}]
+        -
+          var feedbackItems = [
+            {
+              text: 'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!',
+              picture: 'content/reviews1.png',
+              name: 'Ковальчук Дмитрий',
+              position: 'Основатель Loftschool'
+            },
+            {
+              text: 'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах',
+              picture: 'content/reviews2.png',
+              name: 'Владимир Сабанцев',
+              position: 'Преподаватель'
+            }
+          ]
         - for (var i=0; i<feedbackItems.length; i++)
           li.reviews__item
             .reviews__text

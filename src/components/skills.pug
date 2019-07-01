@@ -1,27 +1,36 @@
-section.abilities
-  .container.container_abilities
-    .abilities__title
-      h3.abilities__title-text Чем я могу быть полезен вам
-      h4.abilities__title-desc Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-    +image('content/bag.png', 'skills-pic')
-    ul.abilities__list
-      li.abilities__item.skills
-          h4.skills__title Front-end
-          ul.skills__list
-            - var skills = ['HTML5', 'CSS3', 'Javascript', 'Jquery и Vue.js']
-            each skill in skills
+ul.skills
+  -
+    var skills = [
+      {
+        skillsType: 'Front-end',
+        skills: {
+          'HTML5': 25,
+          'CSS3': 15,
+          'Javascript': 75,
+          'Jquery и Vue.js': 25
+        }
+      },
+      {
+        skillsType: 'Workflow',
+        skills: {
+          'GIT': 15,
+          'Terminal': 25,
+          'Gulp': 50,
+          'Webpack': 40
+        }
+      }
+    ]
+  each item in skills
+      li.skills__row
+        h4.skills__title= item.skillsType
+        ul.skills__list
+          each key, prop in item.skills
+            - var percent = (251/100)*(100-key)
               li.skills__item
-                .skills__item-text= `${skill}`
-                svg(class='skills-icon', viewBox='0 0 100 100', preserveAspectRatio='none')
-                  circle(class='circle circle_under', cx='50', cy='50', r='40')
-                  circle(class='circle circle_above', cx='50', cy='50', r='40')
-      li.abilities__item.skills
-          h4.skills__title Workflow
-          ul.skills__list
-            - var skills = ['GIT', 'Terminal', 'Gulp', 'Webpack']
-            each skill in skills
-              li.skills__item
-                .skills__item-text= `${skill}`
-                svg(class='skills-icon', viewBox='0 0 100 100', preserveAspectRatio='none')
-                  circle(class='circle circle_under', cx='50', cy='50', r='40')
-                  circle(class='circle circle_above', cx='50', cy='50', r='40')
+                .skills__item-text= prop
+                svg.skills-icon(viewBox='0 0 100 100', preserveAspectRatio='none')
+                  circle.circle.circle_under(cx='50', cy='50', r='40')
+                  circle.circle.circle_above(cx='50', cy='50', r='40', stroke='url(#gradient)', stroke-dashoffset=`${percent}`, )
+                  linearGradient(id='gradient', x1='0%', y1='0%', x2='100%', y2='0%')
+                    stop(offset='0%', stop-color='#ad00ed')
+                    stop(offset='100%', stop-color='#5500f2')

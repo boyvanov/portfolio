@@ -5,8 +5,13 @@ section.hero
         +image('content/user.jpg', 'hero__avatar-pic')
       .hero__data
         table
-          - var data = [['Проживаю:','Курск'], ['Возраст:', '30 лет'], ['Родился:','26 апреля 1989']]
-            each row in data
+          -
+            var data = [
+              ['Проживаю:','Курск'],
+              ['Возраст:', '30 лет'],
+              ['Родился:','26 апреля 1989']
+            ]
+          each row in data
               tr
                 td.cell.cell__left= `${row[0]}`
                 td.cell.cell__right= `${row[1]}`
