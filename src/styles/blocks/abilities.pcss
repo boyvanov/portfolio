@@ -1,11 +1,22 @@
 .abilities {
   padding: 150px 0;
   position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 15%;
+    background: url('~images/content/bag.png') 0 100% / contain no-repeat;
+    width: 40%;
+    height: 100%;
+  }
 }
 
 .abilities__title {
   width: 45%;
-  margin: 0 auto;
+  margin-left: 250px;
 }
 
 .abilities__title-text {

@@ -23,15 +23,26 @@
   /* align-items: center; */
   border-bottom: 1px solid $text-color;
   padding-bottom: 20px;
+  transition: .3s;
+
+  &:hover {
+    border-color: $hover-color;
+
+    .form__fiel-icon {
+      opacity: 1;
+      fill: $hover-color;
+    }
+  }
 }
 
 .form__fiel-icon {
   opacity: .3;
   margin-right: 20px;
+  transition: .3s;
 
   &_ava {
     width: 26px;
-    height: 30px;
+    height: 26px;
   }
 
   &_email {
@@ -72,7 +83,7 @@
 .form__btn {
   width: 350px;
   height: 80px;
-  background-image: linear-gradient( 90deg, rgb(173,0,237) 0%, rgb(129,0,240) 48%, rgb(85,0,242) 100%);
+  background-image: linear-gradient( 90deg, rgb(173,0,237) 0%, rgb(129,0,240) 25%, rgb(85,0,242) 100%);
   border-radius: 50px 5px;
   font-size: 18px;
   font-weight: 700;

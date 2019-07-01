@@ -30,6 +30,31 @@
   right: 0;
 }
 
+.slider__preview-item {
+  position: relative;
+  
+  &:hover {
+    .slider__preview-mask {
+      display: block;
+    }
+  }
+}
+
+.slider__preview-mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba($hover-color, .4);
+  cursor: pointer;
+}
+
+/* .slider__preview-active {
+  border: 2px solid $hover-color;
+} */
+
 .slider__controls {
   position: absolute;
   top: 100%;
@@ -44,6 +69,8 @@
   background-image: svg-load('Short Arrow.svg', fill=$white, width=6px, height=10px);
   background-position: 50%;
   background-repeat: no-repeat;
+  transition: .3s;
+  outline: none;
 
   &_prev {
     transform: rotate(-90deg);
@@ -51,6 +78,10 @@
 
   &_next {
     transform: rotate(90deg);
+  }
+
+  &:hover {
+    background-color: $hover-color;
   }
 }
 
@@ -101,6 +132,10 @@
     background-image: svg-load('Link.svg', fill=#4b6fd7, width=100%, height=100%);
     background-position: 50%;
     background-repeat: no-repeat;
+  }
+
+  &:hover {
+    border-bottom: 1px solid #4b6fd7;
   }
 }
 

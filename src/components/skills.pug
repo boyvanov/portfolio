@@ -28,9 +28,9 @@ ul.skills
             - var percent = (251/100)*(100-key)
               li.skills__item
                 .skills__item-text= prop
-                svg.skills-icon(viewBox='0 0 100 100', preserveAspectRatio='none')
+                svg.skills-circle(viewBox='0 0 100 100', preserveAspectRatio='none')
                   circle.circle.circle_under(cx='50', cy='50', r='40')
-                  circle.circle.circle_above(cx='50', cy='50', r='40', stroke='url(#gradient)', stroke-dashoffset=`${percent}`, )
+                  circle.circle.circle_above(cx='50', cy='50', r='40', stroke='url(#gradient)', stroke-dashoffset=`${percent}`)
                   linearGradient(id='gradient', x1='0%', y1='0%', x2='100%', y2='0%')
                     stop(offset='0%', stop-color='#ad00ed')
                     stop(offset='100%', stop-color='#5500f2')
