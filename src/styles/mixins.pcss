@@ -27,8 +27,8 @@
   background-color: $color;
 }
 
-@mixin bgcover() {
-  background-position: center center;
+@mixin bgcover($position: center) {
+  background-position: $position;
   background-size: cover;
   background-repeat: no-repeat;
 }

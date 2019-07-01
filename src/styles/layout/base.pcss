@@ -31,39 +31,28 @@ body {
   max-width: 1480px;
   width: 95%;
   display: flex;
-
+  flex-direction: column;
 
   &_header {
     justify-content: space-between;
     align-items: center;
+    flex-direction: row;
   }
 
   &_welcome {
     height: 100%;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
   &_hero {
     justify-content: center;
+    flex-direction: row;
   }
 
-  &_abilities {
-    flex-direction: column;
+  &_footer {
+    flex-direction: row;
   }
-
-  &_reviews {
-    flex-direction: column;
-  }
-
-  &_feedback {
-    flex-direction: column;
-  }
-
-  &_works {
-    flex-direction: column;
-}
 
   @include phones {
     width: 85%;
