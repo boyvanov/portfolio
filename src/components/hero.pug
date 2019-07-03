@@ -1,9 +1,9 @@
 section.hero
-  .container.container_hero
+  .container.hero__container
     .hero__info
       .hero__avatar
-        +image('content/user.jpg', 'hero__avatar-pic')
-      .hero__data
+        +image('content/user.jpg', 'hero__avatar-pic', 'user')
+      .hero__data.text-op03
         table
           -
             var data = [
@@ -19,8 +19,10 @@ section.hero
                 //- td #{row[1]}
     .hero__about
       h3
-        .hero__welcome Привет, меня зовут
+        .hero__welcome.text Привет, меня зовут
         .hero__name.title Сергей Бойванов
-        .hero__desc
-          p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
-          p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+        .hero__desc.text
+          .hero__desc-main
+            p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
+          .hero__desc-note
+            p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!

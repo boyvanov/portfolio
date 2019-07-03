@@ -2,14 +2,13 @@
   .slider__display
     .slider__content
       .slider__display-img
-        +image('content/slider_display.png', 'slider__display-pic')
+        +image('content/slider_display.png', 'slider__display-pic', 'slider-display')
       ul.slider__preview
         - var previews = ['1', '2', '3', '4']
           each preview in previews
             li.slider__preview-item
-              .slider__preview-mask
               a.slider__preview-link(href='#')
-                +image(`content/slider_review${preview}.png`, 'slider__preview-pic')
+                +image(`content/slider_review${preview}.png`, 'slider__preview-pic', 'slider-preview')
       .slider__controls
         button(type='button').slider__btn.slider__btn_prev
         button(type='button').slider__btn.slider__btn_next.active

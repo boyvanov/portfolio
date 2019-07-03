@@ -33,31 +33,6 @@ body {
   display: flex;
   flex-direction: column;
 
-  &_header {
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  &_welcome {
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &_hero {
-    justify-content: center;
-    flex-direction: row;
-  }
-
-  &_abilities {
-    align-items: center;
-  }
-
-  &_footer {
-    flex-direction: row;
-  }
-
   @include phones {
     width: 85%;
   }
@@ -104,6 +79,7 @@ button[type="button"] {
 }
 
 a {
+  display: block;
   color: inherit;
   cursor: pointer;
   text-decoration: none;
@@ -116,7 +92,13 @@ img {
 }
 
 .text {
-  font-size: 14px;
+  color: rgba($text-color, .5);
+  font-weight: 600;
+}
+
+.text-op03 {
+  color: rgba($text-color, .3);
+  font-weight: 600;
 }
 
 .title {

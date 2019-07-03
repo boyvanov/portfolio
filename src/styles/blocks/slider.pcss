@@ -25,30 +25,33 @@
 }
 
 .slider__preview {
+  display: flex;
   position: absolute;
   bottom: 0;
   right: 0;
+  max-height: 100%;
+  flex-direction: column;
 }
 
-.slider__preview-item {
+.slider__preview-link {
   position: relative;
-  
+
   &:hover {
-    .slider__preview-mask {
-      display: block;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba($hover-color, .4);
     }
   }
-}
 
-.slider__preview-mask {
-  display: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba($hover-color, .4);
-  cursor: pointer;
+  &.active {
+    border: 3px solid $hover-color;
+  }
 }
 
 .slider__controls {
@@ -62,7 +65,7 @@
   width: 50px;
   height: 50px;
   background-color: #2d3c4e;
-  background-image: svg-load('Short Arrow.svg', fill=$white, width=6px, height=10px);
+  background-image: svg-load('arrow-down.svg', fill=$white, width=6px, height=10px);
   background-position: 50%;
   background-repeat: no-repeat;
   transition: .3s;
@@ -126,7 +129,7 @@
     width: 16px;
     height: 16px;
     margin-right: 20px;
-    background-image: svg-load('Link.svg', fill=#4b6fd7, width=100%, height=100%);
+    background-image: svg-load('link.svg', fill=#4b6fd7, width=100%, height=100%);
     background-position: 50%;
     background-repeat: no-repeat;
   }
