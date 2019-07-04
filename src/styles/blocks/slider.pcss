@@ -17,10 +17,10 @@
     position: absolute;
     top: -70px;
     right: -160px;
-    content: '4';
+    content: "4";
     font-size: 400px;
     font-weight: 800;
-    opacity: .05;
+    opacity: 0.05;
   }
 }
 
@@ -37,20 +37,29 @@
   position: relative;
 
   &:hover {
-
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: rgba($hover-color, .4);
+      background-color: rgba($hover-color, 0.4);
     }
   }
 
   &.active {
-    border: 3px solid $hover-color;
+    &:after {
+      display: block;
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      outline: 3px solid $hover-color;
+      z-index: 1;
+    }
   }
 }
 
@@ -65,10 +74,15 @@
   width: 50px;
   height: 50px;
   background-color: #2d3c4e;
-  background-image: svg-load('arrow-down.svg', fill=$white, width=6px, height=10px);
+  background-image: svg-load(
+    "arrow-down.svg",
+    fill=$white,
+    width=6px,
+    height=10px
+  );
   background-position: 50%;
   background-repeat: no-repeat;
-  transition: .3s;
+  transition: 0.3s;
   outline: none;
 
   &_prev {
@@ -97,11 +111,11 @@
 .slider__tags-item {
   font-size: 15px;
   font-weight: 600;
-  background-color: rgba($text-color, .1);
+  background-color: rgba($text-color, 0.1);
   padding: 15px 20px;
   margin-right: 15px;
   border-radius: 22px;
-  opacity: .7;
+  opacity: 0.7;
 
   &:last-child {
     margin-right: 0;
@@ -124,12 +138,17 @@
   @include inlineblock(middle);
 
   &:before {
-    content: '';
+    content: "";
     @include inlineblock(middle);
     width: 16px;
     height: 16px;
     margin-right: 20px;
-    background-image: svg-load('link.svg', fill=#4b6fd7, width=100%, height=100%);
+    background-image: svg-load(
+      "link.svg",
+      fill=#4b6fd7,
+      width=100%,
+      height=100%
+    );
     background-position: 50%;
     background-repeat: no-repeat;
   }
@@ -138,4 +157,3 @@
     border-bottom: 1px solid #4b6fd7;
   }
 }
-
