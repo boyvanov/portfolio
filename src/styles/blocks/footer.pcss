@@ -1,0 +1,55 @@
+.footer {
+  background-color: $footer-color;
+  padding: 100px 0;
+  color: $white;
+
+  &__container {
+    flex-direction: row;
+  }
+}
+
+.footer__col {
+  display: flex;
+
+  &_left {
+    width: 40%;
+  }
+
+  &_right {
+    flex-direction: column;
+    width: 60%;
+  }
+}
+
+.footer__year {
+  font-size: 48px;
+  font-weight: 600;
+  margin-right: 60px;
+  opacity: .1;
+  width: 30%;
+}
+
+.footer__block-wrap {
+  display: flex;
+  margin-top: 70px;
+}
+
+.footer__block {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-right: 60px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.footer__text, .footer__blockquote-text {
+  margin-bottom: 30px;
+  opacity: .3;
+}
+
+.footer__blockquote {
+  margin: 0;
+}

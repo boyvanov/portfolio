@@ -1,0 +1,86 @@
+.form__wrap {
+  margin-bottom: 130px;
+  width: 60%;
+}
+
+.form__row {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.form__block {
+  flex: 1;
+  margin-right: 50px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.form__fiel-wrap {
+  display: flex;
+  /* align-items: center; */
+  border-bottom: 1px solid $text-color;
+  padding-bottom: 20px;
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $hover-color;
+
+    .form__field-icon {
+      opacity: 1;
+      fill: $hover-color;
+    }
+  }
+}
+
+.form__field-icon {
+  opacity: 0.3;
+  margin-right: 20px;
+  transition: 0.1s;
+  width: 30px;
+
+  &_message {
+    height: 23px;
+  }
+}
+
+.form__field {
+  color: $text-color;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  border: 0 none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+.form__block-title {
+  margin-bottom: 20px;
+}
+
+.form__textarea {
+  padding: 0;
+  resize: none;
+  padding-right: 40%;
+  overflow: hidden;
+  /* line-height: 2; */
+}
+
+.form__btn {
+  width: 350px;
+  height: 80px;
+  background-image: linear-gradient(
+    90deg,
+    rgb(173, 0, 237) 0%,
+    rgb(129, 0, 240) 25%,
+    rgb(85, 0, 242) 100%
+  );
+  border-radius: 50px 5px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $white;
+}
