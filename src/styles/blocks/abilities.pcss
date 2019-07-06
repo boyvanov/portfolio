@@ -1,9 +1,33 @@
 .abilities {
-  margin: 9% 0;
+  margin-top: 8.5%;
+  margin-bottom: 9%;
   position: relative;
+
+  @include desktop {
+    margin-top: 18.5%;
+    margin-bottom: 10.5%;
+  }
+
+  @include tablets {
+    margin-top: 19.5%;
+    margin-bottom: 60%;
+  }
+
+  @include tablets {
+    margin-top: 56.5%;
+    margin-bottom: 60%;
+  }
+  @include phones {
+    margin-top: 30%;
+    margin-bottom: 114%;
+  }
 
   &__container {
     align-items: center;
+
+    @include phones {
+    width: 89%;
+  }
   }
 
   &:before {
@@ -15,16 +39,118 @@
     background: url("../images/content/bag.png") 0 100% / contain no-repeat;
     width: 40%;
     height: 100%;
+
+    @include desktop {
+      bottom: -3%;
+      left: -19%;
+      width: 60%;
+    }
+
+    @include tablets {
+      bottom: -62%;
+      left: 31%;
+      width: 43%;
+    }
+    @include phones {
+      bottom: -30%;
+      left: 8%;
+      width: 90%;
+    }
   }
 }
 
 .abilities__title {
+  display: flex;
+  flex-direction: column;
   width: 40%;
   margin-left: 9%;
   margin-bottom: 5%;
+
+  @include desktop {
+    width: 55%;
+    margin-left: 7%;
+    margin-bottom: 7.5%;
+  }
+
+  @include tablets {
+    text-align: center;
+    width: 65%;
+    margin-left: 0%;
+    align-items: center;
+    margin-bottom: 6.5%;
+  }
+  @include phones {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 18%;
+  }
 }
 
 .abilities__title-text {
   margin-bottom: 8%;
+  @include tablets {
+    margin-bottom: 3%;
+    width: 60%;
+  }
+  @include phones {
+    width: 90%;
+    margin-bottom: 7%;
+  }
+}
+.abilities__title-desc {
+  
+  @include phones {
+    width: 90%;
+  }
 }
 
+.abilities {
+  @include desktop {
+    .skills {
+      margin-right: 0;
+    }
+
+    .skills__item {
+      margin-right: 25px;
+    }
+
+    .skills__row {
+      margin-bottom: 3.5%;
+    }
+  }
+
+  @include tablets {
+    .skills {
+      align-items: center;
+    }
+
+    .skills__row {
+      align-items: center;
+      margin-bottom: 5.5%;
+    }
+    .skills__title {
+      font-size: 20px;
+    }
+
+    .skills__item {
+      margin-right: 15px;
+    }
+  }
+
+  @include phones {
+    .skills__list {
+      flex-wrap: wrap;
+    }
+
+    .skills__item {
+      width: 50%;
+      margin-right: 0%;
+    }
+    .skills__title {
+      margin-bottom: 8%;
+    }
+    .skills__row {
+      margin-bottom: 21%;
+    }
+  }
+}

@@ -1,10 +1,98 @@
 .reviews {
   padding-top: 14.5%;
   padding-bottom: 11%;
+
+  &__container {
+    @include phones {
+      width: 87%;
+    }
+  }
+
+  @include desktop {
+    padding-top: 18%;
+    padding-bottom: 16%;
+
+    .widget__controls {
+      top: -65%;
+      left: 40%;
+    }
+
+    .widget__item {
+      width: 34%;
+      margin-right: 17%;
+    }
+
+    .widget__user {
+      margin-top: 5%;
+    }
+  }
+
+  @include tablets {
+    padding-top: 25%;
+
+    .widget__controls {
+      top: -49%;
+      left: 56%;
+    }
+    .widget__btn {
+      width: 58px;
+      height: 58px;
+    }
+
+    .widget__item {
+      &:before {
+        display: none;
+      }
+      width: 43%;
+      margin-right: 11%;
+    }
+  }
+
+  @include phones {
+    padding-top: 33%;
+    padding-bottom: 44%;
+
+    .widget__item {
+      &:last-child {
+        display: none;
+      }
+      width: 100%;
+      margin-right: 0;
+      margin-left: 5%;
+    }
+
+    .widget__text {
+      font-size: 16px;
+    }
+    .widget__avatar {
+      transform: scale(0.85);
+    }
+
+    .widget__controls {
+      top: -42%;
+      left: 31%;
+    }
+  }
 }
 
 .widget-wrap {
   margin-top: 6%;
   padding-left: 8%;
+
+  @include desktop {
+    margin-top: 8.5%;
+  }
+  @include tablets {
+    padding-left: 6%;
+  }
+  @include phones {
+    padding-left: 0%;
+    margin-top: 39%;
+  }
 }
 
+.reviews__title {
+  @include phones {
+    font-size: 30px;
+  }
+}
