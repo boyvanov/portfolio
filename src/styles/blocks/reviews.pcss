@@ -1,10 +1,32 @@
 .reviews {
-  padding-top: 14.5%;
+  padding-top: 15.5%;
   padding-bottom: 11%;
+
+  @include desktop {
+    padding-top: 18%;
+    padding-bottom: 16%;
+
+    .widget__controls {
+      top: -65%;
+      left: 40%;
+    }
+
+    .widget__item {
+      width: 34%;
+      margin-right: 17%;
+    }
+
+    .widget__user {
+      margin-top: 5%;
+    }
+  }
 }
 
 .widget-wrap {
   margin-top: 6%;
   padding-left: 8%;
-}
 
+  @include desktop {
+    margin-top: 8.5%;
+  }
+}

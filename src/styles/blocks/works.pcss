@@ -1,7 +1,45 @@
 .works {
   padding-bottom: 9%;
+
+  @include desktop {
+    padding-bottom: 6%;
+  }
 }
 
 .works__title {
   margin-bottom: 6%;
+
+  @include desktop {
+    margin-bottom: 5.5%;
+  }
+}
+
+.works {
+  @include desktop {
+    .slider__display {
+      width: 58%;
+    }
+    .slider__preview-item:first-child {
+      display: none;
+    }
+
+    .slider__desc {
+      margin-left: 10%;
+      width: 30%;
+    }
+    .slider__tags {
+      margin-bottom: 12%;
+    }
+
+    .slider__tags-item {
+      font-size: 15px;
+      padding: 4.5% 6.5%;
+      margin-right: 4%;
+      border-radius: 22px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
 }

@@ -4,6 +4,7 @@
 
 .slider__display {
   width: 71%;
+  height: 100%;
 }
 
 .slider__display-pic {
@@ -21,6 +22,12 @@
     font-size: 400px;
     font-weight: 800;
     opacity: 0.05;
+
+    @include desktop {
+    top: -31%;
+    right: -20%;
+    font-size: 300px;
+    }
   }
 }
 

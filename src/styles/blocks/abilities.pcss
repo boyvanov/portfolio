@@ -2,6 +2,11 @@
   margin: 9% 0;
   position: relative;
 
+  @include desktop {
+    margin-top: 18.5%;
+    margin-bottom: 10.5%;
+  }
+
   &__container {
     align-items: center;
   }
@@ -15,6 +20,12 @@
     background: url("../images/content/bag.png") 0 100% / contain no-repeat;
     width: 40%;
     height: 100%;
+
+    @include desktop {
+      bottom: -3%;
+      left: -19%;
+      width: 60%;
+    }
   }
 }
 
@@ -22,9 +33,30 @@
   width: 40%;
   margin-left: 9%;
   margin-bottom: 5%;
+
+  @include desktop {
+    width: 55%;
+    margin-left: 7%;
+    margin-bottom: 7.5%;
+  }
 }
 
 .abilities__title-text {
   margin-bottom: 8%;
 }
 
+.abilities {
+  @include desktop {
+    .skills {
+      margin-right: 0;
+    }
+
+    .skills__item {
+      margin-right: 25px;
+    }
+
+    .skills__row {
+      margin-bottom: 3.5%;
+    }
+  }
+}

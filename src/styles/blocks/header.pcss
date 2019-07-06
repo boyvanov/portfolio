@@ -9,6 +9,42 @@
     flex-direction: row;
     height: 100%;
   }
+}
 
-  
+.header {
+  .socials__icon {
+    fill: $text-color;
+
+    &:hover {
+      fill: $hover-color;
+    }
+  }
+}
+
+/* .socials__header {
+  .socials__icon {
+    fill: $text-color;
+    
+    &:hover {
+      fill: $hover-color;
+    }
+  }
+} */
+
+.header {
+  .main-menu__link {
+    padding: 45px 30px;
+
+    &.active {
+      border-bottom: 3px solid $hover-color;
+    }
+  }
+}
+
+.header {
+   @include tablets {
+     .main-menu {
+       display: none;
+     }
+   }
 }
