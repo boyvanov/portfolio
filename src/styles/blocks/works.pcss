@@ -4,6 +4,15 @@
   @include desktop {
     padding-bottom: 6%;
   }
+  @include phones {
+    padding-bottom: 30%;
+  }
+
+  &__container {
+    @include phones {
+      width: 100%;
+    }
+  }
 }
 
 .works__title {
@@ -15,6 +24,11 @@
 
   @include tablets {
     margin-bottom: 7.5%;
+  }
+  @include phones {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 9%;
   }
 }
 
@@ -105,6 +119,35 @@
 
     .slider__text {
       margin-bottom: 4%;
+    }
+  }
+
+  @include phones {
+    .slider__preview {
+      display: none;
+    }
+    .slider__display {
+      width: 100%;
+      margin-bottom: 27.5%;
+    }
+    .slider__controls {
+      top: initial;
+      bottom: 0;
+    }
+    .slider__desc {
+      /* align-items: center; */
+      width: 80%;
+      text-align: left;
+    }
+    .slider__tags {
+      margin-bottom: 7%;
+    }
+
+    .slider__title {
+      margin-bottom: 15px;
+    }
+    .slider__text {
+      margin-bottom: 9%;
     }
   }
 }

@@ -5,6 +5,10 @@
 
   &__container {
     flex-direction: row;
+
+    @include phones {
+      flex-direction: column;
+    }
   }
 
   @include desktop {
@@ -26,6 +30,12 @@
       flex-direction: column;
       width: 25%;
     }
+
+    @include phones {
+      width: 100%;
+      margin-top: 12%;
+      margin-bottom: 16%;
+    }
   }
 
   &_right {
@@ -39,6 +49,10 @@
     @include tablets {
       flex-direction: column;
       width: 75%;
+    }
+
+    @include phones {
+      width: 100%;
     }
   }
 }
@@ -60,6 +74,9 @@
     margin-bottom: 1%;
     font-size: 55px;
   }
+  @include phones {
+    margin-bottom: 4%;
+  }
 }
 
 .footer__block-wrap {
@@ -74,6 +91,10 @@
   @include tablets {
     flex-direction: column;
     margin-left: 13%;
+  }
+  @include phones {
+    margin-left: 0%;
+    width: 90%;
   }
 }
 
@@ -101,6 +122,13 @@
       margin-bottom: 0%;
     }
   }
+  @include phones {
+    margin-bottom: 21%;
+
+    &:last-child {
+      margin-bottom: 0%;
+    }
+  }
 }
 
 .footer__text,
@@ -114,10 +142,16 @@
   @include tablets {
     margin-bottom: 3%;
   }
+  @include phones {
+    margin-bottom: 8%;
+  }
 }
 .footer__blockquote-text {
   @include tablets {
     margin-bottom: 1%;
+  }
+  @include phones {
+    margin-bottom: 11%;
   }
 }
 
@@ -135,6 +169,10 @@
 
     &:last-child {
       margin-right: 0;
+    }
+
+    @include phones {
+      margin-right: 40px;
     }
   }
 
@@ -182,6 +220,10 @@
     @include desktop {
       width: 70%;
     }
+    @include phones {
+      width: 100%;
+      align-items: flex-start;
+    }
   }
 
   .name__title {
@@ -194,6 +236,9 @@
     @include tablets {
       font-size: 21px;
     }
+    @include phones {
+      margin-bottom: 3%;
+    }
   }
 
   .name__text {
@@ -204,18 +249,25 @@
 }
 
 .footer {
-  .main-menu__list {
-    
-    @include tablets {
+  @include tablets {
+    .main-menu__list {
       flex-wrap: wrap;
       margin-top: 1%;
-
-      .main-menu__link {
-        padding: 0;
-      }
-      .main-menu__item {
-        margin-left: 13%;
-        padding-bottom: 25px;
+    }
+    .main-menu__link {
+      padding: 0;
+    }
+    .main-menu__item {
+      margin-left: 13%;
+      padding-bottom: 25px;
+    }
+  }
+  @include phones {
+    .main-menu__item {
+      margin-left: 0;
+      padding-bottom: 30px;
+      &:nth-child(odd) {
+        margin-right: 120px;
       }
     }
   }

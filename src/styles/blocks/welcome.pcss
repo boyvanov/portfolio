@@ -25,6 +25,11 @@
     padding: 27% 20%;
     align-items: flex-start;
   }
+
+  @include phones {
+    padding: 0;
+    padding-top: 68%;
+  }
 }
 
 .welcome__scroll {
@@ -74,6 +79,9 @@
       align-items: center;
       padding-bottom: 5%;
     }
+    @include phones {
+      width: 55%;
+    }
   }
 
   .name__title {
@@ -83,6 +91,9 @@
 
     @include tablets {
       font-size: 55px;
+    }
+    @include phones {
+      font-size: 45px;
     }
   }
 }
