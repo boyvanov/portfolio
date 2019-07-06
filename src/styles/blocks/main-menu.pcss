@@ -3,13 +3,16 @@
   align-items: center;
 }
 
-.main-menu__item {
+.main-menu__link {
+  padding: 0px 30px;
 }
 
-.main-menu__link {
-  padding: 45px 30px;
+.header {
+  .main-menu__link {
+    padding: 45px 30px;
 
-  &.active {
-    border-bottom: 3px solid $hover-color;
+    &.active {
+      border-bottom: 3px solid $hover-color;
+    }
   }
 }

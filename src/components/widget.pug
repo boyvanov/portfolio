@@ -1,8 +1,8 @@
-.reviews__slider
-  .reviews__slider-controls
-    button(type='button').reviews__btn.reviews__btn_prev
-    button(type='button').reviews__btn.reviews__btn_next
-  ul.reviews__list
+.widget
+  .widget__controls
+    button(type='button').widget__btn.widget__btn_prev
+    button(type='button').widget__btn.widget__btn_next
+  ul.widget__list
     -
       var feedbackItems = [
         {
@@ -19,12 +19,12 @@
         }
       ]
     - for (var i=0; i<feedbackItems.length; i++)
-      li.reviews__item
-        .reviews__text.text
+      li.widget__item
+        .widget__text.text
           p= feedbackItems[i].text
-        .reviews__user
-          .reviews__avatar
-            +image(feedbackItems[i].picture, 'reviews__avatar-pic', 'reviews-avatar')
-          .reviews__user-desc
-            .reviews__user-name= feedbackItems[i].name
-            .reviews__user-position.text-op03= feedbackItems[i].position
+        .widget__user
+          .widget__avatar
+            +image(feedbackItems[i].picture, 'widget__avatar-pic', 'widget-avatar')
+          .widget__user-desc
+            .widget__user-name= feedbackItems[i].name
+            .widget__user-position.text-op03= feedbackItems[i].position
