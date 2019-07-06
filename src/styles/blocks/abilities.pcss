@@ -10,7 +10,7 @@
 
   @include tablets {
     margin-top: 19.5%;
-    margin-bottom: 10.5%;
+    margin-bottom: 60%;
   }
 
   &__container {
@@ -31,6 +31,12 @@
       bottom: -3%;
       left: -19%;
       width: 60%;
+    }
+
+    @include tablets {
+      bottom: -62%;
+      left: 31%;
+      width: 43%;
     }
   }
 }
@@ -53,6 +59,7 @@
     width: 65%;
     margin-left: 0%;
     align-items: center;
+    margin-bottom: 6.5%;
   }
 }
 
@@ -76,6 +83,24 @@
 
     .skills__row {
       margin-bottom: 3.5%;
+    }
+  }
+
+  @include tablets {
+    .skills {
+      align-items: center;
+    }
+
+    .skills__row {
+      align-items: center;
+      margin-bottom: 5.5%;
+    }
+    .skills__title {
+      font-size: 20px;
+    }
+
+    .skills__item {
+      margin-right: 15px;
     }
   }
 }

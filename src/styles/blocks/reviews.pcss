@@ -20,6 +20,26 @@
       margin-top: 5%;
     }
   }
+
+  @include tablets {
+    padding-top: 25%;
+
+    .widget__controls {
+      top: -49%;
+      left: 56%;
+    }
+    .widget__btn {
+      transform: scale(1.14);
+    }
+
+    .widget__item {
+      &:before {
+        display: none;
+      }
+      width: 43%;
+      margin-right: 11%;
+    }
+  }
 }
 
 .widget-wrap {
@@ -28,5 +48,8 @@
 
   @include desktop {
     margin-top: 8.5%;
+  }
+  @include tablets {
+    padding-left: 6%;
   }
 }
