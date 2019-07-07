@@ -1,0 +1,43 @@
+.main-menu__icon {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  width: 28px;
+  height: 23px;
+  display: none;
+  align-items: center;
+  z-index: 30;
+
+  @include tablets {
+    display: flex;
+  }
+  @include phones {
+    top: 3%;
+    right: 5%;
+  }
+}
+
+.main-menu__icon-dash {
+  &,
+  &:before,
+  &:after {
+    width: 100%;
+    height: 5px;
+    background-color: $text-color;
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+  }
+
+  &:before {
+    top: 0;
+  }
+
+  &:after {
+    bottom: 0;
+  }
+}
