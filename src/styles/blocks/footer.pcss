@@ -8,6 +8,7 @@
 
     @include phones {
       flex-direction: column;
+      justify-content: center;
     }
   }
 
@@ -266,6 +267,12 @@
     }
   }
   @include phones {
+    .main-menu__item {
+      margin: 0%;
+      margin-right: 13%;
+    }
+  }
+  @include phones-small {
     .main-menu__item {
       margin-left: 0;
       padding-bottom: 30px;

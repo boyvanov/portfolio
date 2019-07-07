@@ -10,13 +10,15 @@ html(lang="ru")
   body
     .wrapper
       .maincontent
-        .maincontent__mountain-bg
+        .parallax-mountain
+          include components/parallax-mountain
           include components/header
           include components/welcome
           include components/hero
         include components/abilities
         include components/works
-        .maincontent__budda-bg
+        .parallax-budda
+          //- include components/parallax-budda
           include components/reviews
           include components/feedback
         include components/footer

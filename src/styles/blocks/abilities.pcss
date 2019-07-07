@@ -22,11 +22,11 @@
   }
 
   &__container {
-    align-items: center;
+    /* align-items: center; */
 
     @include phones {
-    width: 89%;
-  }
+      width: 89%;
+    }
   }
 
   &:before {
@@ -51,9 +51,13 @@
       width: 43%;
     }
     @include phones {
-      bottom: -30%;
+      bottom: -41%;
       left: 8%;
       width: 90%;
+    }
+    @include phones-small {
+      bottom: -33%;
+      left: 8%;
     }
   }
 }
@@ -62,8 +66,9 @@
   display: flex;
   flex-direction: column;
   width: 40%;
-  margin-left: 9%;
+  /* margin-left: 9%; */
   margin-bottom: 5%;
+  align-self: center;
 
   @include desktop {
     width: 55%;
@@ -97,7 +102,6 @@
   }
 }
 .abilities__title-desc {
-  
   @include phones {
     width: 90%;
   }
@@ -105,9 +109,9 @@
 
 .abilities {
   @include desktop {
-    .skills {
+    /* .skills {
       margin-right: 0;
-    }
+    } */
 
     .skills__item {
       margin-right: 25px;
@@ -139,17 +143,23 @@
   @include phones {
     .skills__list {
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .skills__item {
-      width: 50%;
-      margin-right: 0%;
+      /* width: 50%; */
+      margin: 0 4%;
     }
     .skills__title {
       margin-bottom: 8%;
     }
     .skills__row {
       margin-bottom: 21%;
+    }
+  }
+  @include phones-small {
+    .skills__item {
+      margin: 0 2%;
     }
   }
 }
