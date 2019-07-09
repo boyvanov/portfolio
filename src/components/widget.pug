@@ -1,30 +1,21 @@
-.widget
-  .widget__controls
-    button(type='button').widget__btn.widget__btn_prev
-    button(type='button').widget__btn.widget__btn_next
-  ul.widget__list
-    -
-      var feedbackItems = [
-        {
-          text: 'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!',
-          picture: 'content/reviews1.png',
-          name: 'Ковальчук Дмитрий',
-          position: 'Основатель Loftschool'
-        },
-        {
-          text: 'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах',
-          picture: 'content/reviews2.png',
-          name: 'Владимир Сабанцев',
-          position: 'Преподаватель'
-        }
-      ]
-    - for (var i=0; i<feedbackItems.length; i++)
-      li.widget__item
-        .widget__text.text
-          p= feedbackItems[i].text
-        .widget__user
-          .widget__avatar
-            +image(feedbackItems[i].picture, 'widget__avatar-pic', 'widget-avatar')
-          .widget__user-desc
-            .widget__user-name= feedbackItems[i].name
-            .widget__user-position.text-op03= feedbackItems[i].position
+script(type='text/x-template')#reviews-template
+  .widget
+    .widget__controls
+      button(@click="previous()" type='button').widget__btn.widget__btn_prev
+      button(@click="next()" type='button').widget__btn.widget__btn_next
+    flickity(ref="flickity" :options="flickityOptions") 
+      li(v-for="review in reviews" :key="review.id").widget__item
+        review(
+          :review="review"
+        )
+      
+script(type='text/x-template')#review
+  .widget__content
+    .widget__text.text
+      p {{review.text}}
+    .widget__user
+      .widget__avatar
+        img(:src="review.picture", alt='widget-avatar').widget__avatar-pic
+      .widget__user-desc
+        .widget__user-name {{review.name}}
+        .widget__user-position.text-op03 {{review.position}}
