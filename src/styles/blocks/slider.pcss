@@ -5,25 +5,22 @@
 .slider__display {
   width: 71%;
   height: 100%;
-}
-
-.slider__display-pic {
-  object-fit: cover;
-}
-
-.slider__content {
   position: relative;
 
   &:before {
+    content: attr(data-slide);
     position: absolute;
-    top: -9%;
-    right: -17%;
-    content: "4";
+    top: -30%;
+    right: -21%;
     font-size: 400px;
     font-weight: 800;
     opacity: 0.05;
 
   }
+}
+
+.slider__display-pic {
+  object-fit: cover;
 }
 
 .slider__preview {
@@ -37,6 +34,7 @@
 
 .slider__preview-link {
   position: relative;
+  width: 180px;
 
   &:hover {
     &:before {
@@ -96,11 +94,11 @@
   );
   }
 
-  &_prev {
+  &_next {
     transform: rotate(-90deg);
   }
 
-  &_next {
+  &_prev {
     transform: rotate(90deg);
   }
 
@@ -114,6 +112,7 @@
   width: 25%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .slider__tags {

@@ -36,6 +36,12 @@
   @include desktop {
     .slider__display {
       width: 58%;
+
+      &:before {
+        top: -31%;
+        right: -20%;
+        font-size: 300px;
+      }
     }
 
     .slider__preview-item:first-child {
@@ -60,14 +66,6 @@
         margin-right: 0;
       }
     }
-
-    .slider__content {
-      &:before {
-        top: -31%;
-        right: -20%;
-        font-size: 300px;
-      }
-    }
   }
 
   @include tablets {
@@ -80,9 +78,7 @@
       width: 93%;
       margin-bottom: 15%;
       align-self: flex-start;
-    }
 
-    .slider__content {
       &:before {
         font-size: 350px;
       }
@@ -132,12 +128,12 @@
     .slider__display {
       width: 100%;
       margin-bottom: 27.5%;
-    }
-    .slider__content {
+
       &:before {
         display: none;
       }
     }
+    
     .slider__controls {
       top: initial;
       bottom: 0;

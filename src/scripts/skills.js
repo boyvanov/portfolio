@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 const skill = {
-  template: "#skill-template",
+  template: "#skill",
   props: {
     skillPercent: Number,
     skillName: String
@@ -22,7 +22,7 @@ const skill = {
 };
 
 const row = {
-  template: "#skills-row-template",
+  template: "#skills-row",
   props: {
     skill: Object
   },

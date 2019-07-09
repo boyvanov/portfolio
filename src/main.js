@@ -5,4 +5,5 @@ if (process.env.NODE_ENV === "development") {
 
 import "./scripts/parallax-mountain.js";
 import "./scripts/skills.js";
+import "./scripts/slider.js";
 // import "./scripts/parallax-budda.js";
