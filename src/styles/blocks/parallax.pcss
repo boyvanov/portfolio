@@ -1,7 +1,7 @@
 .parallax-mountain {
   position: relative;
   overflow: hidden;
-  height: 1800px;
+  clip-path: polygon(0% 0%, 0% 93%, 50% 100%, 100% 93%, 100% 0%);
 }
 
 .parallax-mountain__img, .parallax-budda__img {
@@ -20,45 +20,44 @@
     .parallax-mountain__img {
       object-fit: cover;
       width: 100%;
-      height: 100%;
     }
   }
   &:nth-child(2) {
     .parallax-mountain__img {
       right: 0;
-      top: 360px;
+      top: 15%;
     }
   }
   &:nth-child(3) {
     .parallax-mountain__img {
       left: 50%;
-      top: 518px;
-      width: 10%;
+      top: 20%;
+      width: 15%;
       margin-left: 12%;
     }
   }
   &:nth-child(4) {
     .parallax-mountain__img {
       left: 0;
-      top: 610px;
+      top: 28%;
     }
   }
   &:nth-child(5) {
     .parallax-mountain__img {
       left: 0;
-      top: 610px;
+      top: 44%;
     }
   }
   &:nth-child(6) {
     .parallax-mountain__img {
       right: 0;
-      bottom: 0;
+      bottom: -6%;
     }
   }
   &:nth-child(7) {
     .parallax-mountain__img {
       left: 0;
-      bottom: -700px;
+      bottom: -40%;
     }
   }
 }
