@@ -86,6 +86,12 @@
   }
 }
 
+@mixin ipad() {
+  @media screen and (max-width: $bp-ipad-pro) {
+    @content;
+  }
+}
+
 @mixin tablets() {
   @media screen and (max-width: $bp-tablets) {
     @content;
