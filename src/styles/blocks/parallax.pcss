@@ -2,9 +2,14 @@
   position: relative;
   overflow: hidden;
   clip-path: polygon(0% 0%, 0% 93%, 50% 100%, 100% 93%, 100% 0%);
+  @include ipad {
+    @include bgcover(top);
+    background-image: url("../images/bg/Mountain-Baloon.png");
+  }
 }
 
-.parallax-mountain__img, .parallax-budda__img {
+.parallax-mountain__img,
+.parallax-budda__img {
   position: absolute;
 }
 
@@ -16,6 +21,10 @@
   height: 100%;
   will-change: transform;
 
+  @include ipad {
+    display: none;
+  }
+
   &:nth-child(1) {
     .parallax-mountain__img {
       object-fit: cover;
@@ -26,6 +35,10 @@
     .parallax-mountain__img {
       right: 0;
       top: 15%;
+
+      @include desktop {
+        top: 11%;
+      }
     }
   }
   &:nth-child(3) {
@@ -39,25 +52,40 @@
   &:nth-child(4) {
     .parallax-mountain__img {
       left: 0;
-      top: 28%;
+      top: 23%;
+      @include desktop {
+        top: 25%;
+      }
     }
   }
   &:nth-child(5) {
     .parallax-mountain__img {
       left: 0;
-      top: 44%;
+      top: 46%;
+
+      @include desktop {
+        top: 34%;
+      }
     }
   }
   &:nth-child(6) {
     .parallax-mountain__img {
       right: 0;
-      bottom: -6%;
+      bottom: -16%;
+
+      @include desktop {
+        bottom: 9%;
+      }
     }
   }
   &:nth-child(7) {
     .parallax-mountain__img {
       left: 0;
-      bottom: -40%;
+      bottom: -51%;
+
+      @include desktop {
+        bottom: -8%;
+      }
     }
   }
 }
