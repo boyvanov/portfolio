@@ -30,6 +30,7 @@
       visibility: hidden;
     }
   }
+
   @include phones {
     padding-bottom: 23%;
 
@@ -39,6 +40,12 @@
 
     .form__row {
       flex-direction: column;
+      margin-bottom: 20px;
+      width: 100%;
+
+      &:nth-child(2) {
+        margin-bottom: 0;
+      }
     }
     .form__field {
       font-size: 16px;
@@ -52,14 +59,7 @@
       font-size: 18px;
       margin-bottom: 30px;
     }
-    .form__row {
-      margin-bottom: 20px;
-      width: 100%;
 
-      &:nth-child(2) {
-        margin-bottom: 0px;
-      }
-    }
     .form__btn {
       transform: scale(0.9);
     }
@@ -78,9 +78,11 @@
   @include desktop {
     margin-bottom: 7%;
   }
+
   @include tablets {
     text-align: center;
   }
+
   @include phones {
     font-size: 30px;
     margin-bottom: 19%;
