@@ -4,6 +4,7 @@
   @include desktop {
     padding-bottom: 6%;
   }
+
   @include phones {
     padding-bottom: 30%;
   }
@@ -13,31 +14,12 @@
       width: 100%;
     }
   }
-}
 
-.works__title {
-  margin-bottom: 6%;
-
-  @include desktop {
-    margin-bottom: 5.5%;
-  }
-
-  @include tablets {
-    margin-bottom: 7.5%;
-  }
-  @include phones {
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 9%;
-  }
-}
-
-.works {
   @include desktop {
     .slider__display {
       width: 58%;
 
-      &:before {
+      &::before {
         top: -31%;
         right: -20%;
         font-size: 300px;
@@ -68,6 +50,12 @@
     }
   }
 
+  @include ipad {
+    .slider__preview-item:nth-child(2) {
+      display: none;
+    }
+  }
+
   @include tablets {
     .slider {
       flex-direction: column;
@@ -79,9 +67,13 @@
       margin-bottom: 15%;
       align-self: flex-start;
 
-      &:before {
+      &::before {
         font-size: 350px;
       }
+    }
+
+    .slider__preview-item:nth-child(2) {
+      display: initial;
     }
 
     .slider__btn {
@@ -121,6 +113,12 @@
     }
   }
 
+  @media screen and (max-width: 580px) {
+    .slider__preview-item:nth-child(2) {
+      display: none;
+    }
+  }
+
   @include phones {
     .slider__preview {
       display: none;
@@ -129,11 +127,11 @@
       width: 100%;
       margin-bottom: 27.5%;
 
-      &:before {
+      &::before {
         display: none;
       }
     }
-    
+
     .slider__controls {
       top: initial;
       bottom: 0;
@@ -156,3 +154,23 @@
     }
   }
 }
+
+.works__title {
+  margin-bottom: 6%;
+
+  @include desktop {
+    margin-bottom: 5.5%;
+  }
+
+  @include tablets {
+    margin-bottom: 7.5%;
+  }
+
+  @include phones {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 9%;
+  }
+}
+
+

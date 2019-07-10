@@ -7,7 +7,7 @@
   height: 100%;
   position: relative;
 
-  &:before {
+  &::before {
     content: attr(data-slide);
     position: absolute;
     top: -30%;
@@ -15,7 +15,6 @@
     font-size: 400px;
     font-weight: 800;
     opacity: 0.05;
-
   }
 }
 
@@ -37,7 +36,7 @@
   width: 180px;
 
   &:hover {
-    &:before {
+    &::before {
       content: "";
       position: absolute;
       top: 0;
@@ -49,7 +48,7 @@
   }
 
   &.active {
-    &:after {
+    &::after {
       display: block;
       content: "";
       position: absolute;
@@ -87,11 +86,11 @@
 
   &.active {
     background-image: svg-load(
-    "arrow-down.svg",
-    fill=$white,
-    width=9px,
-    height=15px
-  );
+      "arrow-down.svg",
+      fill=$white,
+      width=9px,
+      height=15px
+    );
   }
 
   &_next {
@@ -147,10 +146,12 @@
   color: #4b6fd7;
   font-size: 18px;
   font-weight: 700;
+
   @include inlineblock(middle);
 
-  &:before {
+  &::before {
     content: "";
+
     @include inlineblock(middle);
     width: 16px;
     height: 16px;
