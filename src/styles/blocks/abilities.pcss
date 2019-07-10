@@ -33,7 +33,7 @@
     content: "";
     display: block;
     position: absolute;
-    left: 1%;
+    left: -5%;
     bottom: 0;
     background: url("../images/content/bag.png") 0 100% / contain no-repeat;
     width: 40%;
@@ -46,7 +46,7 @@
     }
 
     @include tablets {
-      bottom: -62%;
+      bottom: -41%;
       left: 31%;
       width: 43%;
     }
@@ -65,7 +65,7 @@
 .abilities__title {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 42%;
   /* margin-left: 9%; */
   margin-bottom: 5%;
   align-self: center;
@@ -109,9 +109,12 @@
 
 .abilities {
   @include desktop {
-    /* .skills {
-      margin-right: 0;
-    } */
+    .skills {
+      padding-left: 25%;
+    }
+    .skills__list {
+      flex-wrap: wrap;
+    }
 
     .skills__row-item {
       margin-right: 25px;
@@ -125,6 +128,11 @@
   @include tablets {
     .skills {
       align-items: center;
+      padding-left: 0;
+    }
+
+    .skills__list {
+      justify-content: center;
     }
 
     .skills__item {
@@ -159,7 +167,7 @@
   }
   @include phones-small {
     .skills__row-item {
-      margin: 0 2%;
+      margin: 0 1%;
     }
   }
 }
