@@ -25,7 +25,7 @@ script(type='text/x-template')#slider-display
 script(type='text/x-template')#slider-reviews
   ul.slider__preview
     li.slider__preview-item(v-for="work in works")
-      a.slider__preview-link(:class="{active: work.id === currentWork.id}" href='#')
+      button.slider__preview-button(:class="{active: work.id === currentWork.id}" type='button')
         img(:src="work.slide", alt='slider__preview').slider__preview-pic
 
 
