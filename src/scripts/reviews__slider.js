@@ -10,7 +10,7 @@ const review = {
 
 new Vue ({
   el: '#reviews-slider',
-  template: '#reviews-template', 
+  template: '#reviews__slider-template', 
   components: {
     Flickity, review
   },
@@ -18,7 +18,7 @@ new Vue ({
     return {
       reviews: [],
       flickityOptions: {
-        initialIndex: 3,
+        initialIndex: 1,
         prevNextButtons: false,
         pageDots: false,
         wrapAround: false,
