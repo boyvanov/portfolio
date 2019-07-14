@@ -7,4 +7,4 @@ import "./scripts/parallax-mountain";
 import "./scripts/skills"; 
 import "./scripts/slider";
 import "./scripts/reviews__slider";
-// import "./scripts/parallax-budda";
+import "./scripts/popup-menu";
