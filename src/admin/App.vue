@@ -1,4 +1,8 @@
 <style lang="postcss">
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+
+@import "normalize.css";
+
 @import "../styles/mixins.pcss";
 
 @import "./base.pcss";
@@ -87,7 +91,7 @@
 
 .title {
   font-size: 21px;
-  font-weight: 800;
+  font-weight: 700;
 }
 .about__title-name {
   margin-right: 60px;
@@ -141,7 +145,7 @@
   flex-direction: column;
   background-color: $white;
   padding: 20px;
-  box-shadow: 4.096px 2.868px 20px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
   margin-bottom: 30px;
   justify-content: space-between;
 }
@@ -184,6 +188,7 @@
   &_pencil,
   &_trash {
     fill: $text-color;
+    fill-opacity: 0.5;
   }
 }
 
@@ -271,7 +276,7 @@
   padding: 20px;
   background-color: $white;
   margin-bottom: 35px;
-  box-shadow: 4.096px 2.868px 20px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
 }
 
 .works__edit-content {
@@ -309,7 +314,7 @@
   padding-bottom: 30px;
 }
 
-.works__btn {
+.btn {
   padding: 15px 40px;
   background-image: linear-gradient(
     90deg,
@@ -319,7 +324,7 @@
   );
   text-transform: uppercase;
   color: $white;
-  font-weight: 800;
+  font-weight: 700;
   border-radius: 30px;
 }
 
@@ -331,13 +336,15 @@
   margin-bottom: 25px;
 }
 
-.works__desc-block-title {
+.works__desc-block-title,
+.reviews__new-block-title {
   opacity: 0.5;
   font-weight: 600;
   margin-bottom: 15px;
 }
 
-.works__field {
+.works__field,
+.reviews__new-field {
   width: 100%;
   padding-bottom: 15px;
   border: 0 none;
@@ -347,7 +354,8 @@
   border-bottom: 1px solid $text-color;
 }
 
-.works__textarea {
+.works__textarea,
+.reviews__new-textarea {
   width: 100%;
   outline: none;
   background: none;
@@ -383,12 +391,13 @@
   margin-left: 10px;
 }
 
-.works__buttons {
+.works__buttons,
+.reviews__buttons {
   display: flex;
   justify-content: flex-end;
 }
 
-.works__buttons-cancel {
+.btn-cancel {
   margin-right: 50px;
   color: #383bcf;
   font-weight: 600;
@@ -396,12 +405,14 @@
   padding: 10px;
 }
 
-.works__list {
+.works__list,
+.reviews__list {
   display: flex;
   flex-wrap: wrap;
 }
 
-.works__item {
+.works__item,
+.reviews__item {
   width: calc(100% / 3 - 20px);
   margin-right: 30px;
   margin-bottom: 30px;
@@ -412,11 +423,11 @@
 }
 
 .work {
-  box-shadow: 4.096px 2.868px 20px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
   background-color: $white;
 }
 
-.work-add {
+.add {
   background-image: linear-gradient(
     90deg,
     rgb(0, 106, 237) 0%,
@@ -425,7 +436,7 @@
   );
 }
 
-.work-add-btn {
+.add-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -433,13 +444,13 @@
   height: 100%;
 }
 
-.work-add__content {
+.add__content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.work-add__circle {
+.add__circle {
   width: 150px;
   height: 150px;
   border: 2px solid $white;
@@ -458,12 +469,12 @@
   }
 }
 
-.work-add__text {
+.add__text {
   text-align: center;
   width: 60%;
   color: $white;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .work__img {
@@ -485,8 +496,9 @@
   margin-bottom: 25px;
 }
 .work__desc-text {
-  font-weight: 00;
+  font-weight: 600;
   margin-bottom: 25px;
+  opacity: 0.7;
 }
 
 .work__desc-link {
@@ -495,22 +507,20 @@
   font-weight: 600;
 }
 
-.work__desc-btns {
+.work__desc-btns,
+.review__btns {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
-
 }
 
-.work__desc-btns-edit,
-.work__desc-btns-delete {
-  font-weight: 600;
+.btns-edit,
+.btns-delete {
   color: rgba($text-color, 0.5);
-  font-size: 16px;
-
+  font-weight: 600;
 }
 
-.work__desc-btns-edit {
+.btns-edit {
   &::after {
     content: "";
 
@@ -523,7 +533,7 @@
     @include bgcover;
   }
 }
-.work__desc-btns-delete {
+.btns-delete {
   &::after {
     content: "";
 
@@ -535,6 +545,128 @@
 
     @include bgcover;
   }
+}
+
+.reviews__title {
+  margin-bottom: 60px;
+}
+
+.reviews__new {
+  padding: 20px;
+  background-color: $white;
+  margin-bottom: 35px;
+  box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
+}
+
+.reviews__new-content {
+  display: flex;
+  padding: 45px 15px 10px;
+}
+
+.reviews__new-title {
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba($text-color, 0.15);
+}
+
+.reviews__new-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.reviews__new-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.reviews__new-avatar {
+  background-color: #dee4ed;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.reviews__new-avatar-icon {
+  width: 85px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  fill: $white;
+}
+
+.reviews__new-add-btn {
+  color: #383bcf;
+  font-weight: 600;
+}
+
+.reviews__new-desc {
+  width: 62%;
+}
+.reviews__new-row {
+  display: flex;
+  margin-bottom: 40px;
+}
+.reviews__new-block {
+  flex: 1;
+  margin-right: 30px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.reviews__item {
+  background-color: $white;
+  padding: 20px;
+  box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
+}
+
+.review__user {
+  display: flex;
+  padding: 0 15px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba($text-color, 0.15);
+  margin-bottom: 30px;
+}
+
+.review__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.review__pic {
+  object-fit: cover;
+  object-position: top;
+  width: 100%;
+}
+
+.review__user-name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.review__user-position {
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.review__text {
+  padding: 0 15px;
+  opacity: 0.7;
+  font-weight: 600;
+  margin-bottom: 80px;
+}
+
+.review__btns {
+  padding: 0 15px;
+  margin-bottom: 0;
 }
 </style>
 
@@ -770,11 +902,11 @@
         .works__content
           .works__edit
             .works__edit-title
-              h1.works__edit-name Редактирование работы
+              .works__edit-name Редактирование работы
             .works__edit-content
               .works__load
                 .works__load-text Перетащите или загрузите для загрузки изображения
-                button(type='button').works__btn Загрузить
+                button(type='button').btn Загрузить
               .works__desc  
                 .works__desc-row
                   label.works__desc-block
@@ -809,14 +941,14 @@
                       svg.works__icon-delete
                         use(xlink:href="sprite.svg#remove")
                 .works__buttons
-                  button(type='button').works__buttons-cancel Отмена    
-                  button(type='button').works__btn Сохранить    
+                  button(type='button').btn-cancel Отмена    
+                  button(type='button').btn Сохранить    
           ul.works__list
-            li.works__item.work-add
-                button(type='button').work-add-btn
-                  .work-add__content
-                    .work-add__circle
-                    .work-add__text Добавить работу
+            li.works__item.add
+              button(type='button').add-btn
+                .add__content
+                  .add__circle
+                  .add__text Добавить работу
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview1.jpg").work__pic
@@ -825,8 +957,8 @@
                 .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
                 .work__desc-btns
-                  button(type='button').work__desc-btns-edit Править
-                  button(type='button').work__desc-btns-delete Удалить
+                  button(type='button').btns-edit Править
+                  button(type='button').btns-delete Удалить
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview2.jpg").work__pic
@@ -835,8 +967,8 @@
                 .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
                 .work__desc-btns
-                  button(type='button').work__desc-btns-edit Править
-                  button(type='button').work__desc-btns-delete Удалить
+                  button(type='button').btns-edit Править
+                  button(type='button').btns-delete Удалить
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview3.jpg").work__pic
@@ -845,8 +977,8 @@
                 .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
                 .work__desc-btns
-                  button(type='button').work__desc-btns-edit Править
-                  button(type='button').work__desc-btns-delete Удалить
+                  button(type='button').btns-edit Править
+                  button(type='button').btns-delete Удалить
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview4.jpg").work__pic
@@ -855,13 +987,89 @@
                 .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
                 .work__desc-btns
-                  button(type='button').work__desc-btns-edit Править
-                  button(type='button').work__desc-btns-delete Удалить
+                  button(type='button').btns-edit Править
+                  button(type='button').btns-delete Удалить
+    section.section.reviews
+      .container.reviews__container
+        h1.title.reviews__title Блок "Отзывы"
+        .reviews__content
+          .reviews__new
+            .reviews__new-title
+              .reviews__new-name Новый отзыв
+            .reviews__new-content
+              .reviews__new-avatar-wrap
+                .reviews__new-avatar
+                  svg.reviews__new-avatar-icon
+                    use(xlink:href="sprite.svg#user")
+                button(type='button').reviews__new-avatar-add-btn Добавить фото
+              .reviews__new-desc
+                .reviews__new-row
+                  label.reviews__new-block
+                    .reviews__new-block-title Имя автора
+                    input.reviews__new-field(type="text" name="name" placeholder="Ковальчук Дмитрий")
+                  label.reviews__new-block
+                    .reviews__new-block-title Титул автора
+                    input.reviews__new-field(type="text" name="position" placeholder="Основатель LoftSchool")
+                .reviews__new-row
+                  label.reviews__new-block
+                    .reviews__new-block-title Отзыв
+                    textarea.reviews__new-textarea(type="text" name="review" placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
+                .reviews__buttons
+                  button(type='button').btn-cancel Отмена    
+                  button(type='button').btn Сохранить
+          ul.reviews__list
+            li.reviews__item.add
+              button(type='button').add-btn
+                .add__content
+                  .add__circle
+                  .add__text Добавить отзыв
+            li.reviews__item
+              .review__user
+                .review__avatar
+                  img(src="../images/content/reviews1.png").review__pic
+                .review__user-desc
+                  .review__user-name Дмитрий Ковальчук
+                  .review__user-position Основатель LoftSchool
+              .review__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+              .review__btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
+            li.reviews__item
+              .review__user
+                .review__avatar
+                  img(src="../images/content/reviews2.png").review__pic
+                .review__user-desc
+                  .review__user-name Владимир Сабанцев
+                  .review__user-position Преподаватель
+              .review__text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
+              .review__btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
+            li.reviews__item
+              .review__user
+                .review__avatar
+                  img(src="../images/content/reviews1.png").review__pic
+                .review__user-desc
+                  .review__user-name Дмитрий Ковальчук
+                  .review__user-position Основатель LoftSchool
+              .review__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+              .review__btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
+            li.reviews__item
+              .review__user
+                .review__avatar
+                  img(src="../images/content/reviews2.png").review__pic
+                .review__user-desc
+                  .review__user-name Владимир Сабанцев
+                  .review__user-position Преподаватель
+              .review__text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
+              .review__btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
+                
 
-
-
-
-              
+                        
 
 
 </template>
