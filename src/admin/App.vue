@@ -1011,7 +1011,7 @@
                   .skill__row
                     .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    .cell__number.cell__number_new(colspan='2')
+                    .cell__number.cell__number_new
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__icon
@@ -1031,7 +1031,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Git").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__pencil
@@ -1046,7 +1046,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Webpack").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="90").number
                       .percent %
                     .cell__pencil
@@ -1061,7 +1061,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Terminal").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="80").number
                       .percent %
                     .cell__pencil
@@ -1076,7 +1076,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Gulp").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="70").number
                       .percent %
                     .cell__pencil
@@ -1092,7 +1092,7 @@
                   .skill__row
                     .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    .cell__number.cell__number_new(colspan='2')
+                    .cell__number.cell__number_new
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__icon
@@ -1112,7 +1112,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="HTML5").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__pencil
@@ -1127,7 +1127,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="CSS3").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="90").number
                       .percent %
                     .cell__pencil
@@ -1142,7 +1142,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="JavaScript").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="80").number
                       .percent %
                     .cell__pencil
@@ -1157,7 +1157,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Jquery и Vue.js").skill
-                    .cell__number(colspan='2')
+                    .cell__number
                       input(type="text" name="number" placeholder="70").number
                       .percent %
                     .cell__pencil
@@ -1173,7 +1173,7 @@
                   .skill__row
                     .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    .cell__number.cell__number_new(colspan='2')
+                    .cell__number.cell__number_new
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__icon
