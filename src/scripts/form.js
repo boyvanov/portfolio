@@ -149,8 +149,10 @@ class Validate {
   showModal(message) {
     const container = document.querySelector(".wrapper");
     const popup = document.createElement("div");
+    const body = document.querySelector('body');
 
     popup.classList.add("popup");
+    body.classList.add("locked");
     let innerDiv = document.querySelector("#form-popup").innerHTML;
     popup.innerHTML = innerDiv;
 
