@@ -15,6 +15,10 @@
     rgb(69, 69, 115) 100%
   );
   padding: 15px 0;
+
+  @include phones {
+    padding: 15px 20px;
+  }
 }
 
 .header__container {
@@ -25,15 +29,22 @@
 
 .header__admin-content {
   display: flex;
-  flex-direction: row;
-  flex: 1;
   align-items: center;
+  width: 100%;
+
+  @include phones {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.header__admin-name-wrap {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
 }
 
 .header__admin-close {
-  display: flex;
-  justify-content: flex-end;
-  flex: 1;
   text-decoration: underline;
   opacity: 0.7;
 }
@@ -44,6 +55,7 @@
   border-radius: 50%;
   overflow: hidden;
   margin-right: 20px;
+  flex-shrink: 0;
 }
 
 .header__admin-avatar-pic {
@@ -59,6 +71,10 @@
 .header__admin-title {
   font-size: 14px;
   opacity: 0.5;
+
+  @include phones {
+    display: none;
+  }
 }
 
 .admin__menu-list {
@@ -87,6 +103,12 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 60px;
+
+  @include phones {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+  }
 }
 
 .title {
@@ -95,6 +117,10 @@
 }
 .about__title-name {
   margin-right: 60px;
+
+  @include phones {
+    margin-bottom: 30px;
+  }
 }
 
 .about__title-add {
@@ -137,7 +163,16 @@
 
 .about__item {
   margin-right: 30px;
-  width: calc(50%-30px);
+  width: calc(50%-15px);
+
+  &:nth-child(2) {
+    margin-right: initial;
+  }
+
+  @include phones {
+    width: 100%;
+    margin-right: initial;
+  }
 }
 
 .about__block {
@@ -148,6 +183,10 @@
   box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
   margin-bottom: 30px;
   justify-content: space-between;
+
+  @include phones {
+    padding: 20px 0;
+  }
 }
 
 .about__block_add {
@@ -157,14 +196,48 @@
 .about__block-title {
   border-bottom: 1px solid rgba($text-color, 0.15);
   padding: 10px;
+
+  @include phones {
+    padding: 10px 20px;
+  }
+}
+
+.title__row {
+  display: flex;
+  align-items: center;
+}
+
+.skill__row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.content__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .about__block-content {
   padding: 10px;
+  min-height: 180px;
+
+  @include phones {
+    padding: 10px 20px;
+  }
+}
+
+.about__block-add-skill {
+  padding: 0 10px;
+
+  @include phones {
+    padding: 0 20px;
+  }
 }
 
 .group {
-  width: 66%;
+  width: 70%;
   font-size: 18px;
   font-weight: 700;
   border: 0 none;
@@ -173,6 +246,10 @@
   cursor: pointer;
   padding: 12px 0;
   border-bottom: 1px solid $text-color;
+
+  @include tablets {
+    width: 95%;
+  }
 }
 
 .edit__icon {
@@ -193,8 +270,7 @@
 }
 
 .cell__group {
-  /* padding-right: 140px; */
-  width: 420px;
+  width: 90%;
 }
 
 .cell__ok {
@@ -211,18 +287,18 @@
 }
 
 .skill {
-  width: 100px;
+  width: 100%;
 }
 
 .new-skill {
-  width: 225px;
-  border-bottom: 1px solid $text-color;
+  width: 100%;
   padding: 14px 0;
   padding-left: 20px;
 }
 
 .number {
-  width: 30px;
+  width: 50px;
+  padding: 14px 10px;
 }
 
 .number,
@@ -235,29 +311,30 @@
   padding-bottom: 15px;
 }
 
-.cell__new-skill {
-  padding-left: 70px;
-  padding-right: 10px;
+.cell__number {
+  width: 65px;
+  flex-shrink: 0;
 }
 
-.cell__number {
-  width: 60px;
-}
 .cell__number_new {
-  /* width: 70px; */
-  padding-left: 10px;
+  width: 80px;
+  border-bottom: 1px solid $text-color;
+}
+
+.cell__new-skill {
+  margin-right: 10px;
   border-bottom: 1px solid $text-color;
 }
 
 .cell__pencil {
-  padding-left: 30px;
+  margin-left: 30px;
 }
 
 .cell__trash {
-  padding-left: 15px;
+  margin-left: 15px;
 }
 .cell__icon {
-  padding-left: 30px;
+  margin-left: 30px;
 }
 
 .about__title-add-circle_new {
@@ -270,6 +347,10 @@
 
 .works__title {
   margin-bottom: 60px;
+
+  @include phones {
+    padding-left: 20px;
+  }
 }
 
 .works__edit {
@@ -277,11 +358,24 @@
   background-color: $white;
   margin-bottom: 35px;
   box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
+
+  @include phones {
+    padding: 20px 0;
+  }
 }
 
 .works__edit-content {
   display: flex;
   padding: 45px 15px 10px;
+
+  @include tablets {
+    flex-direction: column;
+    padding: 30px 85px 10px;
+  }
+
+  @include phones {
+    padding: 30px 0 10px;
+  }
 }
 
 .works__edit-title {
@@ -292,6 +386,10 @@
 .works__edit-name {
   font-size: 18px;
   font-weight: 700;
+
+  @include phones {
+    padding-left: 20px;
+  }
 }
 
 .works__load {
@@ -305,6 +403,10 @@
   padding-bottom: 65px;
   margin-right: 30px;
   border: 1px dashed rgb(161, 161, 161);
+
+  @include tablets {
+    display: none;
+  }
 }
 
 .works__load-text {
@@ -312,6 +414,28 @@
   opacity: 0.5;
   width: 50%;
   padding-bottom: 30px;
+}
+
+.works__preview {
+  display: none;
+  flex-direction: column;
+  padding: 0 15px;
+  margin-bottom: 50px;
+
+  @include tablets {
+    display: flex;
+  }
+}
+
+.works__preview-pic {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 30px;
+}
+
+.works__preview-btn {
+  color: #383bcf;
+  font-weight: 600;
 }
 
 .btn {
@@ -330,6 +454,10 @@
 
 .works__desc {
   flex: 1;
+
+  @include phones {
+    padding: 0 20px;
+  }
 }
 
 .works__desc-row {
@@ -361,16 +489,26 @@
   background: none;
   cursor: pointer;
   padding: 20px;
-  min-height: 150px;
+  min-height: 180px;
   resize: none;
   overflow: hidden;
   border: 1px solid rgba($text-color, 0.15);
   line-height: 1.75;
 }
 
+.works__textarea {
+  @include phones {
+    min-height: 200px;
+  }
+}
+
 .works__tags {
   display: flex;
   margin-bottom: 40px;
+
+  @include phones {
+    justify-content: center;
+  }
 }
 
 .works__tags-btn {
@@ -397,6 +535,18 @@
   justify-content: flex-end;
 }
 
+.works__buttons {
+  @include tablets {
+    justify-content: center;
+  }
+}
+
+.reviews__buttons {
+  @include phones {
+    justify-content: center;
+  }
+}
+
 .btn-cancel {
   margin-right: 50px;
   color: #383bcf;
@@ -409,6 +559,10 @@
 .reviews__list {
   display: flex;
   flex-wrap: wrap;
+
+  @include phones {
+    flex-direction: column;
+  }
 }
 
 .works__item,
@@ -418,13 +572,42 @@
   margin-bottom: 30px;
 
   &:nth-child(3n) {
-    margin-right: 0;
+    margin-right: auto;
+  }
+
+  @include tablets {
+    width: calc(100% / 2 - 15px);
+    margin-right: 30px;
+
+    &:nth-child(2n) {
+      margin-right: initial;
+    }
+  }
+
+  @include phones {
+    width: 100%;
+    margin-right: initial;
   }
 }
 
 .work {
   box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
   background-color: $white;
+  position: relative;
+
+  &:nth-child(2) {
+    &::before {
+      content: "";
+      display: block;
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba($white, 0.7);
+    }
+  }
 }
 
 .add {
@@ -434,6 +617,10 @@
     rgb(32, 80, 220) 48%,
     rgb(63, 53, 203) 100%
   );
+
+  @include phones {
+    padding: 30px 20px;
+  }
 }
 
 .add-btn {
@@ -442,12 +629,20 @@
   align-items: center;
   width: 100%;
   height: 100%;
+
+  @include phones {
+    justify-content: flex-start;
+  }
 }
 
 .add__content {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include phones {
+    flex-direction: row;
+  }
 }
 
 .add__circle {
@@ -466,6 +661,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: $white;
+
+    @include phones {
+      font-size: 24px;
+    }
+  }
+
+  @include phones {
+    margin-bottom: 0;
+    margin-right: 20px;
+    flex-direction: row;
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -475,6 +682,10 @@
   color: $white;
   font-size: 18px;
   font-weight: 700;
+
+  @include phones {
+    white-space: nowrap;
+  }
 }
 
 .work__img {
@@ -488,6 +699,10 @@
 
 .work__desc {
   padding: 0 30px;
+
+  @include phones {
+    padding: 0 20px;
+  }
 }
 
 .work__desc-title {
@@ -499,6 +714,7 @@
   font-weight: 600;
   margin-bottom: 25px;
   opacity: 0.7;
+  line-height: 1.875;
 }
 
 .work__desc-link {
@@ -549,6 +765,10 @@
 
 .reviews__title {
   margin-bottom: 60px;
+
+  @include phones {
+    padding-left: 20px;
+  }
 }
 
 .reviews__new {
@@ -556,11 +776,20 @@
   background-color: $white;
   margin-bottom: 35px;
   box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
+
+  @include phones {
+    padding: 20px 0;
+  }
 }
 
 .reviews__new-content {
   display: flex;
   padding: 45px 15px 10px;
+
+  @include phones {
+    flex-direction: column;
+    padding: 45px 20px 10px;
+  }
 }
 
 .reviews__new-title {
@@ -571,12 +800,22 @@
 .reviews__new-name {
   font-size: 18px;
   font-weight: 700;
+
+  @include phones {
+    padding-left: 20px;
+  }
 }
 
 .reviews__new-avatar-wrap {
   display: flex;
   flex-direction: column;
   margin-right: 30px;
+
+  @include phones {
+    margin-right: 0;
+    align-items: center;
+    margin-bottom: 50px;
+  }
 }
 
 .reviews__new-avatar {
@@ -597,17 +836,33 @@
   fill: $white;
 }
 
-.reviews__new-add-btn {
+.reviews__new-avatar-add-btn {
   color: #383bcf;
   font-weight: 600;
 }
 
 .reviews__new-desc {
   width: 62%;
+
+  @include tablets {
+    width: 68%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 .reviews__new-row {
   display: flex;
   margin-bottom: 40px;
+
+  @include tablets {
+    &:first-child {
+      flex-direction: column;
+    }
+
+    margin-bottom: 30px;
+  }
 }
 .reviews__new-block {
   flex: 1;
@@ -616,12 +871,40 @@
   &:last-child {
     margin-right: 0;
   }
+
+  @include tablets {
+    margin-right: 0;
+
+    &:first-child {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.reviews__new-field {
+  @include tablets {
+    width: 70%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .reviews__item {
   background-color: $white;
   padding: 20px;
   box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
+
+  @include phones {
+    padding: 20px 0;
+  }
+}
+
+.add {
+  @include phones {
+    padding: 30px 20px;
+  }
 }
 
 .review__user {
@@ -661,7 +944,13 @@
   padding: 0 15px;
   opacity: 0.7;
   font-weight: 600;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
+  min-height: 170px;
+  line-height: 1.875;
+
+  @include phones {
+    min-height: 100px;
+  }
 }
 
 .review__btns {
@@ -675,13 +964,14 @@
 
     header.header__admin
       .container.header__container
+        a(href='#').header__admin-avatar
+          img.header__admin-avatar-pic(src="../images/content/user.jpg")
         .header__admin-content
-          a(href='#').header__admin-avatar
-            img.header__admin-avatar-pic(src="../images/content/user.jpg")
-          .header__admin-name Сергей Бойванов
-          .header__admin-title Панель администрирования
-        .header__admin-close 
-          a(href='#').header__admin-close-link Выйти
+          .header__admin-name-wrap
+            .header__admin-name Сергей Бойванов
+            .header__admin-title Панель администрирования
+          .header__admin-close 
+            a(href='#').header__admin-close-link Выйти
 
     nav.admin__menu
       .container.admin__menu-container
@@ -702,198 +992,191 @@
           ul.about__list
             li.about__item.about__block.about__block_add
               .about__block-title
-                table
-                  tr.title__row
-                    td.cell__group
+                
+                  .title__row
+                    .cell__group
                       input(type="text" name="group" placeholder="Название новой группы").group
-                    td.cell__ok 
+                    .cell__ok 
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_ok
                           use(xlink:href="sprite.svg#tick")
-                    td.cell__delete
+                    .cell__delete
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_delete
                           use(xlink:href="sprite.svg#remove")
-              
+
+              .about__block-content
               .about__block-add-skill
-                table
-                  tr.skill__row
-                    td.cell__new-skill
+                
+                  .skill__row
+                    .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    td.cell__number.cell__number_new(colspan='2')
+                    .cell__number.cell__number_new(colspan='2')
                       input(type="text" name="number" placeholder="100").number
                       .percent %
-                    td.cell__icon
+                    .cell__icon
                       button(type='button').about__title-add-circle.about__title-add-circle_new
             li.about__item.about__block
               .about__block-title
-                table
-                  tr.title__row
-                    td.cell__group
+                
+                  .title__row
+                    .cell__group
                       input(type="text" name="group" placeholder="Workflow").group
-                    td.cell__ok
+                    .cell__pencil
                       button(type='button').cell__edit-btn
-                        svg.edit__icon.edit__icon_ok
-                          use(xlink:href="sprite.svg#tick")
-                    td.cell__delete
-                      button(type='button').cell__edit-btn
-                        svg.edit__icon.edit__icon_delete
-                          use(xlink:href="sprite.svg#remove")
+                        svg.edit__icon.edit__icon_pencil
+                          use(xlink:href="sprite.svg#pencil")
               .about__block-content
-                table
-                  tr.content__row
-                    td.cell__skill
+                
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="Git").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="100").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
                 
-                  tr.content__row
-                    td.cell__skill
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="Webpack").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="90").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
                 
-                  tr.content__row
-                    td.cell__skill
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="Terminal").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="80").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
                 
-                  tr.content__row
-                    td.cell__skill
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="Gulp").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="70").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
               .about__block-add-skill
-                table
-                  tr.skill__row
-                    td.cell__new-skill
+                
+                  .skill__row
+                    .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    td.cell__number.cell__number_new(colspan='2')
+                    .cell__number.cell__number_new(colspan='2')
                       input(type="text" name="number" placeholder="100").number
                       .percent %
-                    td.cell__icon
+                    .cell__icon
                       button(type='button').about__title-add-circle.about__title-add-circle_new
             li.about__item.about__block
               .about__block-title
-                table
-                  tr.title__row
-                    td.cell__group
+                
+                  .title__row
+                    .cell__group
                       input(type="text" name="group" placeholder="Frontend").group
-                    td.cell__ok
+                    .cell__pencil
                       button(type='button').cell__edit-btn
-                        svg.edit__icon.edit__icon_ok
-                          use(xlink:href="sprite.svg#tick")
-                    td.cell__delete
-                      button(type='button').cell__edit-btn
-                        svg.edit__icon.edit__icon_delete
-                          use(xlink:href="sprite.svg#remove")
+                        svg.edit__icon.edit__icon_pencil
+                          use(xlink:href="sprite.svg#pencil")
               .about__block-content
-                table
-                  tr.content__row
-                    td.cell__skill
+                
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="HTML5").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="100").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
                 
-                  tr.content__row
-                    td.cell__skill
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="CSS3").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="90").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
                 
-                  tr.content__row
-                    td.cell__skill
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="JavaScript").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="80").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
                 
-                  tr.content__row
-                    td.cell__skill
+                  .content__row
+                    .cell__skill
                       input(type="text" name="skill" placeholder="Jquery и Vue.js").skill
-                    td.cell__number(colspan='2')
+                    .cell__number(colspan='2')
                       input(type="text" name="number" placeholder="70").number
                       .percent %
-                    td.cell__pencil
+                    .cell__pencil
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_pencil
                           use(xlink:href="sprite.svg#pencil")
-                    td.cell__trash
+                    .cell__trash
                       button(type='button').cell__edit-btn
                         svg.edit__icon.edit__icon_trash
                           use(xlink:href="sprite.svg#trash")
               .about__block-add-skill
-                table
-                  tr.skill__row
-                    td.cell__new-skill
+                
+                  .skill__row
+                    .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    td.cell__number.cell__number_new(colspan='2')
+                    .cell__number.cell__number_new(colspan='2')
                       input(type="text" name="number" placeholder="100").number
                       .percent %
-                    td.cell__icon
+                    .cell__icon
                       button(type='button').about__title-add-circle.about__title-add-circle_new
 
     section.section.works
@@ -907,7 +1190,11 @@
               .works__load
                 .works__load-text Перетащите или загрузите для загрузки изображения
                 button(type='button').btn Загрузить
-              .works__desc  
+              .works__preview
+                .works__preview-img
+                  img(src="../images/content/slider_preview1.jpg").works__preview-pic
+                button(type='button').works__preview-btn Изменить превью
+              .works__desc
                 .works__desc-row
                   label.works__desc-block
                     .works__desc-block-title Название
@@ -1067,6 +1354,7 @@
               .review__btns
                 button(type='button').btns-edit Править
                 button(type='button').btns-delete Удалить
+            
                 
 
                         
@@ -1074,5 +1362,8 @@
 
 </template>
 
+<script>
+export default {};
+</script>
 
 
