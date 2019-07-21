@@ -8,6 +8,7 @@ import "./scripts/skills";
 import "./scripts/slider";
 import "./scripts/reviews__slider";
 import "./scripts/popup-menu";
+import "./scripts/anchor";
 
 import Validate from "./scripts/form";
 

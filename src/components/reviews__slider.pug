@@ -1,8 +1,8 @@
 script(type='text/x-template')#reviews__slider-template
   .reviews__slider
     .reviews__slider-controls
-      button(@click="previous()" type='button').reviews__slider-btn.reviews__slider-btn_prev
-      button(@click="next()" type='button').reviews__slider-btn.reviews__slider-btn_next
+      button(:class="{disabled: currentIndex <= 0}" @click="previous()" type='button').reviews__slider-btn.reviews__slider-btn_prev
+      button(:class="{disabled: currentIndex >= (reviews.length - 1)}" @click="next()" type='button').reviews__slider-btn.reviews__slider-btn_next
     flickity(ref="flickity" :options="flickityOptions") 
       li(v-for="review in reviews" :key="review.id").reviews__slider-item
         review(

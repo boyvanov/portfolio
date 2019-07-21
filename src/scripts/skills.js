@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 
 const skill = {
   template: "#skill",
@@ -9,11 +9,21 @@ const skill = {
   methods: {
     drawCircle() {
       const circle = this.$refs["circle"];
+      let findBlcTop = this.$root.findCircle();
       const dashArray = parseInt(
         getComputedStyle(circle).getPropertyValue("stroke-dasharray")
       );
       const percent = (dashArray / 100) * (100 - this.skillPercent);
-      circle.style.strokeDashoffset = percent;
+
+
+      window.addEventListener("scroll", function () {
+        const posTop = findBlcTop.findTop.getBoundingClientRect().top;
+        const exactTop = posTop.toFixed();
+        
+        if (exactTop > 280 && exactTop < 330) {
+          circle.style.strokeDashoffset = percent;
+        }
+      });
     }
   },
   mounted() {
@@ -40,6 +50,14 @@ new Vue({
   data() {
     return {
       skills: []
+    };
+  },
+  methods: {
+    findCircle() {
+      let circleBlock = this.$refs["skills-block"];
+          return {
+        findTop: circleBlock
+      };
     }
   },
   created() {
