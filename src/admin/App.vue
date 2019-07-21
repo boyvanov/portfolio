@@ -132,9 +132,26 @@
   color: #383bcf;
   font-weight: 600;
   margin-left: 15px;
+
+  &::before {
+    content: "+";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: linear-gradient(
+      90deg,
+      rgb(0, 106, 237) 0%,
+      rgb(32, 80, 220) 48%,
+      rgb(63, 53, 203) 100%
+    );
+    border-radius: 50%;
+    margin-right: 15px;
+    text-align: center;
+    color: $white;
+  }
 }
 
-.about__title-add-circle {
+/* .about__title-add-circle {
   position: relative;
   width: 20px;
   height: 20px;
@@ -154,24 +171,20 @@
     transform: translate(-50%, -50%);
     color: $white;
   }
-}
+} */
 
 .about__list {
   display: flex;
   flex-wrap: wrap;
+  margin-left: -30px;
 }
 
 .about__item {
-  margin-right: 30px;
-  width: calc(50%-15px);
-
-  &:nth-child(2) {
-    margin-right: initial;
-  }
+  margin-left: 30px;
+  width: calc(100% / 2 - 30px);
 
   @include phones {
     width: 100%;
-    margin-right: initial;
   }
 }
 
@@ -270,11 +283,11 @@
 }
 
 .cell__group {
-  width: 90%;
+  flex: 1;
 }
 
 .cell__ok {
-  padding-right: 15px;
+  margin-right: 15px;
 }
 
 .skill,
@@ -307,8 +320,8 @@
 }
 
 .cell__skill {
-  width: 300px;
   padding-bottom: 15px;
+  flex: 1;
 }
 
 .cell__number {
@@ -365,7 +378,6 @@
 }
 
 .works__edit-content {
-  display: flex;
   padding: 45px 15px 10px;
 
   @include tablets {
@@ -375,6 +387,14 @@
 
   @include phones {
     padding: 30px 0 10px;
+  }
+}
+
+.works__form {
+  display: flex;
+
+  @include tablets {
+    flex-direction: column;
   }
 }
 
@@ -414,6 +434,7 @@
   opacity: 0.5;
   width: 50%;
   padding-bottom: 30px;
+  text-align: center;
 }
 
 .works__preview {
@@ -464,6 +485,10 @@
   margin-bottom: 25px;
 }
 
+.works__desc-block {
+  display: block;
+}
+
 .works__desc-block-title,
 .reviews__new-block-title {
   opacity: 0.5;
@@ -511,22 +536,24 @@
   }
 }
 
-.works__tags-btn {
-  background-color: #f4f4f4;
-  border-radius: 20px;
-  padding: 5px 20px;
+.works__tag-btn {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  padding: 5px 20px;
   font-size: 13px;
-  opacity: 0.7;
+
+  &::after {
+    display: block;
+    content: "X";
+    margin-left: 10px;
+  }
 }
 
-.works__icon-delete {
-  width: 11px;
-  height: 11px;
-  fill: $text-color;
-  margin-left: 10px;
+.works__tag {
+  background-color: #f4f4f4;
+  opacity: 0.7;
+  margin-right: 10px;
+  border-radius: 20px;
 }
 
 .works__buttons,
@@ -559,6 +586,7 @@
 .reviews__list {
   display: flex;
   flex-wrap: wrap;
+  margin-left: -30px;
 
   @include phones {
     flex-direction: column;
@@ -567,26 +595,16 @@
 
 .works__item,
 .reviews__item {
-  width: calc(100% / 3 - 20px);
-  margin-right: 30px;
+  width: calc(100% / 3 - 30px);
+  margin-left: 30px;
   margin-bottom: 30px;
 
-  &:nth-child(3n) {
-    margin-right: auto;
-  }
-
   @include tablets {
-    width: calc(100% / 2 - 15px);
-    margin-right: 30px;
-
-    &:nth-child(2n) {
-      margin-right: initial;
-    }
+    width: calc(100% / 2 - 30px);
   }
 
   @include phones {
     width: 100%;
-    margin-right: initial;
   }
 }
 
@@ -730,6 +748,10 @@
   margin-bottom: 40px;
 }
 
+.work__desc-btns {
+  padding: 0 30px;
+}
+
 .btns-edit,
 .btns-delete {
   color: rgba($text-color, 0.5);
@@ -783,12 +805,18 @@
 }
 
 .reviews__new-content {
-  display: flex;
   padding: 45px 15px 10px;
 
   @include phones {
-    flex-direction: column;
     padding: 45px 20px 10px;
+  }
+}
+
+.reviews__new-form {
+  display: flex;
+
+  @include phones {
+    flex-direction: column;
   }
 }
 
@@ -892,6 +920,8 @@
 }
 
 .reviews__item {
+  display: flex;
+  flex-direction: column;
   background-color: $white;
   padding: 20px;
   box-shadow: 4.096px 2.868px 20px 0 rgba(0, 0, 0, 0.07);
@@ -910,7 +940,7 @@
 .review__user {
   display: flex;
   padding: 0 15px;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   border-bottom: 1px solid rgba($text-color, 0.15);
   margin-bottom: 30px;
 }
@@ -941,6 +971,7 @@
 }
 
 .review__text {
+  flex: 1;
   padding: 0 15px;
   opacity: 0.7;
   font-weight: 600;
@@ -956,6 +987,144 @@
 .review__btns {
   padding: 0 15px;
   margin-bottom: 0;
+}
+
+.login {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(45, 60, 78, 0.9);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+  &.active {
+    display: flex;
+  }
+}
+
+.login__form-wrap {
+  position: relative;
+  padding: 60px 75px;
+  background-color: $white;
+
+  @include phones {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 150px 30px;
+  }
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__form-row {
+  display: flex;
+  margin-bottom: 35px;
+
+  &:last-child {
+    margin-bottom: 0;
+
+    @include phones {
+      align-self: center;
+    }
+  }
+}
+
+.login__form-title {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login__form-block {
+  flex: 1;
+  position: relative;
+}
+
+.login__form-field-wrap {
+  display: flex;
+  border-bottom: 1px solid $text-color;
+  padding-bottom: 15px;
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $hover-color;
+
+    .login__form-field-icon {
+      opacity: 1;
+      fill: $hover-color;
+    }
+  }
+}
+
+.login__form-field-icon {
+  opacity: 0.3;
+  margin-right: 20px;
+  transition: 0.1s;
+  width: 35px;
+  height: 35px;
+  fill: $text-color;
+}
+
+.login__form-field {
+  color: $text-color;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  border: 0 none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+.login__form-block-title {
+  margin-bottom: 20px;
+  padding-left: 50px;
+  opacity: 0.3;
+}
+
+.login__form-btn {
+  padding: 30px 120px;
+  background-image: linear-gradient(
+    90deg,
+    rgb(173, 0, 237) 0%,
+    rgb(129, 0, 240) 25%,
+    rgb(85, 0, 242) 100%
+  );
+  border-radius: 50px 5px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $white;
+  outline: none;
+  cursor: pointer;
+
+  @include phones {
+    padding: 30px 100px;
+  }
+}
+
+.login__form-btn-close {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+.login__form-btn-close-icon {
+  width: 18px;
+  height: 18px;
+  fill: $text-color;
 }
 </style>
 
@@ -984,9 +1153,8 @@
     section.section.about
       .container.about__container
         .about__title 
-          h1.title.about__title-name Блок "Обо мне"
+          h2.title.about__title-name Блок "Обо мне"
           button(type='button').about__title-add
-            .about__title-add-circle
             .about__title-add-name Добавить группу
         .about__content
           ul.about__list
@@ -1011,7 +1179,7 @@
                   .skill__row
                     .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    .cell__number.cell__number_new
+                    label.cell__number.cell__number_new
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__icon
@@ -1031,7 +1199,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Git").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__pencil
@@ -1046,7 +1214,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Webpack").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="90").number
                       .percent %
                     .cell__pencil
@@ -1061,7 +1229,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Terminal").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="80").number
                       .percent %
                     .cell__pencil
@@ -1076,7 +1244,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Gulp").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="70").number
                       .percent %
                     .cell__pencil
@@ -1092,7 +1260,7 @@
                   .skill__row
                     .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    .cell__number.cell__number_new
+                    label.cell__number.cell__number_new
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__icon
@@ -1112,7 +1280,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="HTML5").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__pencil
@@ -1127,7 +1295,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="CSS3").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="90").number
                       .percent %
                     .cell__pencil
@@ -1142,7 +1310,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="JavaScript").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="80").number
                       .percent %
                     .cell__pencil
@@ -1157,7 +1325,7 @@
                   .content__row
                     .cell__skill
                       input(type="text" name="skill" placeholder="Jquery и Vue.js").skill
-                    .cell__number
+                    label.cell__number
                       input(type="text" name="number" placeholder="70").number
                       .percent %
                     .cell__pencil
@@ -1173,7 +1341,7 @@
                   .skill__row
                     .cell__new-skill
                       input(type="text" name="new-skill" placeholder="Новый навык").new-skill
-                    .cell__number.cell__number_new
+                    label.cell__number.cell__number_new
                       input(type="text" name="number" placeholder="100").number
                       .percent %
                     .cell__icon
@@ -1181,55 +1349,51 @@
 
     section.section.works
       .container.works__container
-        h1.title.works__title Блок "Работы"
+        h2.title.works__title Блок "Работы"
         .works__content
           .works__edit
             .works__edit-title
               .works__edit-name Редактирование работы
             .works__edit-content
-              .works__load
-                .works__load-text Перетащите или загрузите для загрузки изображения
-                button(type='button').btn Загрузить
-              .works__preview
-                .works__preview-img
-                  img(src="../images/content/slider_preview1.jpg").works__preview-pic
-                button(type='button').works__preview-btn Изменить превью
-              .works__desc
-                .works__desc-row
-                  label.works__desc-block
-                    .works__desc-block-title Название
-                    input.works__field(type="text" name="name" placeholder="Дизайн сайта для авто салона Porsche")
-                .works__desc-row
-                  label.works__desc-block
-                    .works__desc-block-title Ссылка
-                    input.works__field(type="text" name="link" placeholder="https://www.porsche-pulkovo.ru")
-                .works__desc-row
-                  label.works__desc-block
-                    .works__desc-block-title Описание
-                    textarea.works__textarea(name="message" placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
-                .works__desc-row
-                  label.works__desc-block
-                    .works__desc-block-title Добавление тэга
-                    input.works__field(type="text" name="tags" placeholder="Jquery, Vue.js, HTML5")
-                ul.works__tags
-                  li.works__tags-btn
-                    .works__tag HTML
-                    button(type='button').works__btn-delete
-                      svg.works__icon-delete
-                        use(xlink:href="sprite.svg#remove")
-                  li.works__tags-btn
-                    .works__tag CSS
-                    button(type='button').works__btn-delete
-                      svg.works__icon-delete
-                        use(xlink:href="sprite.svg#remove")
-                  li.works__tags-btn
-                    .works__tag Javascript
-                    button(type='button').works__btn-delete
-                      svg.works__icon-delete
-                        use(xlink:href="sprite.svg#remove")
-                .works__buttons
-                  button(type='button').btn-cancel Отмена    
-                  button(type='button').btn Сохранить    
+              form.works__form
+                .works__load
+                  .works__load-text
+                    p Перетащите или загрузите для загрузки изображения
+                  button(type='button').btn Загрузить
+                .works__preview
+                  .works__preview-img
+                    img(src="../images/content/slider_preview1.jpg").works__preview-pic
+                  button(type='button').works__preview-btn Изменить превью
+                .works__desc
+                  .works__desc-row
+                    label.works__desc-block
+                      .works__desc-block-title Название
+                      input.works__field(type="text" name="name" placeholder="Дизайн сайта для авто салона Porsche")
+                  .works__desc-row
+                    label.works__desc-block
+                      .works__desc-block-title Ссылка
+                      input.works__field(type="text" name="link" placeholder="https://www.porsche-pulkovo.ru")
+                  .works__desc-row
+                    label.works__desc-block
+                      .works__desc-block-title Описание
+                      textarea.works__textarea(name="message" placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
+                  .works__desc-row
+                    label.works__desc-block
+                      .works__desc-block-title Добавление тэга
+                      input.works__field(type="text" name="tags" placeholder="Jquery, Vue.js, HTML5")
+                  ul.works__tags
+                    li.works__tag
+                      button(type='button').works__tag-btn HTML
+                      
+                    li.works__tag
+                      button(type='button').works__tag-btn CSS
+                      
+                    li.works__tag
+                      button(type='button').works__tag-btn Javascript
+                      
+                  .works__buttons
+                    button(type='button').btn-cancel Отмена    
+                    button(type='button').btn Сохранить    
           ul.works__list
             li.works__item.add
               button(type='button').add-btn
@@ -1240,70 +1404,75 @@
               .work__img
                 img(src="../images/content/slider_preview1.jpg").work__pic
               .work__desc
-                .work__desc-title Сайт школы образования
-                .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                h4.work__desc-title Сайт школы образования
+                .work__desc-text
+                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
-                .work__desc-btns
-                  button(type='button').btns-edit Править
-                  button(type='button').btns-delete Удалить
+              .work__desc-btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview2.jpg").work__pic
               .work__desc
-                .work__desc-title Сайт школы образования
-                .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                h4.work__desc-title Сайт школы образования
+                .work__desc-text
+                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
-                .work__desc-btns
-                  button(type='button').btns-edit Править
-                  button(type='button').btns-delete Удалить
+              .work__desc-btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview3.jpg").work__pic
               .work__desc
-                .work__desc-title Сайт школы образования
-                .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                h4.work__desc-title Сайт школы образования
+                .work__desc-text
+                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
-                .work__desc-btns
-                  button(type='button').btns-edit Править
-                  button(type='button').btns-delete Удалить
+              .work__desc-btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
             li.works__item.work
               .work__img
                 img(src="../images/content/slider_preview4.jpg").work__pic
               .work__desc
-                .work__desc-title Сайт школы образования
-                .work__desc-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                h4.work__desc-title Сайт школы образования
+                .work__desc-text
+                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').work__desc-link http://loftschool.ru
-                .work__desc-btns
-                  button(type='button').btns-edit Править
-                  button(type='button').btns-delete Удалить
+              .work__desc-btns
+                button(type='button').btns-edit Править
+                button(type='button').btns-delete Удалить
     section.section.reviews
       .container.reviews__container
-        h1.title.reviews__title Блок "Отзывы"
+        h2.title.reviews__title Блок "Отзывы"
         .reviews__content
           .reviews__new
             .reviews__new-title
               .reviews__new-name Новый отзыв
             .reviews__new-content
-              .reviews__new-avatar-wrap
-                .reviews__new-avatar
-                  svg.reviews__new-avatar-icon
-                    use(xlink:href="sprite.svg#user")
-                button(type='button').reviews__new-avatar-add-btn Добавить фото
-              .reviews__new-desc
-                .reviews__new-row
-                  label.reviews__new-block
-                    .reviews__new-block-title Имя автора
-                    input.reviews__new-field(type="text" name="name" placeholder="Ковальчук Дмитрий")
-                  label.reviews__new-block
-                    .reviews__new-block-title Титул автора
-                    input.reviews__new-field(type="text" name="position" placeholder="Основатель LoftSchool")
-                .reviews__new-row
-                  label.reviews__new-block
-                    .reviews__new-block-title Отзыв
-                    textarea.reviews__new-textarea(type="text" name="review" placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
-                .reviews__buttons
-                  button(type='button').btn-cancel Отмена    
-                  button(type='button').btn Сохранить
+              form.reviews__new-form
+                .reviews__new-avatar-wrap
+                  .reviews__new-avatar
+                    svg.reviews__new-avatar-icon
+                      use(xlink:href="sprite.svg#user")
+                  button(type='button').reviews__new-avatar-add-btn Добавить фото
+                .reviews__new-desc
+                  .reviews__new-row
+                    label.reviews__new-block
+                      .reviews__new-block-title Имя автора
+                      input.reviews__new-field(type="text" name="name" placeholder="Ковальчук Дмитрий")
+                    label.reviews__new-block
+                      .reviews__new-block-title Титул автора
+                      input.reviews__new-field(type="text" name="position" placeholder="Основатель LoftSchool")
+                  .reviews__new-row
+                    label.reviews__new-block
+                      .reviews__new-block-title Отзыв
+                      textarea.reviews__new-textarea(type="text" name="review" placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
+                  .reviews__buttons
+                    button(type='button').btn-cancel Отмена    
+                    button(type='button').btn Сохранить
           ul.reviews__list
             li.reviews__item.add
               button(type='button').add-btn
@@ -1354,6 +1523,31 @@
               .review__btns
                 button(type='button').btns-edit Править
                 button(type='button').btns-delete Удалить
+    section.login
+      .login__form-wrap
+        form.login__form
+          .login__form-title Авторизация
+          .login__form-row
+            label.login__form-block
+              .login__form-block-title Логин
+              .login__form-field-wrap
+                svg.login__form-field-icon
+                    use(xlink:href="sprite.svg#user")
+                input.login__form-field(type="text" name="login" required placeholder="Введите логин")
+          .login__form-row
+            label.login__form-block
+              .login__form-block-title Пароль
+              .login__form-field-wrap
+                svg.login__form-field-icon
+                    use(xlink:href="sprite.svg#user")
+                input.login__form-field(type="password" name="password" required placeholder="Введите пароль")
+          .login__form-row
+            button.login__form-btn(type='submit') Отправить
+        button.login__form-btn-close(type='button')
+          svg.login__form-btn-close-icon
+            use(xlink:href="sprite.svg#remove")   
+              
+
             
                 
 

@@ -8,10 +8,25 @@
   @include bgcover(top);
   background-image: url("../images/bg/Mountain-Baloon.png");
   clip-path: polygon(0% 0%, 0% 93%, 50% 100%, 100% 93%, 100% 0%);
+
+  @include tablets {
+    clip-path: polygon(0% 0%, 0% 96%, 50% 100%, 100% 96%, 100% 0%);
+  }
+  @include phones {
+    clip-path: polygon(0% 0%, 0% 98%, 50% 100%, 100% 98%, 100% 0%);
+  }
 }
 
 .maincontent__budda-bg {
   @include bgcover(top);
   background-image: url("../images/bg/Budda.png");
   clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%, 50% 7%);
+
+  @include tablets {
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%, 50% 4%);
+  }
+
+  @include phones {
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%, 50% 2%);
+  }
 }

@@ -165,6 +165,7 @@ class Validate {
     closePopupButton.addEventListener("click", function(event) {
       event.preventDefault();
       container.removeChild(popup);
+      body.classList.remove("locked");
     });
   }
 }

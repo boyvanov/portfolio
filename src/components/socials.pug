@@ -22,11 +22,11 @@
 ul.socials
   -
     var socials= {
-      'insta': '#',
-      'vk': '#',
-      'github': '#'
+      'insta': 'https://vk.com/id18164151',
+      'vk': 'https://vk.com/id18164151',
+      'github': 'https://github.com/boyvanov'
     }
   each href, title in socials
     li.socials__item
-      a.socials__link(href=`${href}`)
+      a.socials__link(href=`${href}` target='_blank')
         +icon(`${title}`, 'socials__icon')

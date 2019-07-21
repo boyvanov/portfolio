@@ -14,25 +14,30 @@ script(type='text/x-template')#slider-display
   .slider__display(:data-slide="currentIndex + 1")
     .slider__display-full-img
       img(:src="currentWork.slide", alt='slider__display').slider__display-pic
-    reviews(
-      :works="reversedWorks"
+    previews(
+      :works="works"
       :currentWork="currentWork"
+      :currentIndex="currentIndex"
+      @slide="handleSlide"
     )
     btns(
-      @slide="direction => $emit('slide', direction)"
+      :worksLength="works.length"
+      :currentIndex="currentIndex"
+      @slide="handleSlide"
     )
 
-script(type='text/x-template')#slider-reviews
-  ul.slider__preview
-    li.slider__preview-item(v-for="work in works")
-      button.slider__preview-button(:class="{active: work.id === currentWork.id}" type='button')
-        img(:src="work.slide", alt='slider__preview').slider__preview-pic
+script(type='text/x-template')#slider-previews
+  .slider__preview-wrap
+    ul.slider__preview(:style="{transform: `translateY(-${translate}%)`}")
+      li.slider__preview-item(v-for="work, index in works" :key="work.id")
+        button.slider__preview-button(@click="$emit('slide', index)" :class="{active: work.id === currentWork.id}" type='button')
+          img(:src="work.slide", alt='slider__preview').slider__preview-pic
 
 
 script(type='text/x-template')#slider-btn
   .slider__controls
-    button(@click="$emit('slide', 'next')", type='button').slider__btn.slider__btn_next.active
-    button(@click="$emit('slide', 'prev')", type='button').slider__btn.slider__btn_prev
+    button(@click="$emit('slide', 'next')", type='button', :class="{disabled: currentIndex >= (worksLength - 1)}").slider__btn.slider__btn_next
+    button(@click="$emit('slide', 'prev')", type='button', :class="{disabled: currentIndex <= 0 }").slider__btn.slider__btn_prev
 
 script(type='text/x-template')#slider-desc
   .slider__desc
