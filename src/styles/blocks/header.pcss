@@ -20,9 +20,14 @@
   }
   .main-menu__item {
     padding: 50px 30px;
+    border-bottom: 3px solid transparent;
 
     &.active {
       border-bottom: 3px solid $hover-color;
+
+      & .main-menu__link {
+        color: $hover-color;
+      }
     }
   }
 
