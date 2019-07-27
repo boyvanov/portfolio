@@ -1,90 +1,58 @@
 <template lang="pug">
 section.reviews
-      .container.reviews__container
-        h2.title.reviews__title Блок "Отзывы"
-        .reviews__content
-          .reviews__new
-            .reviews__new-title
-              .reviews__new-name Новый отзыв
-            .reviews__new-content
-              form.reviews__new-form
-                .reviews__new-avatar-wrap
-                  .reviews__new-avatar
-                    svg.reviews__new-avatar-icon
-                      use(xlink:href="sprite.svg#user")
-                  button(type='button').reviews__new-avatar-add-btn Добавить фото
-                .reviews__new-desc
-                  .reviews__new-row
-                    label.reviews__new-block
-                      .reviews__new-block-title Имя автора
-                      input.reviews__new-field(type="text" name="name" placeholder="Ковальчук Дмитрий")
-                    label.reviews__new-block
-                      .reviews__new-block-title Титул автора
-                      input.reviews__new-field(type="text" name="position" placeholder="Основатель LoftSchool")
-                  .reviews__new-row
-                    label.reviews__new-block
-                      .reviews__new-block-title Отзыв
-                      textarea.reviews__new-textarea(type="text" name="review" placeholder="Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!")
-                  .reviews__buttons
-                    button(type='button').btn-cancel Отмена    
-                    button(type='button').btn Сохранить
-          ul.reviews__list
-            li.reviews__item.add
-              button(type='button').add-btn
-                .add__content
-                  .add__circle
-                  .add__text Добавить отзыв
-            li.reviews__item
-              .review__user
-                .review__avatar
-                  img(src="../../../images/content/reviews1.png").review__pic
-                .review__user-desc
-                  .review__user-name Дмитрий Ковальчук
-                  .review__user-position Основатель LoftSchool
-              .review__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-              .review__btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
-            li.reviews__item
-              .review__user
-                .review__avatar
-                  img(src="../../../images/content/reviews2.png").review__pic
-                .review__user-desc
-                  .review__user-name Владимир Сабанцев
-                  .review__user-position Преподаватель
-              .review__text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-              .review__btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
-            li.reviews__item
-              .review__user
-                .review__avatar
-                  img(src="../../../images/content/reviews1.png").review__pic
-                .review__user-desc
-                  .review__user-name Дмитрий Ковальчук
-                  .review__user-position Основатель LoftSchool
-              .review__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-              .review__btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
-            li.reviews__item
-              .review__user
-                .review__avatar
-                  img(src="../../../images/content/reviews2.png").review__pic
-                .review__user-desc
-                  .review__user-name Владимир Сабанцев
-                  .review__user-position Преподаватель
-              .review__text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-              .review__btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
+  .container.reviews__container
+    h2.title.reviews__title Блок "Отзывы"
+    .reviews__content
+      reviewsForm(
+        v-if='showAddingForm === true'
+      )
+      ul.reviews__list
+        li.reviews__item.add(
+          v-if="showAddingForm === false"
+          @click='showAddingForm = true'
+        )
+          reviewsAdd
+        li.reviews__item(
+          v-for='review in reviews'
+          )
+          reviewsBlock(
+            :review='review'
+          )
+            
 </template>
 
 <script>
-export default {};
+import { mapState, mapActions, mapGetters } from "vuex";
+export default {
+  components: {
+    reviewsForm: () => import("../reviewsForm"),
+    reviewsAdd: () => import("../reviewsAdd"),
+    reviewsBlock: () => import("../reviewsBlock")
+  },
+  data() {
+    return {
+      showAddingForm: false
+    };
+  },
+  computed: {
+    ...mapState("reviews", {
+      reviews: state => state.reviews
+    })
+  },
+  methods: {
+    ...mapActions("reviews", ["fetchReviews"])
+  },
+  async created() {
+    try {
+      await this.fetchReviews();
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+};
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 @import url("../../../styles/mixins.pcss");
 
 .reviews__title {
