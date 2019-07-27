@@ -2,9 +2,9 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router/index";
 import store from "./store";
-import axios from "./requests";
+import requests from "./requests";
 
-store.$axios = axios;
+store.$axios = requests;
 
 new Vue({
   el: "#app-root",
