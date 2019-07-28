@@ -5,6 +5,7 @@ section.reviews
     .reviews__content
       reviewsForm(
         v-if='showAddingForm === true'
+        @closeNewReview='showAddingForm = false'
       )
       ul.reviews__list
         li.reviews__item.add(

@@ -14,7 +14,9 @@ section.about
         li.about__item.about__block.about__block_add(
           v-if="showAddingForm"
           )
-          skillsAdd
+          skillsAdd(
+            @closeNewCategory='showAddingForm = false'
+          )
         li.about__item.about__block(
           v-for='category in categories'
           :key="category.id"

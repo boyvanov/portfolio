@@ -1,10 +1,16 @@
 import Vue from "vue";
 import Flickity from "vue-flickity";
+import axios from "axios";
 
 const review = {
   template: "#review",
   props: {
     review: Object
+  },
+  computed: {
+    remotePhotoPath() {
+      return `https://webdev-api.loftschool.com/${this.review.photo}`
+    }
   }
 };
 
@@ -18,9 +24,10 @@ new Vue({
   data() {
     return {
       reviews: [],
+      reviewsss: [],
       flickityOptions: {
         initialIndex: 0,
-        prevNextButtons: false,
+        prevNextButtons: true,
         pageDots: false,
         wrapAround: false,
         groupCells: true
@@ -29,25 +36,21 @@ new Vue({
     };
   },
   methods: {
+    onInit() {
+      this.$refs.flickity.on("change", event => {
+        this.currentIndex = event;
+        if (!this.$refs.flickity.$flickity.nextButton.isEnabled)
+          this.currentIndex = this.reviews.length;
+      });
+    },
     next() {
-      this.currentIndex++;
-
       this.$refs.flickity.next();
-
-      if (this.currentIndex >= this.reviews.length - 1) {
-        this.currentIndex = this.reviews.length - 1;
-      }
     },
 
     previous() {
-      this.currentIndex--;
-
       this.$refs.flickity.previous();
-
-      if (this.currentIndex <= 0) {
-        this.currentIndex = 0;
-      }
     },
+    
 
     makeArrWithRequiredImages(data) {
       return data.map(item => {
@@ -60,6 +63,19 @@ new Vue({
   },
   created() {
     const data = require("../data/reviews.json");
-    this.reviews = this.makeArrWithRequiredImages(data);
+    this.reviewsss = this.makeArrWithRequiredImages(data);
+
+    console.log(this.reviewsss);
+    
+
+    axios
+    .get("https://webdev-api.loftschool.com/reviews/156")
+    .then(response => {
+      
+      this.reviews = response.data;
+
+      console.log(this.reviews);
+    })
+    .catch(error => console.error(error));
   }
 });

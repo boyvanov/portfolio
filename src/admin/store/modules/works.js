@@ -65,7 +65,7 @@ export default {
     async fetchWorks({ commit }) {
       try {
         const response = await this.$axios.get("/works/156");
-        commit("SET_WORKS", response.data);
+        commit("SET_WORKS", response.data.reverse());
       } catch (error) {
         throw new Error(
           error.response.data.error || error.response.data.message

@@ -1,7 +1,7 @@
 <template lang="pug">
 .works__group
   .work__img
-    img(:src="work.photo" alt='work-pic').work__pic
+    img(:src="remotePhotoPath" alt='work-pic').work__pic
   .work__desc
     h4.work__desc-title {{work.title}}
     .work__desc-text
@@ -19,6 +19,11 @@ import { mapActions } from "vuex";
 export default {
   props: {
     work: Object
+  },
+  computed: {
+    remotePhotoPath() {
+      return `https://webdev-api.loftschool.com/${this.work.photo}`
+    }
   },
   methods: {
     ...mapActions("works", ["removeWork", "editWork"]),

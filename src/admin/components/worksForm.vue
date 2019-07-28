@@ -70,7 +70,10 @@
               button(type='button').works__tag-btn Javascript
               
           .works__buttons
-            button(type='button').btn-cancel Отмена    
+            button(
+              type='button'
+              @click="$emit('closeNewWork')"
+              ).btn-cancel Отмена    
             button(
               type='button'
               @click='addNewWork').btn Сохранить   
@@ -116,7 +119,6 @@ export default {
         await this.addWork(this.workNew);
         this.workNew.title = "";
         this.workNew.techs = "";
-        this.workNew.photo = "";
         this.workNew.link = "";
         this.workNew.description = "";
       } catch (error) {

@@ -1,10 +1,10 @@
 import Vue from "vue";
+import axios from "axios";
 
 const skill = {
   template: "#skill",
   props: {
-    skillPercent: Number,
-    skillName: String
+    skill: Object
   },
   methods: {
     drawCircle() {
@@ -13,13 +13,12 @@ const skill = {
       const dashArray = parseInt(
         getComputedStyle(circle).getPropertyValue("stroke-dasharray")
       );
-      const percent = (dashArray / 100) * (100 - this.skillPercent);
+      const percent = (dashArray / 100) * (100 - this.skill.percent);
 
-
-      window.addEventListener("scroll", function () {
+      window.addEventListener("scroll", function() {
         const posTop = findBlcTop.findTop.getBoundingClientRect().top;
         const exactTop = posTop.toFixed();
-        
+
         if (exactTop > 280 && exactTop < 330) {
           circle.style.strokeDashoffset = percent;
         }
@@ -34,7 +33,8 @@ const skill = {
 const row = {
   template: "#skills-row",
   props: {
-    skill: Object
+    category: Object,
+    skills: Array
   },
   components: {
     skill
@@ -49,19 +49,37 @@ new Vue({
   },
   data() {
     return {
-      skills: []
+      skills: [],
+      categories: []
     };
   },
   methods: {
+    filterSkillsByCategoryId(categoryId) {
+      return this.skills.filter(skill => skill.category === categoryId);
+    },
     findCircle() {
       let circleBlock = this.$refs["skills-block"];
-          return {
+      return {
         findTop: circleBlock
       };
     }
   },
   created() {
-    const data = require("../data/skills.json");
-    this.skills = data;
+    // const data = require("../data/skills.json");
+    // this.skills = data;
+
+    axios
+      .get("https://webdev-api.loftschool.com/categories/156")
+      .then(response => {
+        this.categories = response.data.reverse()
+      })
+      .catch(error => console.error(error));
+
+    axios
+      .get("https://webdev-api.loftschool.com/skills/156")
+      .then(response => {
+        this.skills = response.data
+      })
+      .catch(error => console.error(error));
   }
 });

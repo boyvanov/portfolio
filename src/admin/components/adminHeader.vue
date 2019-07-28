@@ -8,13 +8,21 @@
           .header__admin-name Сергей Бойванов
           .header__admin-title Панель администрирования
         .header__admin-close 
-          a(href='#').header__admin-close-link Выйти
+          a(
+            href='#'
+            @click='logout'
+            ).header__admin-close-link Выйти
 </template>
 
 <script>
 
 export default {
-  
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      this.$router.replace('/login');
+    }
+  }
 };
 
 </script>

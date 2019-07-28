@@ -6,6 +6,7 @@ section.works
       .works__add
         worksForm(
           v-if="showAddingForm"
+          @closeNewWork='showAddingForm = false'
         ) 
       ul.works__list
         li.works__item.add(
@@ -245,7 +246,6 @@ export default {
   width: calc(100% / 3 - 30px);
   margin-left: 30px;
   margin-bottom: 30px;
-  padding: 20px;
 
   @include tablets {
     width: calc(100% / 2 - 30px);

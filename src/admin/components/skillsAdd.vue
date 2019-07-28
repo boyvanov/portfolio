@@ -19,13 +19,14 @@
       .cell__delete
         button(
           type='button'
+          @click="$emit('closeNewCategory')"
           ).cell__edit-btn
           svg.edit__icon.edit__icon_delete
             use(xlink:href="sprite.svg#remove")
 
   .about__block-content
   .about__block-add-skill
-    .skill__row(:class='{blocked: formIsBlocked}')
+    .skill__row.blocked
       .cell__new-skill
         input(type="text" name="new-skill" placeholder="Новый навык").new-skill
       label.cell__number
@@ -64,6 +65,13 @@ export default {
 
 <style lang="postcss">
 .title__row.blocked {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.blocked {
   opacity: 0.5;
   filter: grayscale(100%);
   pointer-events: none;

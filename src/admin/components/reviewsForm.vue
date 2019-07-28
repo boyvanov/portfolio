@@ -42,7 +42,10 @@
               v-model='reviewNew.text'
               )
           .reviews__buttons
-            button(type='button').btn-cancel Отмена    
+            button(
+              type='button'
+              @click="$emit('closeNewReview')"
+              ).btn-cancel Отмена    
             button(
               type='button'
               @click='addNewReview').btn Сохранить
@@ -87,7 +90,6 @@ export default {
         await this.addReview(this.reviewNew);
         this.reviewNew.author = "";
         this.reviewNew.occ = "";
-        this.reviewNew.photo = "";
         this.reviewNew.text = "";
       } catch (error) {
         alert(error.message);

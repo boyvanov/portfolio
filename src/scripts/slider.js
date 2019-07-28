@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 
 const btns = {
   template: "#slider-btn",
@@ -27,7 +28,10 @@ const previews = {
       if (this.currentIndex >= this.works.length - 1) return;
       else if (this.currentIndex < 2) return 0;
       else if (this.currentIndex >= 2) return step * (this.currentIndex - 1);
-    }
+    },
+    // remotePhotoPath() {
+    //   return `https://webdev-api.loftschool.com/${this.currentWork.photo}`
+    // }
   }
 };
 
@@ -41,6 +45,9 @@ const display = {
     // reversedWorks() {
     //   return [...this.works].reverse();
     // }
+    remotePhotoPath() {
+      return `https://webdev-api.loftschool.com/${this.currentWork.photo}`
+    }
   },
   methods: {
     handleSlide(direction) {
@@ -71,7 +78,7 @@ const description = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(", ");
+      return this.currentWork.techs.split(", ");
     }
   }
 };
@@ -105,14 +112,14 @@ new Vue({
     }
   },
   methods: {
-    makeArrWithRequiredImages(data) {
-      return data.map(item => {
-        const requirePic = require(`../images/content/${item.slide}`);
-        item.slide = requirePic;
+    // makeArrWithRequiredImages(data) {
+    //   return data.map(item => {
+    //     const requirePic = require(`../images/content/${item.slide}`);
+    //     item.slide = requirePic;
 
-        return item;
-      });
-    },
+    //     return item;
+    //   });
+    // },
 
     updateCurrentIndex(value) {
       if (value >= this.works.length - 1) {
@@ -135,7 +142,15 @@ new Vue({
     }
   },
   created() {
-    const data = require("../data/slider.json");
-    this.works = this.makeArrWithRequiredImages(data);
+    // const data = require("../data/slider.json");
+    // this.works = this.makeArrWithRequiredImages(data);
+
+    axios
+    .get("https://webdev-api.loftschool.com/works/156")
+    .then(response => {
+      
+      this.works = response.data;
+    })
+    .catch(error => console.error(error));
   }
 });

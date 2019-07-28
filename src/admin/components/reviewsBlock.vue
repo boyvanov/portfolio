@@ -2,7 +2,7 @@
  .review
     .review__user
       .review__avatar
-        img(:src="review.photo" alt='review-pic').review__pic
+        img(:src="remotePhotoPath" alt='review-pic').review__pic
       .review__user-desc
         .review__user-name {{review.author}}
         .review__user-position {{review.occ}}
@@ -20,6 +20,11 @@ import { mapActions } from "vuex";
 export default {
   props: {
     review: Object
+  },
+  computed: {
+    remotePhotoPath() {
+      return `https://webdev-api.loftschool.com/${this.review.photo}`
+    }
   },
   methods: {
     ...mapActions("reviews", ["removeReview", "editReview"]),
