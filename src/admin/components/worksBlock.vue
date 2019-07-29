@@ -8,14 +8,18 @@
       p {{work.description}}
     a(href='#').work__desc-link {{work.link}}
   .work__desc-btns
-    button(type='button').btns-edit Править
     button(
       type='button'
-      @click='removeExistedWork').btns-delete Удалить
+      @click='showFormAndTurnEditModeOn'
+      ).btns-edit Править
+    button(
+      type='button'
+      @click='removeExistedWork'
+      ).btns-delete Удалить
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   props: {
     work: Object
@@ -26,7 +30,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions("works", ["removeWork", "editWork"]),
+    ...mapActions("works", ["removeWork"]),
+    ...mapMutations("works", ["SHOW_FORM", "TURN_EDIT_MODE_ON"]),
     async removeExistedWork() {
       try {
         await this.removeWork(this.work.id);
@@ -34,14 +39,10 @@ export default {
         alert(error.message)
       }
     },
-    // async editCurrentWork() {
-    //   try {
-    //     await this.editWork(this.editedWork);
-        
-    //   } catch (error) {
-    //     alert(error.message)
-    //   }
-    // }
+    showFormAndTurnEditModeOn() {
+      this["TURN_EDIT_MODE_ON"](this.work);
+      this["SHOW_FORM"]();
+    }
   }
 }
 </script>

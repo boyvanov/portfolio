@@ -1,7 +1,12 @@
 export default {
   namespaced: true,
   state: {
-    works: []
+    works: [],
+    workForm: {
+      show: false,
+      editMode: false
+    },
+    editedWork: {}
   },
   mutations: {
     SET_WORKS: (state, works) => {
@@ -13,24 +18,30 @@ export default {
     REMOVE_WORK: (state, removedWorkId) => {
       state.works = state.works.filter(work => work.id !== removedWorkId);
     },
-    // EDIT_SKILL: (state, editedSkill) => {
-    //   state.skills = state.skills.map(skill => {
-    //     return skill.id === editedSkill.id ? editedSkill : skill;
-    //   });
-    // }
+    EDIT_WORK: (state, editedWork) => {
+      state.works = state.works.map(work => {
+        return work.id === editedWork.id ? editedWork : work;
+      });
+    },
+    SHOW_FORM: state => {
+      state.workForm.show = true;
+    },
+    CLOSE_FORM: state => {
+      state.workForm.show = false;
+    },
+    TURN_EDIT_MODE_ON: (state, work) => {
+      state.workForm.editMode = true;
+      state.editedWork = { ...work };
+    },
+    TURN_EDIT_MODE_OFF: state => {
+      state.workForm.editMode = false;
+      state.editedWork = {};
+    }
   },
   actions: {
     async addWork({ commit }, workNew) {
       try {
-        const formData = new FormData();
-
-        formData.append("title", workNew.title);
-        formData.append("techs", workNew.techs);
-        formData.append("photo", workNew.photo);
-        formData.append("link", workNew.link);
-        formData.append("description", workNew.description);
-        
-        const response = await this.$axios.post("/works", formData);
+        const response = await this.$axios.post("/works", workNew);
 
         commit("ADD_WORKS", response.data);
         return response;
@@ -51,17 +62,26 @@ export default {
         );
       }
     },
-    // async editSkill({ commit }, skill) {
-    //   try {
-    //     const response = await this.$axios.post(`/skills/${skill.id}`, skill);
-    //     commit("EDIT_SKILL", skill);
-    //     return response;
-    //   } catch (error) {
-    //     throw new Error(
-    //       error.response.data.error || error.response.data.message
-    //     );
-    //   }
-    // },
+    async editWork({ commit }, work) {
+      try {
+        const formData = new FormData();
+
+        formData.append("title", work.title);
+        formData.append("techs", work.techs);
+        formData.append("photo", work.photo);
+        formData.append("link", work.link);
+        formData.append("description", work.description);
+
+        const response = await this.$axios.post(`/works/${work.id}`, formData);
+
+        commit("EDIT_WORK", work);
+        return response;
+      } catch (error) {
+        throw new Error(
+          error.response.data.error || error.response.data.message
+        );
+      }
+    },
     async fetchWorks({ commit }) {
       try {
         const response = await this.$axios.get("/works/156");

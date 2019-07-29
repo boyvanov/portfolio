@@ -72,15 +72,22 @@
           .works__buttons
             button(
               type='button'
-              @click="$emit('closeNewWork')"
+              @click="CLOSE_FORM"
               ).btn-cancel Отмена    
             button(
               type='button'
-              @click='addNewWork').btn Сохранить   
+              @click='addNewWork'
+              v-if="!workForm.editMode"
+              ).btn Сохранить
+            button(
+              type='button'
+              @click='saveEditedWork'
+              v-if="workForm.editMode"
+              ).btn Сохранить  
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -95,8 +102,19 @@ export default {
       formIsBlocked: false
     };
   },
+  computed: {
+    ...mapState("works", {
+      workForm: state => state.workForm,
+      editedWork: state => state.editedWork
+    }),
+
+    remotePhotoPath() {
+      return `https://webdev-api.loftschool.com/${this.workNew.photo}`;
+    }
+  },
   methods: {
-    ...mapActions("works", ["addWork"]),
+    ...mapActions("works", ["addWork", "editWork"]),
+    ...mapMutations("works", ["CLOSE_FORM"]),
     appendFileAndRenderPhoto(e) {
       const file = e.target.files[0];
       this.workNew.photo = file;
@@ -112,11 +130,23 @@ export default {
         alert(error.message);
       }
     },
+    createWorkFormData() {
+      const formData = new FormData();
+
+      formData.append("title", this.workNew.title);
+      formData.append("techs", this.workNew.techs);
+      formData.append("photo", this.workNew.photo);
+      formData.append("link", this.workNew.link);
+      formData.append("description", this.workNew.description);
+
+      return formData;
+    },
     async addNewWork() {
       this.formIsBlocked = true;
 
       try {
-        await this.addWork(this.workNew);
+        const workFormData = this.createWorkFormData();
+        await this.addWork(workFormData);
         this.workNew.title = "";
         this.workNew.techs = "";
         this.workNew.link = "";
@@ -126,6 +156,23 @@ export default {
       } finally {
         this.formIsBlocked = false;
       }
+    },
+    setEditedWork() {
+      this.workNew = { ...this.editedWork };
+      this.renderedPhotoUrl = this.remotePhotoPath;
+    },
+    async saveEditedWork() {
+      try {
+        await this.editWork(this.workNew);
+        this["CLOSE_FORM"]();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  },
+  created() {
+    if (this.workForm.editMode) {
+      this.setEditedWork();
     }
   }
 };

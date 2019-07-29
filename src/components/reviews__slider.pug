@@ -25,7 +25,7 @@ script(type='text/x-template')#review
       p {{review.text}}
     .reviews__slider-user
       .reviews__slider-avatar
-        img(:src="remotePhotoPath", alt='avatar').reviews__slider-avatar-pic
+        img(:src="review.photo", alt='avatar').reviews__slider-avatar-pic
       .reviews__slider-user-desc
         .reviews__slider-user-name {{review.author}}
         .reviews__slider-user-position.text-op03 {{review.occ}}
