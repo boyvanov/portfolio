@@ -4,13 +4,12 @@ section.reviews
     h2.title.reviews__title Блок "Отзывы"
     .reviews__content
       reviewsForm(
-        v-if='showAddingForm === true'
-        @closeNewReview='showAddingForm = false'
+        v-if="reviewForm.show"
       )
       ul.reviews__list
         li.reviews__item.add(
-          v-if="showAddingForm === false"
-          @click='showAddingForm = true'
+          v-if="!reviewForm.show"
+          @click='showFormAndTurnEditModeOff'
         )
           reviewsAdd
         li.reviews__item(
@@ -23,7 +22,7 @@ section.reviews
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     reviewsForm: () => import("../reviewsForm"),
@@ -32,17 +31,23 @@ export default {
   },
   data() {
     return {
-      showAddingForm: false
     };
   },
   computed: {
     ...mapState("reviews", {
-      reviews: state => state.reviews
+      reviews: state => state.reviews,
+      reviewForm: state => state.reviewForm
     })
   },
   methods: {
-    ...mapActions("reviews", ["fetchReviews"])
+    ...mapActions("reviews", ["fetchReviews"]),
+    ...mapMutations("reviews", ["SHOW_FORM", "TURN_EDIT_MODE_OFF"]),
+    showFormAndTurnEditModeOff() {
+      this["TURN_EDIT_MODE_OFF"]();
+      this["SHOW_FORM"]();
+    }
   },
+
   async created() {
     try {
       await this.fetchReviews();

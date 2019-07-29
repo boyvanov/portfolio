@@ -44,15 +44,22 @@
           .reviews__buttons
             button(
               type='button'
-              @click="$emit('closeNewReview')"
+              @click="CLOSE_FORM"
               ).btn-cancel Отмена    
             button(
               type='button'
-              @click='addNewReview').btn Сохранить
+              @click='addNewReview'
+              v-if="!reviewForm.editMode"
+              ).btn Сохранить
+            button(
+              type='button'
+              @click='saveEditedReview'
+              v-if="reviewForm.editMode"
+              ).btn Сохранить
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -66,8 +73,19 @@ export default {
       formIsBlocked: false
     };
   },
+  computed: {
+    ...mapState("reviews", {
+      reviewForm: state => state.reviewForm,
+      editedReview: state => state.editedReview
+    }),
+
+    remotePhotoPath() {
+      return `https://webdev-api.loftschool.com/${this.reviewNew.photo}`;
+    }
+  },
   methods: {
-    ...mapActions("reviews", ["addReview"]),
+    ...mapActions("reviews", ["addReview", "editReview"]),
+    ...mapMutations("reviews", ["CLOSE_FORM"]),
     appendFileAndRenderPhoto(e) {
       const file = e.target.files[0];
       this.reviewNew.photo = file;
@@ -83,11 +101,22 @@ export default {
         alert(error.message);
       }
     },
+    createReviewFormData() {
+      const formData = new FormData();
+
+      formData.append("author", this.reviewNew.author);
+      formData.append("photo", this.reviewNew.photo);
+      formData.append("text", this.reviewNew.text);
+      formData.append("occ", this.reviewNew.occ);
+
+      return formData;
+    },
     async addNewReview() {
       this.formIsBlocked = true;
 
       try {
-        await this.addReview(this.reviewNew);
+        const reviewFormData = this.createReviewFormData();
+        await this.addReview(reviewFormData);
         this.reviewNew.author = "";
         this.reviewNew.occ = "";
         this.reviewNew.text = "";
@@ -96,6 +125,23 @@ export default {
       } finally {
         this.formIsBlocked = false;
       }
+    },
+    setEditedReview() {
+      this.reviewNew = { ...this.editedReview };
+      this.renderedPhotoUrl = this.remotePhotoPath;
+    },
+    async saveEditedReview() {
+      try {
+        await this.editReview(this.reviewNew);
+        this["CLOSE_FORM"]();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  },
+  created() {
+    if (this.reviewForm.editMode) {
+      this.setEditedReview();
     }
   }
 };

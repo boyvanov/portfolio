@@ -15,7 +15,7 @@ script(type='text/x-template')#slider-display
   .slider__display(:data-slide="currentIndex + 1")
     pre {{ currentWork }}
     .slider__display-full-img
-      img(:src="remotePhotoPath", alt='slider__display').slider__display-pic
+      img(:src="currentWork.photo", alt='slider__display').slider__display-pic
     previews(
       :works="works"
       :currentWork="currentWork"

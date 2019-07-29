@@ -5,13 +5,12 @@ section.works
     .works__content
       .works__add
         worksForm(
-          v-if="showAddingForm"
-          @closeNewWork='showAddingForm = false'
+          v-if="workForm.show"
         ) 
       ul.works__list
         li.works__item.add(
-          v-if="showAddingForm === false"
-          @click="showAddingForm = true"
+          v-if="!workForm.show"
+          @click='showFormAndTurnEditModeOff'
           )
           worksAdd
         li.works__item.work(
@@ -24,7 +23,7 @@ section.works
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     worksForm: () => import("../worksForm"),
@@ -33,16 +32,21 @@ export default {
   },
   data() {
     return {
-      showAddingForm: false
     };
   },
   computed: {
     ...mapState("works", {
-      works: state => state.works
+      works: state => state.works,
+      workForm: state => state.workForm
     })
   },
   methods: {
-    ...mapActions("works", ["fetchWorks"])
+    ...mapActions("works", ["fetchWorks"]),
+    ...mapMutations("works", ["SHOW_FORM", "TURN_EDIT_MODE_OFF"]),
+    showFormAndTurnEditModeOff() {
+      this["TURN_EDIT_MODE_OFF"]();
+      this["SHOW_FORM"]();
+    }
   },
   async created() {
     try {

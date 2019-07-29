@@ -73,13 +73,13 @@ new Vue({
       .then(response => {
         this.categories = response.data.reverse()
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error(error.message));
 
     axios
       .get("https://webdev-api.loftschool.com/skills/156")
       .then(response => {
         this.skills = response.data
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error(error.message));
   }
 });

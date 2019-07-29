@@ -6,12 +6,12 @@ const review = {
   template: "#review",
   props: {
     review: Object
-  },
-  computed: {
-    remotePhotoPath() {
-      return `https://webdev-api.loftschool.com/${this.review.photo}`
-    }
   }
+  // computed: {
+  //   remotePhotoPath() {
+  //     return `https://webdev-api.loftschool.com/${this.review.photo}`
+  //   }
+  // }
 };
 
 new Vue({
@@ -50,32 +50,35 @@ new Vue({
     previous() {
       this.$refs.flickity.previous();
     },
-    
 
-    makeArrWithRequiredImages(data) {
+    // makeArrWithRequiredImages(data) {
+    //   return data.map(item => {
+    //     const requirePic = require(`../images/content/${item.picture}`);
+    //     item.picture = requirePic;
+
+    //     return item;
+    //   });
+    // },
+
+    makeArrWithAbsoluteImages(data) {
       return data.map(item => {
-        const requirePic = require(`../images/content/${item.picture}`);
-        item.picture = requirePic;
+        const absolutePic = `https://webdev-api.loftschool.com/${item.photo}`;
+        item.photo = absolutePic;
 
         return item;
       });
     }
   },
   created() {
-    const data = require("../data/reviews.json");
-    this.reviewsss = this.makeArrWithRequiredImages(data);
-
-    console.log(this.reviewsss);
-    
+    // const data = require("../data/reviews.json");
+    // this.reviews = this.makeArrWithRequiredImages(data);
 
     axios
-    .get("https://webdev-api.loftschool.com/reviews/156")
-    .then(response => {
-      
-      this.reviews = response.data;
-
-      console.log(this.reviews);
-    })
-    .catch(error => console.error(error));
+      .get("https://webdev-api.loftschool.com/reviews/156")
+      .then(response => {
+        const data = response.data;
+        this.reviews = this.makeArrWithAbsoluteImages(data);
+      })
+      .catch(error => console.error(error));
   }
 });
