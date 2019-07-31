@@ -10,6 +10,7 @@
               type='file'
               @change='appendFileAndRenderPhoto'
             ).reviews__new-file-input
+            errorTooltip
             .reviews__new-pic
               .reviews__new-avatar-empty(
                 :class="{'filled' : this.renderedPhotoUrl.length}"
@@ -21,41 +22,44 @@
             label.reviews__new-block
               .reviews__new-block-title Имя автора
               input.reviews__new-field(
-                type="text" 
-                name="name" 
-                placeholder="Имя автора"
-                v-model='reviewNew.author'
-                )
+                  type="text" 
+                  name="name" 
+                  placeholder="Имя автора"
+                  v-model='reviewNew.author'
+              )
+              errorTooltip
             label.reviews__new-block
               .reviews__new-block-title Титул автора
               input.reviews__new-field(type="text" 
-              name="position" 
-              placeholder="Титул автора"
-              v-model='reviewNew.occ'
+                name="position" 
+                placeholder="Титул автора"
+                v-model='reviewNew.occ'
               )
+              errorTooltip
           .reviews__new-row
             label.reviews__new-block
               .reviews__new-block-title Отзыв
               textarea.reviews__new-textarea(type="text" 
-              name="review" 
-              placeholder="Отзыв"
-              v-model='reviewNew.text'
+                name="review" 
+                placeholder="Отзыв"
+                v-model='reviewNew.text'
               )
+              errorTooltip
           .reviews__buttons
             button(
               type='button'
               @click="CLOSE_FORM"
-              ).btn-cancel Отмена    
+            ).btn-cancel Отмена    
             button(
               type='button'
               @click='addNewReview'
               v-if="!reviewForm.editMode"
-              ).btn Сохранить
+            ).btn Сохранить
             button(
               type='button'
               @click='saveEditedReview'
               v-if="reviewForm.editMode"
-              ).btn Сохранить
+            ).btn Сохранить
 </template>
 
 <script>
@@ -72,6 +76,9 @@ export default {
       },
       formIsBlocked: false
     };
+  },
+  components: {
+    errorTooltip: () => import("./errorTooltip")
   },
   computed: {
     ...mapState("reviews", {
@@ -148,10 +155,6 @@ export default {
 </script>
 
 <style lang="postcss">
-.reviews__new-avatar {
-  position: relative;
-  cursor: pointer;
-}
 
 .reviews__new-file-input {
   position: absolute;

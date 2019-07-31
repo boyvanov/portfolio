@@ -14,12 +14,13 @@
               @change='appendFileAndRenderPhoto'
             ).works__load-file-input
             .works__load-text(
-            :class="{'filled' : this.renderedPhotoUrl.length}"
-          )
+              :class="{'filled' : this.renderedPhotoUrl.length}"
+            )
               p Перетащите или загрузите для загрузки изображения
             .btn(
-            :class="{'filled' : this.renderedPhotoUrl.length}"
-          ) Загрузить
+              :class="{'filled' : this.renderedPhotoUrl.length}"
+            ) Загрузить
+            errorTooltip
         //- .works__preview
         //-   .works__preview-img
         //-     img(src="../../images/content/slider_preview1.jpg").works__preview-pic
@@ -33,7 +34,8 @@
                 name="name" 
                 placeholder="Название"
                 v-model='workNew.title'
-                )
+              )
+              errorTooltip
           .works__desc-row
             label.works__desc-block
               .works__desc-block-title Ссылка
@@ -42,7 +44,8 @@
                 name="link" 
                 placeholder="Ссылка"
                 v-model='workNew.link'
-                )
+              )
+              errorTooltip
           .works__desc-row
             label.works__desc-block
               .works__desc-block-title Описание
@@ -50,7 +53,8 @@
                 name="message" 
                 placeholder="Описание"
                 v-model='workNew.description'
-                )
+              )
+              errorTooltip
           .works__desc-row
             label.works__desc-block
               .works__desc-block-title Добавление тэга
@@ -58,16 +62,11 @@
                 type="text" 
                 name="tags" 
                 placeholder="Тэги"
-                v-model='workNew.techs')
-          ul.works__tags
-            li.works__tag
-              button(type='button').works__tag-btn HTML
-              
-            li.works__tag
-              button(type='button').works__tag-btn CSS
-              
-            li.works__tag
-              button(type='button').works__tag-btn Javascript
+                v-model='workNew.techs'
+                @keydown.enter='ADD_TAGS(workNew.techs)'
+              )
+              errorTooltip
+          tagsForm
               
           .works__buttons
             button(
@@ -102,6 +101,10 @@ export default {
       formIsBlocked: false
     };
   },
+  components: {
+    errorTooltip: () => import("./errorTooltip"),
+    tagsForm: () => import("./tagsForm")
+  },
   computed: {
     ...mapState("works", {
       workForm: state => state.workForm,
@@ -114,7 +117,7 @@ export default {
   },
   methods: {
     ...mapActions("works", ["addWork", "editWork"]),
-    ...mapMutations("works", ["CLOSE_FORM"]),
+    ...mapMutations("works", ["CLOSE_FORM", "ADD_TAGS"]),
     appendFileAndRenderPhoto(e) {
       const file = e.target.files[0];
       this.workNew.photo = file;

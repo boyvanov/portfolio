@@ -238,6 +238,7 @@ export default {
   flex: 1;
   font-size: 18px;
   font-weight: 700;
+  position: relative;
 }
 
 .cell__ok {
@@ -282,16 +283,17 @@ export default {
 
 .cell__skill {
   flex: 1;
+  position: relative;
 }
 
 .cell__number {
-  width: 65px;
-  flex-shrink: 0;
-  margin-right: 10px;
+  margin-right: 30px;
+  position: relative;
 }
 
 .cell__new-skill {
   margin-right: 10px;
+  position: relative;
 }
 
 .cell__pencil {

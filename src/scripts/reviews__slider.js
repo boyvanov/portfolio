@@ -24,7 +24,6 @@ new Vue({
   data() {
     return {
       reviews: [],
-      reviewsss: [],
       flickityOptions: {
         initialIndex: 0,
         prevNextButtons: true,
@@ -37,6 +36,7 @@ new Vue({
   },
   methods: {
     onInit() {
+      
       this.$refs.flickity.on("change", event => {
         this.currentIndex = event;
         if (!this.$refs.flickity.$flickity.nextButton.isEnabled)

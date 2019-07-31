@@ -17,7 +17,8 @@ section.login
                   required 
                   placeholder="Введите логин"
                   v-model='user.name'
-                  )
+                )
+                errorTooltip
           .login__form-row
             label.login__form-block
               .login__form-block-title Пароль
@@ -30,7 +31,8 @@ section.login
                   required 
                   placeholder="Введите пароль"
                   v-model='user.password'
-                  )
+                )
+                errorTooltip
           .login__form-row
             button.login__form-btn(type='submit') Отправить
         button.login__form-btn-close(type='button')
@@ -48,6 +50,9 @@ export default {
         password: "benchik"
       }
     };
+  },
+  components: {
+    errorTooltip: () => import("../errorTooltip")
   },
   methods: {
     async login() {

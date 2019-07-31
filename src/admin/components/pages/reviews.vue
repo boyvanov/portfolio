@@ -112,23 +112,18 @@ export default {
 
 .reviews__new-avatar-wrap {
   display: flex;
-  flex-direction: column;
   margin-right: 30px;
 
   @include phones {
     margin-right: 0;
-    align-items: center;
+    justify-content: center;
     margin-bottom: 50px;
   }
 }
 
 .reviews__new-avatar {
-  background-color: #dee4ed;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
   position: relative;
-  margin-bottom: 30px;
+  cursor: pointer;
 }
 
 .reviews__new-avatar-icon {
@@ -169,6 +164,7 @@ export default {
   }
 }
 .reviews__new-block {
+  position: relative;
   flex: 1;
   margin-right: 30px;
 

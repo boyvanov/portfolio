@@ -159,6 +159,7 @@ export default {
 
 .works__desc-block {
   display: block;
+  position: relative;
 }
 
 .works__desc-block-title {

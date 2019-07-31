@@ -6,7 +6,9 @@ export default {
       show: false,
       editMode: false
     },
-    editedWork: {}
+    editedWork: {},
+    editedTags: [],
+    newTags: [],
   },
   mutations: {
     SET_WORKS: (state, works) => {
@@ -36,7 +38,13 @@ export default {
     TURN_EDIT_MODE_OFF: state => {
       state.workForm.editMode = false;
       state.editedWork = {};
-    }
+    },
+    ADD_TAGS: (state, newTags) => {
+      state.newTags = newTags.split(' ');
+    },
+    REMOVE_TAG: (state, deletedTag) => {
+      state.newTags = state.newTags.filter(tag => tag !== deletedTag);
+    },
   },
   actions: {
     async addWork({ commit }, workNew) {

@@ -2,6 +2,10 @@
 .works__group
   .work__img
     img(:src="remotePhotoPath" alt='work-pic').work__pic
+    .work__img-tags
+      tagsWork(
+        :tags="tagsArray"
+      )
   .work__desc
     h4.work__desc-title {{work.title}}
     .work__desc-text
@@ -26,8 +30,14 @@ export default {
   },
   computed: {
     remotePhotoPath() {
-      return `https://webdev-api.loftschool.com/${this.work.photo}`
+      return `https://webdev-api.loftschool.com/${this.work.photo}`;
+    },
+    tagsArray() {
+      return this.work.techs.split(" ");
     }
+  },
+  components: {
+    tagsWork: () => import("./tagsWork")
   },
   methods: {
     ...mapActions("works", ["removeWork"]),
@@ -36,7 +46,7 @@ export default {
       try {
         await this.removeWork(this.work.id);
       } catch (error) {
-        alert(error.message)
+        alert(error.message);
       }
     },
     showFormAndTurnEditModeOn() {
@@ -44,5 +54,20 @@ export default {
       this["SHOW_FORM"]();
     }
   }
-}
+};
 </script>
+<style lang="postcss">
+.work__img {
+  position: relative;
+}
+
+.work__img-tags {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+
+  & .works__tag-btn {
+    cursor: initial;
+  }
+}
+</style>

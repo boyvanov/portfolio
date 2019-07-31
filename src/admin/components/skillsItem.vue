@@ -24,6 +24,7 @@
       placeholder="Название"
       v-model='editedSkill.title'
       ).skill
+    errorTooltip
   label.cell__number
     input(
       type="text" 
@@ -32,6 +33,7 @@
       v-model='editedSkill.percent'
       ).number
     .percent %
+    errorTooltip
   .cell__ok 
     button(
       type='button'
@@ -59,6 +61,9 @@ export default {
       editModeOn: false,
       editedSkill: { ...this.skill }
     };
+  },
+  components: {
+    errorTooltip: () => import("./errorTooltip")
   },
   methods: {
     ...mapActions("skills", ["removeSkill", "editSkill"]),

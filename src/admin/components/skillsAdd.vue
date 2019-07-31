@@ -9,6 +9,7 @@
           placeholder="Название новой группы"
           v-model='categoryTitle'
           ).group
+        errorTooltip
       .cell__ok 
         button(
           type='button'
@@ -45,6 +46,9 @@ export default {
       categoryTitle: "",
       formIsBlocked: false
     };
+  },
+  components: {
+    errorTooltip: () => import("./errorTooltip")
   },
   methods: {
     ...mapActions("categories", ["addCategory"]),

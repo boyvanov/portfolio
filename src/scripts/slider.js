@@ -73,7 +73,7 @@ const description = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.techs.split(", ");
+      return this.currentWork.techs.split(" ");
     }
   }
 };

@@ -1,5 +1,5 @@
 script(type='text/x-template')#reviews__slider-template
-  .reviews__slider
+  .reviews__slider(v-if="reviews.length > 0")
     .reviews__slider-controls
       button(
         type='button'

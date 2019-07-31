@@ -25,6 +25,7 @@
         
         v-model='editedCategory.category'
         ).group 
+        errorTooltip
       .cell__ok 
         button(
           type='button'
@@ -55,6 +56,7 @@
           placeholder="Новый навык"
           v-model='newSkill.title'
           ).new-skill
+        errorTooltip
       label.cell__number
         input(
           type="text" 
@@ -62,6 +64,7 @@
           placeholder="0"
           v-model='newSkill.percent'
           ).number.new-number
+        errorTooltip
         .percent %
       .cell__icon
         button(        
@@ -90,7 +93,8 @@ export default {
     skills: Array
   },
   components: {
-    skillsItem: () => import("./skillsItem")
+    skillsItem: () => import("./skillsItem"),
+    errorTooltip: () => import("./errorTooltip")
   },
   methods: {
     ...mapActions("skills", ["addSkill"]),
