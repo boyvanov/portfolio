@@ -13,13 +13,14 @@ export default {
   props: {
     tags: Array
   }
-}
+};
 </script>
 
 <style lang="postcss">
 @import url("../../styles/mixins.pcss");
 .works__tags-preview {
   display: flex;
+  pointer-events: none;
 
   @include phones {
     justify-content: center;

@@ -55,7 +55,9 @@
                 v-model='workNew.description'
               )
               errorTooltip
-          .works__desc-row
+          .works__desc-row(
+            v-if="!workForm.editMode"
+          )
             label.works__desc-block
               .works__desc-block-title Добавление тэга
               input.works__field(
@@ -63,7 +65,20 @@
                 name="tags" 
                 placeholder="Тэги"
                 v-model='workNew.techs'
-                @keydown.enter='ADD_TAGS(workNew.techs)'
+                @keydown.enter='ADD_NEWTAGS(workNew.techs)'
+              )
+              errorTooltip
+          .works__desc-row(
+            v-if="workForm.editMode"
+          )
+            label.works__desc-block
+              .works__desc-block-title Добавление тэга
+              input.works__field(
+                type="text" 
+                name="tags" 
+                placeholder="Тэги"
+                v-model='workNew.techs'
+                @keydown.enter='EDIT_EDITEDTAGS(workNew.techs)'
               )
               errorTooltip
           tagsForm
@@ -108,7 +123,8 @@ export default {
   computed: {
     ...mapState("works", {
       workForm: state => state.workForm,
-      editedWork: state => state.editedWork
+      editedWork: state => state.editedWork,
+      editedTags: state => state.editedTags
     }),
 
     remotePhotoPath() {
@@ -117,7 +133,7 @@ export default {
   },
   methods: {
     ...mapActions("works", ["addWork", "editWork"]),
-    ...mapMutations("works", ["CLOSE_FORM", "ADD_TAGS"]),
+    ...mapMutations("works", ["CLOSE_FORM", "ADD_NEWTAGS", "ADD_EDITEDTAGS", "EDIT_EDITEDTAGS"]),
     appendFileAndRenderPhoto(e) {
       const file = e.target.files[0];
       this.workNew.photo = file;
@@ -176,6 +192,7 @@ export default {
   created() {
     if (this.workForm.editMode) {
       this.setEditedWork();
+      this["ADD_EDITEDTAGS"](this.workNew);
     }
   }
 };

@@ -30,6 +30,8 @@ export default {
     },
     CLOSE_FORM: state => {
       state.workForm.show = false;
+      state.newTags = [];
+      state.editedTags = [];
     },
     TURN_EDIT_MODE_ON: (state, work) => {
       state.workForm.editMode = true;
@@ -39,11 +41,20 @@ export default {
       state.workForm.editMode = false;
       state.editedWork = {};
     },
-    ADD_TAGS: (state, newTags) => {
+    ADD_NEWTAGS: (state, newTags) => {
       state.newTags = newTags.split(' ');
     },
-    REMOVE_TAG: (state, deletedTag) => {
+    REMOVE_NEWTAG: (state, deletedTag) => {
       state.newTags = state.newTags.filter(tag => tag !== deletedTag);
+    },
+    ADD_EDITEDTAGS: (state, editedWork) => {
+      state.editedTags = editedWork.techs.split(' ');
+    },
+    REMOVE_EDITEDTAG: (state, deletedTag) => {
+      state.editedTags = state.editedTags.filter(tag => tag !== deletedTag);
+    },
+    EDIT_EDITEDTAGS: (state, editedTags) => {
+      state.editedTags = editedTags.split(' ');
     },
   },
   actions: {
