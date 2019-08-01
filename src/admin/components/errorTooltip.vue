@@ -62,22 +62,15 @@ export default {
   }
 }
 
-/* .cell__new-skill.error {
+.cell__new-skill {
   .input__error-tooltip-container {
-    display: block;
+    left: 39%;
   }
 }
-
-.cell__number.error {
+.cell__number {
   .input__error-tooltip-container {
-    display: block;
+    left: 60%;
   }
 }
-
-.cell__group.error {
-  .input__error-tooltip-container {
-    display: block;
-  }
-} */
 </style>
 
