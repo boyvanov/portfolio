@@ -17,23 +17,27 @@
       svg.edit__icon.edit__icon_trash
         use(xlink:href="sprite.svg#trash") 
 .content__row(v-else)
-  .cell__skill
+  .cell__skill(:class="{'error' : validation.hasError('editedSkill.title')}")
     input(
       type="text" 
       name="skill" 
       placeholder="Название"
       v-model='editedSkill.title'
       ).skill
-    errorTooltip
-  label.cell__number
+    errorTooltip(
+      :errorText="validation.firstError('editedSkill.title')"
+    )
+  label.cell__number(:class="{'error' : validation.hasError('editedSkill.percent')}")
     input(
       type="text" 
       name="number" 
-      placeholder="Проценты"
+      placeholder="0"
       v-model='editedSkill.percent'
       ).number
     .percent %
-    errorTooltip
+    errorTooltip(
+      :errorText="validation.firstError('editedSkill.percent')"
+    )
   .cell__ok 
     button(
       type='button'
@@ -51,8 +55,21 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
+import { Validator } from "simple-vue-validator";
 export default {
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "editedSkill.title": value => {
+      return Validator.value(value).required("Введите название");
+    },
+    "editedSkill.percent": value => {
+      return Validator.value(value)
+        .required("Введите значение")
+        .digit("Введите число")
+        .between(0, 100, "Число от 0 до 100");
+    }
+  },
   props: {
     skill: Object
   },
@@ -67,20 +84,34 @@ export default {
   },
   methods: {
     ...mapActions("skills", ["removeSkill", "editSkill"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     async removeExistedSkill() {
       try {
         await this.removeSkill(this.skill.id);
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Навык удален'
+        });
       } catch (error) {
-        alert(error.message)
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       }
     },
     async editCurrentSkill() {
       try {
         this.editModeOn = false;
         await this.editSkill(this.editedSkill);
-        
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Навык изменен'
+        });
       } catch (error) {
-        alert(error.message)
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       }
     }
   }

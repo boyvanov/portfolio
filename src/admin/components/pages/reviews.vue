@@ -30,8 +30,7 @@ export default {
     reviewsBlock: () => import("../reviewsBlock")
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapState("reviews", {
@@ -42,6 +41,7 @@ export default {
   methods: {
     ...mapActions("reviews", ["fetchReviews"]),
     ...mapMutations("reviews", ["SHOW_FORM", "TURN_EDIT_MODE_OFF"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     showFormAndTurnEditModeOff() {
       this["TURN_EDIT_MODE_OFF"]();
       this["SHOW_FORM"]();
@@ -51,8 +51,15 @@ export default {
   async created() {
     try {
       await this.fetchReviews();
+      this["SHOW_TOOLTIP"]({
+        type: "success",
+        text: "Отзывы загружены"
+      });
     } catch (error) {
-      alert(error.message);
+      this["SHOW_TOOLTIP"]({
+        type: "error",
+        text: "Произошла ошибка"
+      });
     }
   }
 };
@@ -113,6 +120,7 @@ export default {
 .reviews__new-avatar-wrap {
   display: flex;
   margin-right: 30px;
+  align-items: flex-start;
 
   @include phones {
     margin-right: 0;
@@ -181,16 +189,6 @@ export default {
   }
 }
 
-.reviews__new-field {
-  @include tablets {
-    width: 70%;
-  }
-
-  @include phones {
-    width: 100%;
-  }
-}
-
 .reviews__item {
   display: flex;
   flex-direction: column;
@@ -206,9 +204,15 @@ export default {
   }
 
   @include phones {
-    width: 100%;
+    width: 100vw;
 
     padding: 20px 0;
+  }
+
+  &.add {
+    @include phones {
+      padding: 30px 20px;
+    }
   }
 }
 
@@ -273,6 +277,14 @@ export default {
   background: none;
   cursor: pointer;
   border-bottom: 1px solid $text-color;
+
+  @include tablets {
+    width: 70%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .reviews__new-textarea {
@@ -310,7 +322,6 @@ export default {
 .review__btns {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
   padding: 0 30px;
   margin-bottom: 0;
 }

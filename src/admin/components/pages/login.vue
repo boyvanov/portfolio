@@ -6,7 +6,7 @@ section.login
           )
           .login__form-title Авторизация
           .login__form-row
-            label.login__form-block
+            label.login__form-block(:class="{'error' : validation.hasError('user.name')}")
               .login__form-block-title Логин
               .login__form-field-wrap
                 svg.login__form-field-icon
@@ -14,13 +14,14 @@ section.login
                 input.login__form-field(
                   type="text" 
                   name="login" 
-                  required 
                   placeholder="Введите логин"
                   v-model='user.name'
                 )
-                errorTooltip
+                errorTooltip(
+                  :errorText="validation.firstError('user.name')"
+                )
           .login__form-row
-            label.login__form-block
+            label.login__form-block(:class="{'error' : validation.hasError('user.password')}")
               .login__form-block-title Пароль
               .login__form-field-wrap
                 svg.login__form-field-icon
@@ -28,21 +29,33 @@ section.login
                 input.login__form-field(
                   type="password" 
                   name="password" 
-                  required 
                   placeholder="Введите пароль"
                   v-model='user.password'
                 )
-                errorTooltip
+                errorTooltip(
+                  :errorText="validation.firstError('user.password')"
+                )
           .login__form-row
             button.login__form-btn(type='submit') Отправить
-        button.login__form-btn-close(type='button')
+        a.login__form-btn-close(href='#')
           svg.login__form-btn-close-icon
             use(xlink:href="sprite.svg#remove") 
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import $axios from "../../requests";
+import { Validator } from "simple-vue-validator";
 export default {
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "user.name": value => {
+      return Validator.value(value).required("Введите логин");
+    },
+    "user.password": value => {
+      return Validator.value(value).required("Введите пароль");
+    }
+  },
   data() {
     return {
       user: {
@@ -55,16 +68,24 @@ export default {
     errorTooltip: () => import("../errorTooltip")
   },
   methods: {
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     async login() {
       try {
         const {
           data: { token }
         } = await $axios.post("/login", this.user);
+        this["SHOW_TOOLTIP"]({
+          type: "success",
+          text: "Вход в админку"
+        });
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         this.$router.replace("/");
       } catch (error) {
-        alert (error.message);
+        this["SHOW_TOOLTIP"]({
+          type: "error",
+          text: "Произошла ошибка"
+        });
       }
     }
   }
@@ -85,7 +106,8 @@ export default {
   justify-content: center;
   z-index: 100;
 
-  background-image: url("../../../images/admin/bg/MountainBaloon.png");
+  background-image: url("../../../images/bg/Mountain-Baloon.png");
+
   @include bgcover();
 
   &::before {
@@ -95,8 +117,8 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    opacity: 0.5;
-    background: $text-color;
+    background-color: rgb(45, 60, 78);
+    opacity: 0.902;
   }
 }
 

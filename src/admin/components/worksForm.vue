@@ -6,7 +6,7 @@
       form.works__form
         .works__load
           label.works__load-pic(
-            :class="{'filled' : this.renderedPhotoUrl.length}"
+            :class="{'filled' : this.renderedPhotoUrl.length, 'error' : validation.hasError('renderedPhotoUrl')}"
             :style="{'backgroundImage' : `url(${this.renderedPhotoUrl})`}"
           )
             input(
@@ -20,14 +20,16 @@
             .btn(
               :class="{'filled' : this.renderedPhotoUrl.length}"
             ) Загрузить
-            errorTooltip
+            errorTooltip(
+              :errorText="validation.firstError('renderedPhotoUrl')"
+            )
         //- .works__preview
         //-   .works__preview-img
         //-     img(src="../../images/content/slider_preview1.jpg").works__preview-pic
         //-   button(type='button').works__preview-btn Изменить превью
         .works__desc
           .works__desc-row
-            label.works__desc-block
+            label.works__desc-block(:class="{'error' : validation.hasError('workNew.title')}")
               .works__desc-block-title Название
               input.works__field(
                 type="text" 
@@ -35,9 +37,11 @@
                 placeholder="Название"
                 v-model='workNew.title'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('workNew.title')"
+              )
           .works__desc-row
-            label.works__desc-block
+            label.works__desc-block(:class="{'error' : validation.hasError('workNew.link')}")
               .works__desc-block-title Ссылка
               input.works__field(
                 type="text" 
@@ -45,20 +49,24 @@
                 placeholder="Ссылка"
                 v-model='workNew.link'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('workNew.link')"
+              )
           .works__desc-row
-            label.works__desc-block
+            label.works__desc-block(:class="{'error' : validation.hasError('workNew.description')}")
               .works__desc-block-title Описание
               textarea.works__textarea(
                 name="message" 
                 placeholder="Описание"
                 v-model='workNew.description'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('workNew.description')"
+              )
           .works__desc-row(
             v-if="!workForm.editMode"
           )
-            label.works__desc-block
+            label.works__desc-block(:class="{'error' : validation.hasError('workNew.techs')}")
               .works__desc-block-title Добавление тэга
               input.works__field(
                 type="text" 
@@ -67,11 +75,13 @@
                 v-model='workNew.techs'
                 @keydown.enter='ADD_NEWTAGS(workNew.techs)'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('workNew.techs')"
+              )
           .works__desc-row(
             v-if="workForm.editMode"
           )
-            label.works__desc-block
+            label.works__desc-block(:class="{'error' : validation.hasError('workNew.techs')}")
               .works__desc-block-title Добавление тэга
               input.works__field(
                 type="text" 
@@ -80,7 +90,9 @@
                 v-model='workNew.techs'
                 @keydown.enter='EDIT_EDITEDTAGS(workNew.techs)'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('workNew.techs')"
+              )
           tagsForm
               
           .works__buttons
@@ -102,7 +114,26 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
+import { Validator } from "simple-vue-validator";
 export default {
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "workNew.title": value => {
+      return Validator.value(value).required("Введите название");
+    },
+    "workNew.techs": value => {
+      return Validator.value(value).required("Введите теги");
+    },
+    "renderedPhotoUrl": value => {
+      return Validator.value(value).required("Загрузите изображение");
+    },
+    "workNew.link": value => {
+      return Validator.value(value).required("Введите ссылку");
+    },
+    "workNew.description": value => {
+      return Validator.value(value).required("Введите описание");
+    }
+  },
   data() {
     return {
       renderedPhotoUrl: "",
@@ -134,6 +165,7 @@ export default {
   methods: {
     ...mapActions("works", ["addWork", "editWork"]),
     ...mapMutations("works", ["CLOSE_FORM", "ADD_NEWTAGS", "ADD_EDITEDTAGS", "EDIT_EDITEDTAGS"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     appendFileAndRenderPhoto(e) {
       const file = e.target.files[0];
       this.workNew.photo = file;
@@ -161,17 +193,29 @@ export default {
       return formData;
     },
     async addNewWork() {
+      if ((await this.$validate()) === false) return;
       this.formIsBlocked = true;
 
       try {
         const workFormData = this.createWorkFormData();
         await this.addWork(workFormData);
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Работа добавлена'
+        });
+
         this.workNew.title = "";
         this.workNew.techs = "";
         this.workNew.link = "";
         this.workNew.description = "";
+        this.renderedPhotoUrl = "";
+        
+        this.validation.reset();
       } catch (error) {
-        alert(error.message);
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       } finally {
         this.formIsBlocked = false;
       }
@@ -181,11 +225,19 @@ export default {
       this.renderedPhotoUrl = this.remotePhotoPath;
     },
     async saveEditedWork() {
+      if ((await this.$validate()) === false) return;
       try {
         await this.editWork(this.workNew);
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Работа изменена'
+        });
         this["CLOSE_FORM"]();
       } catch (error) {
-        alert(error.message);
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       }
     }
   },

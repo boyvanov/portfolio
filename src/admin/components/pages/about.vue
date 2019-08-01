@@ -29,7 +29,7 @@ section.about
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     skillsAdd: () => import("../skillsAdd"),
@@ -51,6 +51,7 @@ export default {
   methods: {
     ...mapActions("skills", ["fetchSkills"]),
     ...mapActions("categories", ["fetchCategories"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     filterSkillsByCategoryId(categoryId) {
       return this.skills.filter(skill => skill.category === categoryId);
     }
@@ -58,14 +59,28 @@ export default {
   async created() {
     try {
       await this.fetchCategories();
+      this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Группы загружены'
+        });
     } catch (error) {
-      alert(error.message);
+      this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
     }
 
     try {
       await this.fetchSkills();
+      this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Навыки загружены'
+        });
     } catch (error) {
-      alert(error.message);
+      this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
     }
   }
 };
@@ -289,6 +304,7 @@ export default {
 .cell__number {
   margin-right: 30px;
   position: relative;
+  display: flex;
 }
 
 .cell__new-skill {

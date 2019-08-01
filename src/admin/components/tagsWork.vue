@@ -38,5 +38,9 @@ export default {
   background-color: $white;
   margin-right: 10px;
   border-radius: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 </style>

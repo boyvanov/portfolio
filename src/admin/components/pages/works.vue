@@ -43,6 +43,7 @@ export default {
   methods: {
     ...mapActions("works", ["fetchWorks"]),
     ...mapMutations("works", ["SHOW_FORM", "TURN_EDIT_MODE_OFF"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     showFormAndTurnEditModeOff() {
       this["TURN_EDIT_MODE_OFF"]();
       this["SHOW_FORM"]();
@@ -51,8 +52,15 @@ export default {
   async created() {
     try {
       await this.fetchWorks();
+      this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Работы загружены'
+        });
     } catch (error) {
-      alert(error.message);
+      this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
     }
   }
 };
@@ -189,9 +197,7 @@ export default {
   overflow: hidden;
   border: 1px solid rgba($text-color, 0.15);
   line-height: 1.75;
-}
 
-.works__textarea {
   @include phones {
     min-height: 200px;
   }
@@ -229,9 +235,7 @@ export default {
 .works__buttons {
   display: flex;
   justify-content: flex-end;
-}
 
-.works__buttons {
   @include tablets {
     justify-content: center;
   }
@@ -257,7 +261,7 @@ export default {
   }
 
   @include phones {
-    width: 100%;
+    width: 100vw;
   }
 }
 
@@ -266,19 +270,7 @@ export default {
   background-color: $white;
   position: relative;
 
-  &.current {
-    &::before {
-      content: "";
-      display: block;
-      z-index: 10;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      background-color: rgba($white, 0.7);
-    }
-  }
+  
 }
 
 .work__img {
@@ -323,3 +315,4 @@ export default {
   padding: 0 30px;
 }
 </style>
+

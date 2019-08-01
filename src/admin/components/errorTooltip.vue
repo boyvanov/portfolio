@@ -27,7 +27,9 @@ export default {
   color: #fff;
   padding: 12px 20px;
   font-size: 14px;
+  font-weight: 400;
   white-space: nowrap;
+
   &::before {
     content: "";
     display: block;
@@ -43,5 +45,39 @@ export default {
     transform: translateX(-50%);
   }
 }
+
+.login__form-block,
+.cell__new-skill,
+.cell__skill,
+.cell__number,
+.cell__group,
+.reviews__new-block,
+.reviews__new-avatar,
+.works__desc-block,
+.works__load-pic {
+  &.error {
+    .input__error-tooltip-container {
+      display: block;
+    }
+  }
+}
+
+/* .cell__new-skill.error {
+  .input__error-tooltip-container {
+    display: block;
+  }
+}
+
+.cell__number.error {
+  .input__error-tooltip-container {
+    display: block;
+  }
+}
+
+.cell__group.error {
+  .input__error-tooltip-container {
+    display: block;
+  }
+} */
 </style>
 

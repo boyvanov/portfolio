@@ -32,11 +32,19 @@ export default {
   methods: {
     ...mapActions("reviews", ["removeReview"]),
     ...mapMutations("reviews", ["SHOW_FORM", "TURN_EDIT_MODE_ON"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     async removeExistedReview() {
       try {
         await this.removeReview(this.review.id);
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Отзыв удален'
+        });
       } catch (error) {
-        alert(error.message);
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       }
     },
     showFormAndTurnEditModeOn() {

@@ -151,7 +151,7 @@ new Vue({
     axios
       .get("https://webdev-api.loftschool.com/works/156")
       .then(response => {
-        const data = response.data;
+        const data = response.data.reverse();
         this.works = this.makeArrWithAbsoluteImages(data);
       })
       .catch(error => console.error(error.message));

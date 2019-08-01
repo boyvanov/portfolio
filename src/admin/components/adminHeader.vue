@@ -15,20 +15,24 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 
 export default {
   methods: {
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     logout() {
-      localStorage.removeItem('token');
-      this.$router.replace('/login');
+      this["SHOW_TOOLTIP"]({
+        type: "success",
+        text: "Выход из админки"
+      });
+      localStorage.removeItem("token");
+      this.$router.replace("/login");
     }
   }
 };
-
 </script>
 
 <style lang="postcss" scoped>
-
 @import url("../../styles/mixins.pcss");
 
 .header__admin {

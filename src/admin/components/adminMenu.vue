@@ -29,9 +29,6 @@ export default {
   flex-direction: row;
 }
 
-.admin__menu-item {
-}
-
 .admin__menu-link {
   padding: 30px;
   border-bottom: 3px solid transparent;

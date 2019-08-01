@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   props: {
     work: Object
@@ -34,7 +34,11 @@ export default {
     },
     tagsArray() {
       return this.work.techs.split(" ");
-    }
+    },
+
+    ...mapState("works", {
+      workForm: state => state.workForm
+    })
   },
   components: {
     tagsWork: () => import("./tagsWork")
@@ -42,11 +46,19 @@ export default {
   methods: {
     ...mapActions("works", ["removeWork"]),
     ...mapMutations("works", ["SHOW_FORM", "TURN_EDIT_MODE_ON"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     async removeExistedWork() {
       try {
         await this.removeWork(this.work.id);
+        this["SHOW_TOOLTIP"]({
+          type: "success",
+          text: "Работа удалена"
+        });
       } catch (error) {
-        alert(error.message);
+        this["SHOW_TOOLTIP"]({
+          type: "error",
+          text: "Произошла ошибка"
+        });
       }
     },
     showFormAndTurnEditModeOn() {
@@ -64,10 +76,26 @@ export default {
 .work__img-tags {
   position: absolute;
   bottom: 5%;
-  right: 5%;
+  right: 2%;
 
   & .works__tag-btn {
     cursor: initial;
+  }
+}
+
+.works__group {
+  &.current {
+    &::before {
+      content: "";
+      display: block;
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba($white, 0.7);
+    }
   }
 }
 </style>

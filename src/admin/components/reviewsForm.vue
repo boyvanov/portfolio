@@ -5,12 +5,14 @@
     .reviews__new-content
       form.reviews__new-form
         .reviews__new-avatar-wrap
-          label.reviews__new-avatar
+          label.reviews__new-avatar(:class="{'error' : validation.hasError('renderedPhotoUrl')}")
             input(
               type='file'
               @change='appendFileAndRenderPhoto'
             ).reviews__new-file-input
-            errorTooltip
+            errorTooltip(
+              :errorText="validation.firstError('renderedPhotoUrl')"
+            )
             .reviews__new-pic
               .reviews__new-avatar-empty(
                 :class="{'filled' : this.renderedPhotoUrl.length}"
@@ -19,7 +21,7 @@
             .reviews__new-addphoto Добавить фото
         .reviews__new-desc
           .reviews__new-row
-            label.reviews__new-block
+            label.reviews__new-block(:class="{'error' : validation.hasError('reviewNew.author')}")
               .reviews__new-block-title Имя автора
               input.reviews__new-field(
                   type="text" 
@@ -27,24 +29,32 @@
                   placeholder="Имя автора"
                   v-model='reviewNew.author'
               )
-              errorTooltip
-            label.reviews__new-block
+              errorTooltip(
+                :errorText="validation.firstError('reviewNew.author')"
+              )
+            label.reviews__new-block(:class="{'error' : validation.hasError('reviewNew.occ')}")
               .reviews__new-block-title Титул автора
-              input.reviews__new-field(type="text" 
+              input.reviews__new-field(
+                type="text" 
                 name="position" 
                 placeholder="Титул автора"
                 v-model='reviewNew.occ'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('reviewNew.occ')"
+              )
           .reviews__new-row
-            label.reviews__new-block
+            label.reviews__new-block(:class="{'error' : validation.hasError('reviewNew.text')}")
               .reviews__new-block-title Отзыв
-              textarea.reviews__new-textarea(type="text" 
+              textarea.reviews__new-textarea(
+                type="text" 
                 name="review" 
                 placeholder="Отзыв"
                 v-model='reviewNew.text'
               )
-              errorTooltip
+              errorTooltip(
+                :errorText="validation.firstError('reviewNew.text')"
+              )
           .reviews__buttons
             button(
               type='button'
@@ -64,7 +74,23 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
+import { Validator } from "simple-vue-validator";
 export default {
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "reviewNew.author": value => {
+      return Validator.value(value).required("Введите имя");
+    },
+    "reviewNew.occ": value => {
+      return Validator.value(value).required("Введите позицию");
+    },
+    "renderedPhotoUrl": value => {
+      return Validator.value(value).required("Загрузите изображение");
+    },
+    "reviewNew.text": value => {
+      return Validator.value(value).required("Введите отзыв");
+    }
+  },
   data() {
     return {
       renderedPhotoUrl: "",
@@ -93,6 +119,7 @@ export default {
   methods: {
     ...mapActions("reviews", ["addReview", "editReview"]),
     ...mapMutations("reviews", ["CLOSE_FORM"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     appendFileAndRenderPhoto(e) {
       const file = e.target.files[0];
       this.reviewNew.photo = file;
@@ -119,16 +146,27 @@ export default {
       return formData;
     },
     async addNewReview() {
+      if ((await this.$validate()) === false) return;
       this.formIsBlocked = true;
 
       try {
         const reviewFormData = this.createReviewFormData();
         await this.addReview(reviewFormData);
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Отзыв добавлен'
+        });
         this.reviewNew.author = "";
         this.reviewNew.occ = "";
         this.reviewNew.text = "";
+        this.renderedPhotoUrl = "";
+        
+        this.validation.reset();
       } catch (error) {
-        alert(error.message);
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       } finally {
         this.formIsBlocked = false;
       }
@@ -138,11 +176,19 @@ export default {
       this.renderedPhotoUrl = this.remotePhotoPath;
     },
     async saveEditedReview() {
+      if ((await this.$validate()) === false) return;
       try {
         await this.editReview(this.reviewNew);
+        this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Отзыв изменен'
+        });
         this["CLOSE_FORM"]();
       } catch (error) {
-        alert(error.message);
+        this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
       }
     }
   },
@@ -177,7 +223,7 @@ export default {
   background: #dee4ed;
   position: relative;
 
-  &:before {
+  &::before {
     content: "";
     height: 115px;
     width: 85px;
@@ -191,7 +237,7 @@ export default {
 
   &.filled {
     background: center center no-repeat / cover;
-    &:before {
+    &::before {
       display: none;
     }
   }
