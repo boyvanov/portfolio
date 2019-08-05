@@ -1,24 +1,53 @@
-.works__slider.slider
-  .slider__display
-    .slider__content
-      .slider__display-img
-        +image('content/slider_display.png', 'slider__display-pic', 'slider-display')
-      ul.slider__preview
-        - var previews = ['1', '2', '3', '4']
-          each preview in previews
-            li.slider__preview-item
-              a.slider__preview-link(href='#')
-                +image(`content/slider_review${preview}.png`, 'slider__preview-pic', 'slider-preview')
-      .slider__controls
-        button(type='button').slider__btn.slider__btn_prev
-        button(type='button').slider__btn.slider__btn_next.active
+script(type='text/x-template')#slider-template
+  .slider
+    display(
+      :works="works"
+      :currentWork="currentWork"
+      @slide="handleSlide"
+      :currentIndex="currentIndex"
+    )
+    description(
+      :currentWork="currentWork"
+    )
+
+script(type='text/x-template')#slider-display
+  .slider__display(:data-slide="currentIndex + 1")
+    .slider__display-full-img
+      img(:src="currentWork.slide", alt='slider__display').slider__display-pic
+    reviews(
+      :works="reversedWorks"
+      :currentWork="currentWork"
+    )
+    btns(
+      @slide="direction => $emit('slide', direction)"
+    )
+
+script(type='text/x-template')#slider-reviews
+  ul.slider__preview
+    li.slider__preview-item(v-for="work in works")
+      button.slider__preview-button(:class="{active: work.id === currentWork.id}" type='button')
+        img(:src="work.slide", alt='slider__preview').slider__preview-pic
+
+
+script(type='text/x-template')#slider-btn
+  .slider__controls
+    button(@click="$emit('slide', 'next')", type='button').slider__btn.slider__btn_next.active
+    button(@click="$emit('slide', 'prev')", type='button').slider__btn.slider__btn_prev
+
+script(type='text/x-template')#slider-desc
   .slider__desc
-    ul.slider__tags
-      - var tags = ['HTML', 'CSS', 'Javascript']
-        each tag in tags
-          li.slider__tags-item= tag
-    .slider__title.subtitle Сайт школы образования
-    .slider__text 
-      p Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-    a.slider__link Посмотреть сайт
-      
+    tags(
+      :tags="tagsArray"
+    )
+    .slider__title.subtitle {{currentWork.title}}
+    .slider__text.text 
+      p {{currentWork.desc}}
+    a(:href="currentWork.link").slider__link Посмотреть сайт
+
+script(type='text/x-template')#slider-tags
+  ul.slider__tags
+    li.slider__tags-item(v-for="tag in tags") {{tag}}
+
+
+
+

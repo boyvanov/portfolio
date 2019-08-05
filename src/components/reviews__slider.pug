@@ -1,30 +1,21 @@
-.reviews__slider
-  .reviews__slider-controls
-    button(type='button').reviews__btn.reviews__btn_prev
-    button(type='button').reviews__btn.reviews__btn_next
-  ul.reviews__list
-    -
-      var feedbackItems = [
-        {
-          text: 'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!',
-          picture: 'content/reviews1.png',
-          name: 'Ковальчук Дмитрий',
-          position: 'Основатель Loftschool'
-        },
-        {
-          text: 'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах',
-          picture: 'content/reviews2.png',
-          name: 'Владимир Сабанцев',
-          position: 'Преподаватель'
-        }
-      ]
-    - for (var i=0; i<feedbackItems.length; i++)
-      li.reviews__item
-        .reviews__text.text
-          p= feedbackItems[i].text
-        .reviews__user
-          .reviews__avatar
-            +image(feedbackItems[i].picture, 'reviews__avatar-pic', 'reviews-avatar')
-          .reviews__user-desc
-            .reviews__user-name= feedbackItems[i].name
-            .reviews__user-position.text-op03= feedbackItems[i].position
+script(type='text/x-template')#reviews__slider-template
+  .reviews__slider
+    .reviews__slider-controls
+      button(@click="previous()" type='button').reviews__slider-btn.reviews__slider-btn_prev
+      button(@click="next()" type='button').reviews__slider-btn.reviews__slider-btn_next
+    flickity(ref="flickity" :options="flickityOptions") 
+      li(v-for="review in reviews" :key="review.id").reviews__slider-item
+        review(
+          :review="review"
+        )
+      
+script(type='text/x-template')#review
+  .reviews__slider-content
+    .reviews__slider-text.text
+      p {{review.text}}
+    .reviews__slider-user
+      .reviews__slider-avatar
+        img(:src="review.picture", alt='widget-avatar').reviews__slider-avatar-pic
+      .reviews__slider-user-desc
+        .reviews__slider-user-name {{review.name}}
+        .reviews__slider-user-position.text-op03 {{review.position}}

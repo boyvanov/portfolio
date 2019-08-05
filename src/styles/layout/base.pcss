@@ -1,18 +1,20 @@
 html {
-  @include desktop {
-    font-size: 15px;
-  }
   @include tablets {
     font-size: 14px;
   }
+
+  @include phones {
+    font-size: 13px;
+  }
 }
+
 body,
 html {
   height: 100%;
 }
 
 body {
-  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.42;
   -webkit-font-smoothing: antialiased;
@@ -33,19 +35,31 @@ body {
   display: flex;
   flex-direction: column;
 
+  @include desktop {
+    width: 91%;
+  }
+
+  @include tablets {
+    width: 90%;
+  }
+
   @include phones {
-    width: 85%;
+    width: 81%;
   }
 }
 
 .fullscreen-section {
   height: 100vh;
   min-height: 650px;
+
+  @include phones {
+    height: auto;
+  }
 }
 
 button {
   border: 0;
-  cursor: pointer;
+  padding: 0;
 }
 
 * {
@@ -92,12 +106,13 @@ img {
 }
 
 .text {
-  color: rgba($text-color, .5);
+  color: rgba($text-color, 0.5);
   font-weight: 600;
+  line-height: 1.875;
 }
 
 .text-op03 {
-  color: rgba($text-color, .3);
+  color: rgba($text-color, 0.3);
   font-weight: 600;
 }
 
@@ -109,4 +124,8 @@ img {
 .subtitle {
   font-size: 30px;
   font-weight: 700;
+
+  @include tablets {
+    font-size: 32px;
+  }
 }

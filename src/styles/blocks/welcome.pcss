@@ -1,7 +1,103 @@
 .welcome {
+  position: relative;
   &__container {
     height: 100%;
     align-items: center;
     justify-content: center;
+  }
+
+  .name {
+    @include desktop {
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    @include tablets {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  }
+
+  .name__text {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.67;
+    opacity: 0.4;
+    width: 45%;
+    padding-bottom: 3%;
+
+    @include desktop {
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: right;
+      margin-right: 9%;
+      margin-top: 1%;
+    }
+
+    @include tablets {
+      margin: 0;
+      text-align: center;
+      align-items: center;
+      padding-bottom: 5%;
+    }
+
+    @include phones {
+      width: 55%;
+    }
+  }
+
+  .name__title {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.1;
+
+    @include tablets {
+      font-size: 55px;
+    }
+
+    @include phones {
+      font-size: 45px;
+    }
+  }
+}
+
+.welcome__name {
+  display: flex;
+  flex: 0.84;
+  padding: 0 30%;
+  align-items: center;
+  justify-content: center;
+
+  @include desktop {
+    padding: 26.5% 15%;
+    padding-bottom: 0;
+    padding-top: 7%;
+    flex: 0.87;
+  }
+
+  @include tablets {
+    padding: 27% 20%;
+    align-items: flex-start;
+  }
+
+  @include phones {
+    padding: 68% 5% 0%;
+  }
+
+  @include phones-small {
+    padding: 0;
+    padding-top: 68%;
+  }
+}
+
+.welcome__scroll {
+  @include desktop {
+    margin-left: 5%;
+  }
+
+  @include tablets {
+    display: none;
   }
 }

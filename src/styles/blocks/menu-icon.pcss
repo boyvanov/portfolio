@@ -1,0 +1,65 @@
+.main-menu__icon {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  width: 28px;
+  height: 23px;
+  display: none;
+  align-items: center;
+  z-index: 60;
+  background-color: transparent;
+  outline: none;
+
+  @include tablets {
+    display: flex;
+  }
+
+  @include phones {
+    top: 3%;
+    right: 5%;
+  }
+
+  &.active {
+    .main-menu__icon-dash {
+      & {
+        height: 0;
+      }
+
+      &::before {
+        transform-origin: 0 0;
+        transform: rotate(45deg) translate(2px, -5px);
+      }
+
+      &::after {
+        transform-origin: 0 0;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.main-menu__icon-dash {
+  &,
+  &::before,
+  &::after {
+    width: 100%;
+    height: 5px;
+    background-color: $text-color;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    /* transition: 0.3s; */
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    bottom: 0;
+  }
+}

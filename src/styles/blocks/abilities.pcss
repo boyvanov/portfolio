@@ -1,32 +1,185 @@
 .abilities {
-  padding: 150px 0;
+  margin-top: 8.5%;
+  margin-bottom: 9%;
   position: relative;
 
-  &__container {
-    align-items: center;
+  @include desktop {
+    margin-top: 18.5%;
+    margin-bottom: 10.5%;
   }
 
-  &:before {
+  @include tablets {
+    margin-top: 19.5%;
+    margin-bottom: 60%;
+  }
+
+  @include tablets {
+    margin-bottom: 60%;
+  }
+
+  @include phones {
+    margin-top: 30%;
+    margin-bottom: 114%;
+  }
+
+  &__container {
+    @include desktop {
+      width: 98%;
+    }
+
+    @include phones {
+      width: 89%;
+    }
+  }
+
+  &::before {
     content: "";
     display: block;
     position: absolute;
-    left: 0;
-    bottom: 15%;
+    left: -5%;
+    bottom: 0;
     background: url("../images/content/bag.png") 0 100% / contain no-repeat;
     width: 40%;
     height: 100%;
+
+    @include desktop {
+      bottom: -3%;
+      left: -19%;
+      width: 60%;
+    }
+
+    @include tablets {
+      bottom: -55%;
+      left: 31%;
+      width: 43%;
+    }
+
+    @media screen and (max-width: 642px) {
+      bottom: -26%;
+    }
+
+    @include phones {
+      bottom: -41%;
+      left: 8%;
+      width: 90%;
+    }
+
+    @include phones-small {
+      bottom: -33%;
+      left: 8%;
+    }
+  }
+
+  @include desktop {
+    .skills {
+      padding-left: 25%;
+    }
+
+    .skills__list {
+      flex-wrap: wrap;
+    }
+
+    .skills__row-item {
+      margin-left: 25px;
+    }
+
+    .skills__item {
+      margin-bottom: 3.5%;
+    }
+  }
+
+  @include tablets {
+    .skills {
+      align-items: center;
+      padding-left: 0;
+    }
+
+    .skills__list {
+      justify-content: center;
+    }
+
+    .skills__item {
+      align-items: center;
+      margin-bottom: 5.5%;
+    }
+    .skills__title {
+      font-size: 20px;
+    }
+
+    .skills__row-item {
+      margin-left: 15px;
+    }
+  }
+
+  @include phones {
+    .skills__list {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .skills__row-item {
+      /* width: 50%; */
+      margin: 0 4%;
+    }
+    .skills__title {
+      margin-bottom: 8%;
+    }
+    .skills__item {
+      margin-bottom: 21%;
+    }
+  }
+
+  @include phones-small {
+    .skills__row-item {
+      margin: 0 1%;
+    }
   }
 }
 
 .abilities__title {
-  width: 45%;
-  margin-left: 250px;
+  display: flex;
+  flex-direction: column;
+  width: 42%;
+  /* margin-left: 9%; */
+  margin-bottom: 5%;
+  align-self: center;
+
+  @include desktop {
+    width: 55%;
+    margin-left: 7%;
+    margin-bottom: 7.5%;
+  }
+
+  @include tablets {
+    text-align: center;
+    width: 65%;
+    margin-left: 0%;
+    align-items: center;
+    margin-bottom: 6.5%;
+  }
+
+  @include phones {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 18%;
+  }
 }
 
 .abilities__title-text {
-  margin-bottom: 60px;
-}
+  margin-bottom: 8%;
 
+  @include tablets {
+    margin-bottom: 3%;
+    width: 60%;
+  }
+
+  @include phones {
+    width: 90%;
+    margin-bottom: 7%;
+  }
+}
 .abilities__title-desc {
-  margin-bottom: 130px;
+  @include phones {
+    width: 90%;
+  }
 }

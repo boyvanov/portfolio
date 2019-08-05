@@ -2,6 +2,7 @@
   position: absolute;
   left: 0;
   right: 0;
+  z-index: 10;
 
   &__container {
     justify-content: space-between;
@@ -10,5 +11,58 @@
     height: 100%;
   }
 
-  
+  .socials__icon {
+    fill: $text-color;
+
+    &:hover {
+      fill: $hover-color;
+    }
+  }
+  .main-menu__link {
+    padding: 50px 30px;
+
+    &.active {
+      border-bottom: 3px solid $hover-color;
+    }
+  }
+
+  @include desktop {
+    .main-menu__link {
+      padding: 50px 20px;
+    }
+  }
+
+  @include ipad {
+    .main-menu__link {
+      padding: 50px 10px;
+    }
+  }
+
+  @include tablets {
+    .main-menu {
+      display: none;
+    }
+
+    .socials {
+      margin-right: 16%;
+    }
+  }
+
+  @include phones {
+    .socials {
+      display: none;
+    }
+  }
 }
+
+/* .socials__header {
+  .socials__icon {
+    fill: $text-color;
+    
+    &:hover {
+      fill: $hover-color;
+    }
+  }
+} */
+
+

@@ -1,20 +1,27 @@
 .reviews__slider {
   position: relative;
+  width: 69%;
 }
 
 .reviews__slider-controls {
+  display: flex;
   position: absolute;
-  top: -70%;
-  left: 28%;
+  top: -64%;
+  left: 60%;
 }
 
-.reviews__btn {
+.reviews__slider-btn {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   border: 1px solid $text-color;
   margin-right: 30px;
-  background: svg-load('arrow-down.svg', fill=$text-color, width=6px, height=10px);
+  background: svg-load(
+    "arrow-down.svg",
+    fill=$text-color,
+    width=9px,
+    height=15px
+  );
   background-position: 50%;
   background-repeat: no-repeat;
   outline: none;
@@ -29,65 +36,79 @@
 
   &:hover {
     border-color: $hover-color;
-    background-image: svg-load('arrow-down.svg', fill=$hover-color, width=6px, height=10px);
+    background-image: svg-load(
+      "arrow-down.svg",
+      fill=$hover-color,
+      width=9px,
+      height=15px
+    );
   }
 }
 
-.reviews__list {
+/* .widget__list {
   display: flex;
-}
+  width: 69%;
+} */
 
-.reviews__item {
-  width: 28%;
+.reviews__slider-item {
+  width: 50%;
   display: flex;
   flex-direction: column;
-  margin-right: 155px;
+  /* margin-right: 10.5%; */
+  position: relative;
+  padding-left: 13%;
 
   &:last-child {
     margin-right: 0;
   }
-}
 
-.reviews__text {
-    position: relative;
-    min-height: 110px;
-
-  &:before {
+  &::before {
     content: "";
     position: absolute;
     display: block;
     width: 75px;
     height: 65px;
-    left: -105px;
-    background: svg-load('quote.svg', fill=$text-color, width=100%, height=100%);
+    left: 0%;
+    top: 3%;
+    background: svg-load(
+      "quote.svg",
+      fill=$text-color,
+      width=100%,
+      height=100%
+    );
+    
     @include bgcover;
-    opacity: .05;
+    opacity: 0.05;
   }
 }
 
-.reviews__user {
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
+.reviews__slider-text {
+  min-height: 130px;
 }
 
-.reviews__avatar {
+.reviews__slider-user {
+  display: flex;
+  align-items: center;
+  margin-top: 3%;
+}
+
+.reviews__slider-avatar {
   width: 75px;
   height: 75px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 30px;
+  margin-right: 10%;
 }
 
-.reviews__avatar-pic {
+.reviews__slider-avatar-pic {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top;
 }
 
-.reviews__user-name {
+.reviews__slider-user-name {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 6%;
 }
