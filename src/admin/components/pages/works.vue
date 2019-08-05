@@ -1,111 +1,72 @@
 <template lang="pug">
 section.works
-      .container.works__container
-        h2.title.works__title Блок "Работы"
-        .works__content
-          .works__edit
-            .works__edit-title
-              .works__edit-name Редактирование работы
-            .works__edit-content
-              form.works__form
-                .works__load
-                  .works__load-text
-                    p Перетащите или загрузите для загрузки изображения
-                  button(type='button').btn Загрузить
-                .works__preview
-                  .works__preview-img
-                    img(src="../../../images/content/slider_preview1.jpg").works__preview-pic
-                  button(type='button').works__preview-btn Изменить превью
-                .works__desc
-                  .works__desc-row
-                    label.works__desc-block
-                      .works__desc-block-title Название
-                      input.works__field(type="text" name="name" placeholder="Дизайн сайта для авто салона Porsche")
-                  .works__desc-row
-                    label.works__desc-block
-                      .works__desc-block-title Ссылка
-                      input.works__field(type="text" name="link" placeholder="https://www.porsche-pulkovo.ru")
-                  .works__desc-row
-                    label.works__desc-block
-                      .works__desc-block-title Описание
-                      textarea.works__textarea(name="message" placeholder="Порше Центр Пулково - является официальным дилером марки Порше в Санкт-Петербурге и предоставляет полный цикл услуг по продаже и сервисному обслуживанию автомобилей")
-                  .works__desc-row
-                    label.works__desc-block
-                      .works__desc-block-title Добавление тэга
-                      input.works__field(type="text" name="tags" placeholder="Jquery, Vue.js, HTML5")
-                  ul.works__tags
-                    li.works__tag
-                      button(type='button').works__tag-btn HTML
-                      
-                    li.works__tag
-                      button(type='button').works__tag-btn CSS
-                      
-                    li.works__tag
-                      button(type='button').works__tag-btn Javascript
-                      
-                  .works__buttons
-                    button(type='button').btn-cancel Отмена    
-                    button(type='button').btn Сохранить    
-          ul.works__list
-            li.works__item.add
-              button(type='button').add-btn
-                .add__content
-                  .add__circle
-                  .add__text Добавить работу
-            li.works__item.work
-              .work__img
-                img(src="../../../images/content/slider_preview1.jpg").work__pic
-              .work__desc
-                h4.work__desc-title Сайт школы образования
-                .work__desc-text
-                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(href='#').work__desc-link http://loftschool.ru
-              .work__desc-btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
-            li.works__item.work
-              .work__img
-                img(src="../../../images/content/slider_preview2.jpg").work__pic
-              .work__desc
-                h4.work__desc-title Сайт школы образования
-                .work__desc-text
-                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(href='#').work__desc-link http://loftschool.ru
-              .work__desc-btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
-            li.works__item.work
-              .work__img
-                img(src="../../../images/content/slider_preview3.jpg").work__pic
-              .work__desc
-                h4.work__desc-title Сайт школы образования
-                .work__desc-text
-                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(href='#').work__desc-link http://loftschool.ru
-              .work__desc-btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
-            li.works__item.work
-              .work__img
-                img(src="../../../images/content/slider_preview4.jpg").work__pic
-              .work__desc
-                h4.work__desc-title Сайт школы образования
-                .work__desc-text
-                  p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(href='#').work__desc-link http://loftschool.ru
-              .work__desc-btns
-                button(type='button').btns-edit Править
-                button(type='button').btns-delete Удалить
+  .container.works__container
+    h2.title.works__title Блок "Работы"
+    .works__content
+      .works__add
+        worksForm(
+          v-if="workForm.show"
+        ) 
+      ul.works__list
+        li.works__item.add(
+          v-if="!workForm.show"
+          @click='showFormAndTurnEditModeOff'
+          )
+          worksAdd
+        li.works__item.work(
+           v-for='work in works'
+        )
+          worksBlock(
+            :work='work'
+          )
+            
 </template>
 
 <script>
-
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
-
-}
+  components: {
+    worksForm: () => import("../worksForm"),
+    worksAdd: () => import("../worksAdd"),
+    worksBlock: () => import("../worksBlock")
+  },
+  data() {
+    return {
+    };
+  },
+  computed: {
+    ...mapState("works", {
+      works: state => state.works,
+      workForm: state => state.workForm
+    })
+  },
+  methods: {
+    ...mapActions("works", ["fetchWorks"]),
+    ...mapMutations("works", ["SHOW_FORM", "TURN_EDIT_MODE_OFF"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
+    showFormAndTurnEditModeOff() {
+      this["TURN_EDIT_MODE_OFF"]();
+      this["SHOW_FORM"]();
+    }
+  },
+  async created() {
+    try {
+      await this.fetchWorks();
+      this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Работы загружены'
+        });
+    } catch (error) {
+      this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
+    }
+  }
+};
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 @import url("../../../styles/mixins.pcss");
 
 .works__title {
@@ -162,23 +123,6 @@ export default {
   }
 }
 
-.works__load {
-  flex: 1;
-  background-color: #dee4ed;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  align-items: center;
-  padding-top: 80px;
-  padding-bottom: 65px;
-  margin-right: 30px;
-  border: 1px dashed rgb(161, 161, 161);
-
-  @include tablets {
-    display: none;
-  }
-}
-
 .works__load-text {
   font-weight: 600;
   opacity: 0.5;
@@ -187,7 +131,7 @@ export default {
   text-align: center;
 }
 
-.works__preview {
+/* .works__preview {
   display: none;
   flex-direction: column;
   padding: 0 15px;
@@ -207,7 +151,7 @@ export default {
 .works__preview-btn {
   color: #383bcf;
   font-weight: 600;
-}
+} */
 
 .works__desc {
   flex: 1;
@@ -223,6 +167,7 @@ export default {
 
 .works__desc-block {
   display: block;
+  position: relative;
 }
 
 .works__desc-block-title {
@@ -252,9 +197,7 @@ export default {
   overflow: hidden;
   border: 1px solid rgba($text-color, 0.15);
   line-height: 1.75;
-}
 
-.works__textarea {
   @include phones {
     min-height: 200px;
   }
@@ -292,9 +235,7 @@ export default {
 .works__buttons {
   display: flex;
   justify-content: flex-end;
-}
 
-.works__buttons {
   @include tablets {
     justify-content: center;
   }
@@ -320,7 +261,7 @@ export default {
   }
 
   @include phones {
-    width: 100%;
+    width: 100vw;
   }
 }
 
@@ -329,19 +270,7 @@ export default {
   background-color: $white;
   position: relative;
 
-  &:nth-child(2) {
-    &::before {
-      content: "";
-      display: block;
-      z-index: 10;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      background-color: rgba($white, 0.7);
-    }
-  }
+  
 }
 
 .work__img {
@@ -383,11 +312,7 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
-}
-
-.work__desc-btns {
   padding: 0 30px;
 }
-
-
 </style>
+

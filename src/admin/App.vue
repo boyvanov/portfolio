@@ -1,20 +1,22 @@
 <template lang="pug">
   .maincontent
-
-    adminHeader
-
-    adminMenu
-
+    adminHeader(v-if='userIsLogged')
+    adminMenu(v-if='userIsLogged')
     .admin-content
       router-view
-
+    queryTooltip
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   components: {
     adminHeader: () => import("./components/adminHeader"),
-    adminMenu: () => import("./components/adminMenu")
+    adminMenu: () => import("./components/adminMenu"),
+    queryTooltip: () => import("./components/queryTooltip")
+  },
+  computed: {
+    ...mapGetters("user", ["userIsLogged"])
   }
 };
 </script>

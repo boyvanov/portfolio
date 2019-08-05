@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 
 const btns = {
   template: "#slider-btn",
@@ -41,6 +42,7 @@ const display = {
     // reversedWorks() {
     //   return [...this.works].reverse();
     // }
+    //
   },
   methods: {
     handleSlide(direction) {
@@ -71,7 +73,7 @@ const description = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(", ");
+      return this.currentWork.techs.split(" ");
     }
   }
 };
@@ -105,10 +107,18 @@ new Vue({
     }
   },
   methods: {
-    makeArrWithRequiredImages(data) {
+    // makeArrWithRequiredImages(data) {
+    //   return data.map(item => {
+    //     const requirePic = require(`../images/content/${item.slide}`);
+    //     item.slide = requirePic;
+
+    //     return item;
+    //   });
+    // },
+    makeArrWithAbsoluteImages(data) {
       return data.map(item => {
-        const requirePic = require(`../images/content/${item.slide}`);
-        item.slide = requirePic;
+        const absolutePic = `https://webdev-api.loftschool.com/${item.photo}`;
+        item.photo = absolutePic;
 
         return item;
       });
@@ -135,7 +145,15 @@ new Vue({
     }
   },
   created() {
-    const data = require("../data/slider.json");
-    this.works = this.makeArrWithRequiredImages(data);
+    // const data = require("../data/slider.json");
+    // this.works = this.makeArrWithRequiredImages(data);
+
+    axios
+      .get("https://webdev-api.loftschool.com/works/156")
+      .then(response => {
+        const data = response.data.reverse();
+        this.works = this.makeArrWithAbsoluteImages(data);
+      })
+      .catch(error => console.error(error.message));
   }
 });

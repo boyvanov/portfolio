@@ -1,11 +1,17 @@
 import Vue from "vue";
 import Flickity from "vue-flickity";
+import axios from "axios";
 
 const review = {
   template: "#review",
   props: {
     review: Object
   }
+  // computed: {
+  //   remotePhotoPath() {
+  //     return `https://webdev-api.loftschool.com/${this.review.photo}`
+  //   }
+  // }
 };
 
 new Vue({
@@ -20,7 +26,7 @@ new Vue({
       reviews: [],
       flickityOptions: {
         initialIndex: 0,
-        prevNextButtons: false,
+        prevNextButtons: true,
         pageDots: false,
         wrapAround: false,
         groupCells: true
@@ -29,37 +35,50 @@ new Vue({
     };
   },
   methods: {
+    onInit() {
+      
+      this.$refs.flickity.on("change", event => {
+        this.currentIndex = event;
+        if (!this.$refs.flickity.$flickity.nextButton.isEnabled)
+          this.currentIndex = this.reviews.length;
+      });
+    },
     next() {
-      this.currentIndex++;
-
       this.$refs.flickity.next();
-
-      if (this.currentIndex >= this.reviews.length - 1) {
-        this.currentIndex = this.reviews.length - 1;
-      }
     },
 
     previous() {
-      this.currentIndex--;
-
       this.$refs.flickity.previous();
-
-      if (this.currentIndex <= 0) {
-        this.currentIndex = 0;
-      }
     },
 
-    makeArrWithRequiredImages(data) {
+    // makeArrWithRequiredImages(data) {
+    //   return data.map(item => {
+    //     const requirePic = require(`../images/content/${item.picture}`);
+    //     item.picture = requirePic;
+
+    //     return item;
+    //   });
+    // },
+
+    makeArrWithAbsoluteImages(data) {
       return data.map(item => {
-        const requirePic = require(`../images/content/${item.picture}`);
-        item.picture = requirePic;
+        const absolutePic = `https://webdev-api.loftschool.com/${item.photo}`;
+        item.photo = absolutePic;
 
         return item;
       });
     }
   },
   created() {
-    const data = require("../data/reviews.json");
-    this.reviews = this.makeArrWithRequiredImages(data);
+    // const data = require("../data/reviews.json");
+    // this.reviews = this.makeArrWithRequiredImages(data);
+
+    axios
+      .get("https://webdev-api.loftschool.com/reviews/156")
+      .then(response => {
+        const data = response.data;
+        this.reviews = this.makeArrWithAbsoluteImages(data);
+      })
+      .catch(error => console.error(error));
   }
 });

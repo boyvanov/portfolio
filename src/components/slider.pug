@@ -1,5 +1,6 @@
 script(type='text/x-template')#slider-template
-  .slider
+  .slider(v-if="works.length > 0")
+    
     display(
       :works="works"
       :currentWork="currentWork"
@@ -13,7 +14,7 @@ script(type='text/x-template')#slider-template
 script(type='text/x-template')#slider-display
   .slider__display(:data-slide="currentIndex + 1")
     .slider__display-full-img
-      img(:src="currentWork.slide", alt='slider__display').slider__display-pic
+      img(:src="currentWork.photo", alt='slider__display').slider__display-pic
     previews(
       :works="works"
       :currentWork="currentWork"
@@ -31,7 +32,7 @@ script(type='text/x-template')#slider-previews
     ul.slider__preview(:style="{transform: `translateY(-${translate}%)`}")
       li.slider__preview-item(v-for="work, index in works" :key="work.id")
         button.slider__preview-button(@click="$emit('slide', index)" :class="{active: work.id === currentWork.id}" type='button')
-          img(:src="work.slide", alt='slider__preview').slider__preview-pic
+          img(:src="work.photo", alt='slider__preview').slider__preview-pic
 
 
 script(type='text/x-template')#slider-btn
@@ -41,12 +42,13 @@ script(type='text/x-template')#slider-btn
 
 script(type='text/x-template')#slider-desc
   .slider__desc
+
     tags(
       :tags="tagsArray"
     )
     .slider__title.subtitle {{currentWork.title}}
     .slider__text.text 
-      p {{currentWork.desc}}
+      p {{currentWork.description}}
     a(:href="currentWork.link").slider__link Посмотреть сайт
 
 script(type='text/x-template')#slider-tags

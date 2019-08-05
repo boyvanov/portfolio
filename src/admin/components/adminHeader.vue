@@ -8,19 +8,31 @@
           .header__admin-name Сергей Бойванов
           .header__admin-title Панель администрирования
         .header__admin-close 
-          a(href='#').header__admin-close-link Выйти
+          a(
+            href='#'
+            @click='logout'
+            ).header__admin-close-link Выйти
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 
 export default {
-  
+  methods: {
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
+    logout() {
+      this["SHOW_TOOLTIP"]({
+        type: "success",
+        text: "Выход из админки"
+      });
+      localStorage.removeItem("token");
+      this.$router.replace("/login");
+    }
+  }
 };
-
 </script>
 
 <style lang="postcss" scoped>
-
 @import url("../../styles/mixins.pcss");
 
 .header__admin {

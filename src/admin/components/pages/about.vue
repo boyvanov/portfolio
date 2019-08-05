@@ -14,7 +14,9 @@ section.about
         li.about__item.about__block.about__block_add(
           v-if="showAddingForm"
           )
-          skillsAdd
+          skillsAdd(
+            @closeNewCategory='showAddingForm = false'
+          )
         li.about__item.about__block(
           v-for='category in categories'
           :key="category.id"
@@ -27,7 +29,7 @@ section.about
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     skillsAdd: () => import("../skillsAdd"),
@@ -49,6 +51,7 @@ export default {
   methods: {
     ...mapActions("skills", ["fetchSkills"]),
     ...mapActions("categories", ["fetchCategories"]),
+    ...mapMutations("tooltip", ["SHOW_TOOLTIP"]),
     filterSkillsByCategoryId(categoryId) {
       return this.skills.filter(skill => skill.category === categoryId);
     }
@@ -56,14 +59,28 @@ export default {
   async created() {
     try {
       await this.fetchCategories();
+      this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Группы загружены'
+        });
     } catch (error) {
-      alert(error.message);
+      this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
     }
 
     try {
       await this.fetchSkills();
+      this['SHOW_TOOLTIP']({
+          type: 'success',
+          text: 'Навыки загружены'
+        });
     } catch (error) {
-      alert(error.message);
+      this['SHOW_TOOLTIP']({
+          type: 'error',
+          text: 'Произошла ошибка'
+        });
     }
   }
 };
@@ -236,6 +253,7 @@ export default {
   flex: 1;
   font-size: 18px;
   font-weight: 700;
+  position: relative;
 }
 
 .cell__ok {
@@ -280,16 +298,18 @@ export default {
 
 .cell__skill {
   flex: 1;
+  position: relative;
 }
 
 .cell__number {
-  width: 65px;
-  flex-shrink: 0;
-  margin-right: 10px;
+  margin-right: 30px;
+  position: relative;
+  display: flex;
 }
 
 .cell__new-skill {
   margin-right: 10px;
+  position: relative;
 }
 
 .cell__pencil {
