@@ -1,6 +1,32 @@
 nav.main-menu
   ul.main-menu__list
-    - var items = ['Главная', 'Обо мне', 'Навыки', 'Работы', 'Отзывы', 'Связаться']
+    -
+      var items = [
+        {
+          name: 'Главная',
+          anchor: 'main'
+        },
+        {
+          name: 'Обо мне',
+          anchor: 'about'
+        },
+        {
+          name: 'Навыки',
+          anchor: 'skills'
+        },
+        {
+          name: 'Работы',
+          anchor: 'works'
+        },
+        {
+          name: 'Отзывы',
+          anchor: 'reviews'
+        },
+        {
+          name: 'Связаться',
+          anchor: 'feedback'
+        }
+      ]
     each item in items
       li.main-menu__item
-        a.main-menu__link(href='#')= item
+        a.main-menu__link(href=`#${item.anchor}`)= item.name

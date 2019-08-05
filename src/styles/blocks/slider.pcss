@@ -23,20 +23,52 @@
 }
 
 .slider__preview {
-  display: flex;
+  transition: transform 0.5s;
+  will-change: transform;
+}
+
+.slider__preview-wrap {
   position: absolute;
   bottom: 0;
   right: 0;
-  flex-direction: column;
+  overflow: hidden;
+  height: 400px;
+  transform: rotate(-180deg);
+
+  @include desktop {
+    height: 300px;
+  }
+
+  @media screen and (max-width: 930px) {
+    height: 200px;
+  }
+
+  @include tablets {
+    height: 300px;
+  }
+
+  @media screen and (max-width: 520px) {
+    height: 200px;
+  }
+}
+
+.slider__preview {
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
 }
 
 .slider__preview-item {
   display: flex;
+  position: relative;
+  transform: rotate(-180deg);
 }
 
 .slider__preview-button {
   position: relative;
-  width: 180px;
+  width: 178px;
+  height: 100px;
+  outline: none;
 
   &:hover {
     &::before {
@@ -59,10 +91,15 @@
       bottom: 0;
       left: 0;
       right: 0;
-      outline: 3px solid $hover-color;
+      border: 3px solid $hover-color;
       z-index: 1;
     }
   }
+}
+
+.slider__preview-pic {
+  width: 100%;
+  object-fit: cover;
 }
 
 .slider__controls {
@@ -78,7 +115,7 @@
   background-color: #2d3c4e;
   background-image: svg-load(
     "arrow-down.svg",
-    fill=#6c7783,
+    fill=$white,
     width=15px,
     height=9px
   );
@@ -87,13 +124,18 @@
   transition: 0.3s;
   outline: none;
 
-  &.active {
+  &.disabled {
     background-image: svg-load(
       "arrow-down.svg",
-      fill=$white,
-      width=9px,
-      height=15px
+      fill=#6c7783,
+      width=15px,
+      height=9px
     );
+    cursor: initial;
+
+    &:hover {
+      background-color: #2d3c4e;
+    }
   }
 
   &_next {
