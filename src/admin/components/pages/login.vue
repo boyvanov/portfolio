@@ -37,7 +37,7 @@ section.login
                 )
           .login__form-row
             button.login__form-btn(type='submit') Отправить
-        a.login__form-btn-close(href='#')
+        a.login__form-btn-close(href='https://boyvanov.github.io/portfolio/')
           svg.login__form-btn-close-icon
             use(xlink:href="sprite.svg#remove") 
 </template>
