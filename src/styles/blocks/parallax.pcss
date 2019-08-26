@@ -64,7 +64,11 @@
   &:nth-child(5) {
     .parallax-mountain__img {
       left: 0;
-      top: 73%;
+      top: 83%;
+
+      @include desktopHd {
+        top: 73%;
+      }
 
       @include desktop {
         top: 59%;
@@ -74,7 +78,11 @@
   &:nth-child(6) {
     .parallax-mountain__img {
       right: 0;
-      bottom: -45%;
+      bottom: -25%;
+
+      @include desktopHd {
+        bottom: -45%;
+      }
 
       @include desktop {
         bottom: -30%;
@@ -84,7 +92,11 @@
   &:nth-child(7) {
     .parallax-mountain__img {
       left: 0;
-      bottom: -80%;
+      bottom: -35%;
+
+      @include desktopHd {
+        bottom: -80%;
+      }
 
       @include desktop {
         bottom: -56%;
@@ -92,4 +104,3 @@
     }
   }
 }
-

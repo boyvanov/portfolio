@@ -1,11 +1,13 @@
 let popupMenu = (function(options) {
   let button = document.querySelector(options.button);
   let menu = document.querySelector(options.menu);
+  let body = document.querySelector('body');
   let flag = false;
 
   let _toggleMenu = function(e) {
     button.classList.toggle("active");
     menu.classList.toggle("active");
+    body.classList.toggle("locked");
 
     flag ? flag = false : flag = true;
   };

@@ -9,8 +9,7 @@ section.login
             label.login__form-block(:class="{'error' : validation.hasError('user.name')}")
               .login__form-block-title Логин
               .login__form-field-wrap
-                svg.login__form-field-icon
-                    use(xlink:href="sprite.svg#user")
+                .login__form-field-icon.login__form-field-icon-user
                 input.login__form-field(
                   type="text" 
                   name="login" 
@@ -24,8 +23,7 @@ section.login
             label.login__form-block(:class="{'error' : validation.hasError('user.password')}")
               .login__form-block-title Пароль
               .login__form-field-wrap
-                svg.login__form-field-icon
-                    use(xlink:href="sprite.svg#key")
+                .login__form-field-icon.login__form-field-icon-key
                 input.login__form-field(
                   type="password" 
                   name="password" 
@@ -37,9 +35,9 @@ section.login
                 )
           .login__form-row
             button.login__form-btn(type='submit') Отправить
-        a.login__form-btn-close(href='#')
-          svg.login__form-btn-close-icon
-            use(xlink:href="sprite.svg#remove") 
+        a.login__form-btn-close(href='https://boyvanov.github.io/portfolio/')
+          .login__form-btn-close-icon
+            
 </template>
 
 <script>
@@ -179,7 +177,7 @@ export default {
 
     .login__form-field-icon {
       opacity: 1;
-      fill: $hover-color;
+      /* fill: $hover-color; */
     }
   }
 }
@@ -191,6 +189,22 @@ export default {
   width: 35px;
   height: 35px;
   fill: $text-color;
+}
+
+.login__form-field-icon-user {
+  width: 35px;
+  height: 40px;
+  background: svg-load("user.svg", fill=$text-color, width=100%, height=100%);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+.login__form-field-icon-key {
+  width: 30px;
+  height: 35px;
+  background: svg-load("key.svg", fill=$text-color, width=100%, height=100%);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
 .login__form-field {
@@ -238,8 +252,22 @@ export default {
 }
 
 .login__form-btn-close-icon {
-  width: 18px;
-  height: 18px;
-  fill: $text-color;
+  width: 20px;
+  height: 20px;
+  background: svg-load("remove.svg", fill=$text-color, width=100%, height=100%);
 }
+
+/* .btns-edit {
+  &::after {
+    content: "";
+
+    @include inlineblock(middle);
+    width: 20px;
+    height: 20px;
+    margin-left: 11px;
+    background: svg-load("pencil.svg", fill=#383bcf, width=100%, height=100%);
+
+    @include bgcover;
+  }
+} */
 </style>
