@@ -6,4 +6,3 @@ $ git clone git@github.com:boyvanov/portfolio.git
 $ cd portfolio
 $ yarn
 ```
-
